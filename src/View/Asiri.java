@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package asiri;
+package View;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +19,7 @@ public class Asiri extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/resource/Dashboard.fxml"));
         
         Scene scene = new Scene(root);
         

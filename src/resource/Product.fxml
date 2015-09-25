@@ -8,10 +8,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ProductController">
+    <stylesheets>
+        <URL value="@product.css" />
+    </stylesheets>
    <children>
-      <VBox alignment="CENTER" prefHeight="392.0" prefWidth="773.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" prefWidth="725.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="CENTER">
                <children>
@@ -19,36 +21,68 @@
                      <children>
                         <VBox alignment="CENTER" spacing="5.0">
                            <children>
-                              <Label text="Code" />
+                              <Label text="ID" />
                               <TextField prefWidth="100.0" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" layoutX="236.0" layoutY="10.0" spacing="5.0">
                            <children>
                               <Label text="Name" />
-                              <TextField prefWidth="180.0" />
+                              <TextField prefWidth="200.0" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" layoutX="395.0" layoutY="10.0" spacing="5.0">
                            <children>
-                              <Label text="Phone Number" />
-                              <TextField prefWidth="120.0" />
+                              <Label text="Brand" />
+                              <TextField prefWidth="150.0" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" layoutX="467.0" layoutY="10.0" spacing="5.0">
                            <children>
-                              <Label text="Address" />
-                              <TextField prefHeight="25.0" prefWidth="250.0" />
+                              <Label text="Strength" />
+                              <TextField prefWidth="50.0" />
                            </children>
                         </VBox>
-                        <VBox alignment="CENTER_RIGHT" layoutX="550.0" layoutY="10.0" prefWidth="63.0" spacing="5.0">
+                        <VBox alignment="CENTER" layoutX="498.0" layoutY="10.0" spacing="5.0">
+                           <children>
+                              <Label text="Type" />
+                              <ComboBox prefWidth="50.0" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" layoutX="550.0" layoutY="10.0" spacing="5.0">
                            <children>
                               <Label />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" text="Add" />
+                              <Button mnemonicParsing="false" prefWidth="51.0" text="Add" />
                            </children>
                            <padding>
-                              <Insets left="5.0" />
+                              <Insets left="25.0" />
                            </padding>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefWidth="705.0" spacing="10.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefWidth="676.0" spacing="10.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" spacing="5.0">
+                           <children>
+                              <Label alignment="CENTER" prefWidth="100.0" text="Discription" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </VBox>
+                        <VBox alignment="CENTER" spacing="5.0">
+                           <children>
+                              <TextArea prefHeight="50.0" prefWidth="480.0" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_RIGHT" prefWidth="76.0">
+                           <children>
+                              <Button mnemonicParsing="false" text="Search" />
+                           </children>
                         </VBox>
                      </children>
                   </HBox>
@@ -56,9 +90,9 @@
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER">
+                  <HBox alignment="CENTER_LEFT" prefWidth="676.0">
                      <children>
-                        <TableView prefHeight="250.0" prefWidth="680.0">
+                        <TableView prefHeight="250.0" prefWidth="590.0">
                            <columns>
                               <TableColumn prefWidth="105.0" text="ID" />
                               <TableColumn prefWidth="210.0" text="Name" />
@@ -67,12 +101,14 @@
                               <TableColumn prefWidth="55.0" text="Type" />
                            </columns>
                         </TableView>
-                        <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="73.0" spacing="20.0">
+                        <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="86.0" spacing="20.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Search" />
-                              <Button layoutX="32.0" layoutY="35.0" mnemonicParsing="false" prefWidth="51.0" text="Edit" />
+                              <Button mnemonicParsing="false" prefWidth="51.0" text="Edit" />
                               <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Delete" />
                            </children>
+                           <padding>
+                              <Insets top="25.0" />
+                           </padding>
                         </VBox>
                      </children>
                   </HBox>

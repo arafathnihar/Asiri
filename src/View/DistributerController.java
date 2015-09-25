@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package asiri;
+package View;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author testing
  */
-public class ProductController implements Initializable {
+public class DistributerController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -22,6 +22,6 @@ public class ProductController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }
