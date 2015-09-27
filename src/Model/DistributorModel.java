@@ -4,28 +4,26 @@ import java.sql.*;
 import javafx.collections.*;
 import javax.sql.*;
 
-import Controller.Distributor;
-
 public class DistributorModel {
 
     static DataSource ds = DatabaseSource.getMySQLDataSource();
 
-    public static void add(Distributor d) {
+    public void add(Distributor d) {
 
         try (Connection con = ds.getConnection()) {
             String query = "INSERT INTO distributor VALUES (?,?,?,?)";
             PreparedStatement pStmt = con.prepareStatement(query);
-            pStmt.setString(1, d.getDistributorCode());
-            pStmt.setString(2, d.getDistributorName());
-            pStmt.setString(3, d.getDistributorAddress());
-            pStmt.setString(4, d.getDistributorTel());
+            pStmt.setString(1, d.getCode());
+            pStmt.setString(2, d.getName());
+            pStmt.setString(3, d.getAddress());
+            pStmt.setString(4, d.getPhoneNo());
             pStmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
 
-    public static ObservableList getDistributors() {
+    public ObservableList getDistributors() {
         try (Connection con = ds.getConnection()) {
             ObservableList<Distributor> ol = FXCollections.observableArrayList();
             String query = "SELECT * FROM distributor";
@@ -41,13 +39,13 @@ public class DistributorModel {
         }
     }
 
-    public static void update(Distributor d) {
+    public void update(Distributor d) {
         try (Connection con = ds.getConnection()) {
             String query = "UPDATE distributor SET "
-                    + "dName='" + d.getDistributorName() + "',"
-                    + "dAddress='" + d.getDistributorAddress() + "',"
-                    + "dTelephone='" + d.getDistributorTel() + "'"
-                    + " WHERE dCode='" + d.getDistributorCode() + "'";
+                    + "dName='" + d.getName() + "',"
+                    + "dAddress='" + d.getAddress() + "',"
+                    + "dTelephone='" + d.getPhoneNo() + "'"
+                    + " WHERE dCode='" + d.getCode() + "'";
             PreparedStatement pStmt = con.prepareStatement(query);
             pStmt.executeUpdate();
         } catch (SQLException ex) {
@@ -55,7 +53,7 @@ public class DistributorModel {
         }
     }
 
-    public static void remove(String code) {
+    public void remove(String code) {
         try (Connection con = ds.getConnection()) {
             String query = "DELETE FROM distributor WHERE dCode='" + code + "'";
             PreparedStatement pStmt = con.prepareStatement(query);
