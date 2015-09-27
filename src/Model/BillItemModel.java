@@ -4,15 +4,48 @@ import java.sql.*;
 import javax.sql.*;
 import javafx.collections.*;
 
-import Controller.Bill;
-import Controller.BillItem;
-
 public class BillItemModel {
 
     static DataSource ds = DatabaseSource.getMySQLDataSource();
 
-    public static void addBill(Bill b) {
+    public void addBill(Bill b, ObservableList<BillItem> items) {
         try (Connection con = ds.getConnection()) {
+            boolean empty = true;
+            String query1 = "SELECT * FROM bill";
+            PreparedStatement pStmt1 = con.prepareStatement(query1);
+            ResultSet rs1 = pStmt1.executeQuery();
+            String bName = "Bill-";
+            while (rs1.next()) {
+                rs1.last();
+                String temp1 = rs1.getString("billNo");
+                int bNo = Integer.parseInt(temp1.substring(5));
+                bNo++;
+                bName = bName + Integer.toString(bNo);
+                b.setBillNo(bName);
+                empty = false;
+            }
+            if (empty) {
+                bName = bName + Integer.toString(1);
+                b.setBillNo(bName);
+            }
+            
+            for(int i=0; i<items.size(); i++){
+                items.get(i).setBillNo(bName);
+            }
+            
+            String query2 = "INSERT INTO billitem" + " VALUES (?,?,?,?,?,?)";
+            PreparedStatement pStmt2 = con.prepareStatement(query2);            
+            for (BillItem record : items) {
+                pStmt2.setString(1, record.getBillNo());
+                pStmt2.setString(2, record.getBillItemNo());
+                pStmt2.setString(3, record.getProductID());
+                pStmt2.setDouble(4, record.getUnitPrice());
+                pStmt2.setInt(5, record.getQuantity());
+                pStmt2.setDouble(6, record.getTotal());
+                pStmt2.addBatch();
+            }
+            pStmt2.executeBatch();
+
             String query = "INSERT INTO bill" + " VALUES (?,?,?,?)";
             PreparedStatement pStmt = con.prepareStatement(query);
             pStmt.setString(1, b.getBillNo());
@@ -20,28 +53,13 @@ public class BillItemModel {
             pStmt.setString(3, b.getBillNote());
             pStmt.setDouble(4, b.getBillAmount());
             pStmt.executeUpdate();
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
     
-    public static void addBillItem(BillItem bi) {
-        try (Connection con = ds.getConnection()) {
-            String query = "INSERT INTO billitem" + " VALUES (?,?,?,?,?,?)";
-            PreparedStatement pStmt = con.prepareStatement(query);
-            pStmt.setString(1, bi.getBillNo());
-            pStmt.setString(2, bi.getBillItemNo());
-            pStmt.setString(3, bi.getProductID());
-            pStmt.setDouble(4, bi.getUnitPrice());
-            pStmt.setInt(5, bi.getQuantity());
-            pStmt.setDouble(6, bi.getTotal());
-            pStmt.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-    
-    public static ObservableList getBills() {
+    /*public static ObservableList getBills() {
         try (Connection con = ds.getConnection()) {
             ObservableList<Bill> ol = FXCollections.observableArrayList();
             String query = "SELECT * FROM bill";
@@ -55,8 +73,9 @@ public class BillItemModel {
             ex.printStackTrace();
             return null;
         }
-    }
-    public static ObservableList getBillItems(Bill b) {
+    }*/
+    
+    /*public ObservableList getBillItems(Bill b) {
         try (Connection con = ds.getConnection()) {
             ObservableList<BillItem> ol = FXCollections.observableArrayList();
             String query = "SELECT * FROM billitem WHERE billNo='"+b.getBillNo()+"'";
@@ -70,7 +89,6 @@ public class BillItemModel {
             ex.printStackTrace();
             return null;
         }
-    }
-
-    
+    }*/
+  
 }
