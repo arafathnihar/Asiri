@@ -146,7 +146,7 @@
                                         </VBox>
                                         <VBox alignment="CENTER" layoutX="310.0" layoutY="10.0" spacing="5.0">
                                             <children>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Expiery" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Expire Date" />
                                                 <DatePicker fx:id="expireDate" prefWidth="105.0" />
                                             </children>
                                             <padding>
@@ -197,6 +197,7 @@
                                 <VBox alignment="TOP_CENTER" prefWidth="65.0" spacing="10.0">
                                     <children>
                                         <Button layoutX="573.0" layoutY="10.0" mnemonicParsing="false" onAction="#edit" prefWidth="51.0" text="Edit" />
+                                        <Button mnemonicParsing="false" onAction="#update" text="Update" />
                                         <Button mnemonicParsing="false" onAction="#delete" text="Delete" />
                                     </children>
                                     <padding>
@@ -233,3 +234,4 @@
         </VBox>
     </children>
 </AnchorPane>
+

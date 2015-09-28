@@ -4,7 +4,6 @@ import Model.Bill;
 import Model.BillItem;
 import Model.BillItemModel;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -24,7 +23,7 @@ public class BillController implements Initializable {
     @FXML
     private TextField billNote;
     @FXML
-    private final DatePicker billDate = new DatePicker(LocalDate.now());
+    private DatePicker billDate;
     @FXML
     private TextField discount;
     
@@ -50,6 +49,8 @@ public class BillController implements Initializable {
     private TableColumn<BillItem, Double> totalC;
 
     BillItemModel bm = new BillItemModel();
+    
+    int index;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -68,9 +69,7 @@ public class BillController implements Initializable {
         bi.setQuantity(Integer.parseInt(quantity.getText()));
         bi.setTotal(Double.parseDouble(total.getText()));
         itemsTable.getItems().add(bi);
-        unitPrice.clear();
-        quantity.clear();
-        total.clear();
+        clear();
     }
 
     @FXML
@@ -86,10 +85,55 @@ public class BillController implements Initializable {
             j++;
         }
         bm.addBill(b, items);
-
+        clear();
         for (int i = 0; i < itemsTable.getItems().size(); i++) {
             itemsTable.getItems().clear();
         }
     }
-
+    
+    @FXML
+    public void edit() {
+        index = itemsTable.getSelectionModel().getSelectedIndex();
+        BillItem bi = itemsTable.getItems().get(index);
+        productID.setValue(bi.getProductID());
+        unitPrice.setText(String.valueOf(bi.getUnitPrice()));
+        quantity.setText(String.valueOf(bi.getQuantity()));
+        total.setText(String.valueOf(bi.getTotal()));
+    }
+    
+    @FXML
+    public void update() {
+        BillItem bi = new BillItem();
+        bi.setProductID(productID.getValue());
+        bi.setUnitPrice(Double.parseDouble(unitPrice.getText()));
+        bi.setQuantity(Integer.parseInt(quantity.getText()));
+        bi.setTotal(Double.parseDouble(total.getText()));
+        index = itemsTable.getSelectionModel().getSelectedIndex();
+        itemsTable.getItems().set(index, bi);
+        clear();
+    }
+    
+    @FXML
+    public void delete() {
+        index = itemsTable.getSelectionModel().getSelectedIndex();
+        itemsTable.getItems().remove(index);
+        clear();
+    }
+    
+    @FXML
+    public void clear() {
+        productID.setValue(null);
+        unitPrice.clear();
+        quantity.clear();
+        total.clear();
+        
+        billAmount.clear();
+        discount.clear();
+        billNote.clear();
+    }
+    
+    @FXML
+    public void cancel() {
+        
+    }
 }

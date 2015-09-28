@@ -122,8 +122,9 @@
                         </ScrollPane>
                         <VBox alignment="TOP_CENTER" spacing="10.0">
                            <children>
-                              <Button layoutX="573.0" layoutY="10.0" mnemonicParsing="false" prefWidth="51.0" text="Edit" />
-                              <Button mnemonicParsing="false" text="Delete" />
+                              <Button layoutX="573.0" layoutY="10.0" mnemonicParsing="false" onAction="#edit" prefWidth="51.0" text="Edit" />
+                              <Button mnemonicParsing="false" onAction="#update" text="Update" />
+                              <Button mnemonicParsing="false" onAction="#delete" text="Delete" />
                            </children>
                            <padding>
                               <Insets top="25.0" />
@@ -137,8 +138,8 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefWidth="514.0" spacing="60.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Clear" />
-                        <Button layoutX="768.0" layoutY="20.0" mnemonicParsing="false" text="Cancel" />
+                        <Button mnemonicParsing="false" onAction="#clear" text="Clear" />
+                        <Button layoutX="768.0" layoutY="20.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
                      </children>
                      <padding>
                         <Insets right="10.0" top="10.0" />

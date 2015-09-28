@@ -71,6 +71,7 @@ public class InvoiceController implements Initializable {
     private TableColumn<InvoiceItem, Date> expireDateC;
     
     InvoiceItemModel iim = new InvoiceItemModel();
+    int index;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -124,7 +125,8 @@ public class InvoiceController implements Initializable {
         ii.setMargin(Integer.parseInt(margin.getText()));
         ii.setExpireDate(java.sql.Date.valueOf(expireDate.getValue()));        
         ii.setDiscount(Double.parseDouble(discount.getText()));
-        invoiceItemTable.getItems().add(ii);     
+        invoiceItemTable.getItems().add(ii);   
+        clear();
     }
     
     @FXML
@@ -142,20 +144,62 @@ public class InvoiceController implements Initializable {
             j++;
         }
         iim.addInvoice(i, items);
-        
+        clear();
         for (int l = 0; l < invoiceItemTable.getItems().size(); l++) {
             invoiceItemTable.getItems().clear();
         }
     }
     
     @FXML
-    public void edit() {}
+    public void edit() {
+        index = invoiceItemTable.getSelectionModel().getSelectedIndex();
+        InvoiceItem ii = invoiceItemTable.getItems().get(index);
+        productID.setValue(ii.getProductID());
+        packSize.setText(String.valueOf(ii.getPackSize()));
+        quantity.setText(String.valueOf(ii.getQuantity()));
+        free.setText(String.valueOf(ii.getFree()));
+        price.setText(String.valueOf(ii.getPrice()));
+        margin.setText(String.valueOf(ii.getMargin()));
+        //expireDate.setValue(ii.getExpireDate());
+        discount.setText(String.valueOf(ii.getDiscount()));
+    }
+    @FXML
+    public void update(){
+        InvoiceItem ii = new InvoiceItem();
+        ii.setProductID(productID.getValue());
+        ii.setPackSize(Integer.parseInt(packSize.getText()));
+        ii.setQuantity(Integer.parseInt(quantity.getText()));
+        ii.setFree(Integer.parseInt(free.getText()));
+        ii.setPrice(Double.parseDouble(price.getText()));
+        ii.setMargin(Integer.parseInt(margin.getText()));
+        ii.setExpireDate(java.sql.Date.valueOf(expireDate.getValue()));        
+        ii.setDiscount(Double.parseDouble(discount.getText()));
+        index = invoiceItemTable.getSelectionModel().getSelectedIndex();
+        invoiceItemTable.getItems().set(index, ii);  
+        clear();
+    }
     
     @FXML
-    public void delete() {}
+    public void delete() {
+        index = invoiceItemTable.getSelectionModel().getSelectedIndex();
+        invoiceItemTable.getItems().remove(index);
+        clear();
+    }
     
     @FXML
-    public void clear() {}
+    public void clear() {
+        invoiceID.clear();
+        distributerCode.setValue(null);
+        invoiceNote.clear();
+    
+        productID.setValue(null);
+        packSize.clear();
+        quantity.clear();
+        price.clear();
+        discount.clear();
+        free.clear();
+        margin.clear();
+    }
     
     @FXML
     public void cancel() {}
