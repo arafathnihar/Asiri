@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ProductController">
+<AnchorPane id="AnchorPane" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProductController">
     <stylesheets>
         <URL value="@product.css" />
     </stylesheets>
@@ -97,7 +97,7 @@
                               <TableColumn prefWidth="105.0" text="ID" />
                               <TableColumn prefWidth="210.0" text="Name" />
                               <TableColumn prefWidth="160.0" text="Brand" />
-                              <TableColumn prefWidth="60.0" text="Strendth" />
+                              <TableColumn prefWidth="60.0" text="Strength" />
                               <TableColumn prefWidth="55.0" text="Type" />
                            </columns>
                         </TableView>
