@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2015 at 05:23 PM
+-- Generation Time: Sep 30, 2015 at 06:23 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -53,28 +53,6 @@ CREATE TABLE IF NOT EXISTS `billitem` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `distri`
---
-
-CREATE TABLE IF NOT EXISTS `distri` (
-  `DistriCode` varchar(255) NOT NULL,
-  `DistriName` varchar(255) DEFAULT NULL,
-  `DistriAdd` varchar(255) DEFAULT NULL,
-  `DistriTel` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`DistriCode`),
-  KEY `DistriCode` (`DistriCode`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `distri`
---
-
-INSERT INTO `distri` (`DistriCode`, `DistriName`, `DistriAdd`, `DistriTel`) VALUES
-('PR', 'Pradeep Pharmacy', 'No. 392/B, Nainamadama (West) Nainamadama.', '(077) 836-5520');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `distributor`
 --
 
@@ -93,12 +71,8 @@ CREATE TABLE IF NOT EXISTS `distributor` (
 INSERT INTO `distributor` (`dCode`, `dName`, `dAddress`, `dTelephone`) VALUES
 ('a', '', '', ''),
 ('b', '', '', ''),
-('c', '', '', ''),
-('d', '', '', ''),
 ('e', '', '', ''),
 ('f', '', '', ''),
-('g', '', '', ''),
-('h', '', '', ''),
 ('i', '', '', ''),
 ('j', '', '', ''),
 ('k', '', '', ''),
