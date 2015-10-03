@@ -4,12 +4,35 @@ public class Product {
     
     private String productID;
     private String productName;
-    private String productDiscription;
+    private String productDescription;
     private String productBrand;
     private int productStrength;
-    private String producttype;
+    private String productType;
     private int productStock;
     private int productMinStock;
+
+    public Product(String productID, String productName, String productDescription, String productBrand, 
+            int productStrength, String productType, int productStock, int productMinStock) {
+        this.productID = productID;
+        this.productName = productName;
+        this.productDescription = productDescription;
+        this.productBrand = productBrand;
+        this.productStrength = productStrength;
+        this.productType = productType;
+        this.productStock = productStock;
+        this.productMinStock = productMinStock;
+    }
+
+    public Product() {
+        this.productID = "";
+        this.productName = "";
+        this.productDescription = "";
+        this.productBrand = "";
+        this.productStrength = 0;
+        this.productType = "";
+        this.productStock = 0;
+        this.productMinStock = 0;
+    }
 
     public String getProductID() {
         return productID;
@@ -27,12 +50,12 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getProductDiscription() {
-        return productDiscription;
+    public String getProductDescription() {
+        return productDescription;
     }
 
-    public void setProductDiscription(String productDiscription) {
-        this.productDiscription = productDiscription;
+    public void setProductDiscription(String productDescription) {
+        this.productDescription = productDescription;
     }
 
     public String getProductBrand() {
@@ -52,11 +75,11 @@ public class Product {
     }
 
     public String getProducttype() {
-        return producttype;
+        return productType;
     }
 
-    public void setProducttype(String producttype) {
-        this.producttype = producttype;
+    public void setProducttype(String productType) {
+        this.productType = productType;
     }
 
     public int getProductStock() {

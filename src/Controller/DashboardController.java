@@ -17,7 +17,7 @@ public class DashboardController implements Initializable {
     public void testing() {
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("/resource/Invoice.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/resource/Product.fxml"));
             Stage stage = new Stage();
             stage.setTitle("");
             stage.setScene(new Scene(root, 915, 580));
