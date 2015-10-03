@@ -5,25 +5,27 @@ import java.util.*;
 import javafx.fxml.*;
 import java.io.*;
 import javafx.scene.*;
-import javafx.stage.*;
+import javafx.scene.layout.AnchorPane;
 
 public class DashboardController implements Initializable {
 
+    @FXML
+    private AnchorPane invoiceTab;
+    @FXML
+    private AnchorPane billTab;
+    @FXML
+    private AnchorPane productTab;
+    @FXML
+    private AnchorPane distributerTab;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
-    }
-
-    public void testing() {
-        Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("/resource/Product.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("");
-            stage.setScene(new Scene(root, 915, 580));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+            invoiceTab.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Invoice.fxml")));
+            billTab.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Bill.fxml")));
+            productTab.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Product.fxml")));
+            distributerTab.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Distributer.fxml")));
+        } catch (IOException ex) {
         }
     }
 }

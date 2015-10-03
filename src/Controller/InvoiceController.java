@@ -31,7 +31,7 @@ public class InvoiceController implements Initializable {
     @FXML
     private DatePicker date;
     @FXML
-    private TextArea invoiceNote;
+    private TextField invoiceNote;
     
     @FXML
     private ComboBox<String> productID;

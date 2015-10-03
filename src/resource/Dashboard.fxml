@@ -7,15 +7,54 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashboardController">
+<AnchorPane id="AnchorPane" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashboardController">
     <stylesheets>
         <URL value="@dashboard.css" />
     </stylesheets>
    <children>
-      <VBox fx:id="vbx" alignment="CENTER" layoutX="120.0" layoutY="84.0" prefHeight="400.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label text="Label" />
-            <Button fx:id="test" mnemonicParsing="false" onAction="#testing" text="Testing" />
-         </children></VBox>
+      <TabPane layoutX="100.0" layoutY="71.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="INVOICE">
+            <content>
+                  <AnchorPane>
+                     <children>
+                        <VBox alignment="CENTER">
+                           <children>
+                          <AnchorPane fx:id="invoiceTab" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="BILL">
+               <content>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <AnchorPane fx:id="billTab" />
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab text="PRODUCT">
+               <content>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <AnchorPane fx:id="productTab" />
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab text="DISTRIBUTOR">
+               <content>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <AnchorPane fx:id="distributerTab" />
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </AnchorPane>
