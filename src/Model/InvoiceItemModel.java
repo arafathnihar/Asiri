@@ -6,7 +6,7 @@ import javafx.collections.*;
 
 public class InvoiceItemModel {
 
-    static DataSource ds = DatabaseSource.getMySQLDataSource();
+    DataSource ds = DatabaseSource.getMySQLDataSource();
 
     public void addInvoice(Invoice i, ObservableList<InvoiceItem> items) {
         try (Connection con = ds.getConnection()) {
@@ -43,6 +43,38 @@ public class InvoiceItemModel {
             ex.printStackTrace();
         }
 
+    }
+
+    public ObservableList<String> getProductsID() {
+        try (Connection con = ds.getConnection()) {
+            ObservableList<String> ol = FXCollections.observableArrayList();
+            String query = "SELECT productID FROM product";
+            PreparedStatement pStmt = con.prepareStatement(query);
+            ResultSet rs = pStmt.executeQuery();
+            while (rs.next()) {
+                ol.add(rs.getString(1));
+            }
+            return ol;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public ObservableList<String> getDistributerCode() {
+        try (Connection con = ds.getConnection()) {
+            ObservableList<String> ol = FXCollections.observableArrayList();
+            String query = "SELECT dCode FROM distributor";
+            PreparedStatement pStmt = con.prepareStatement(query);
+            ResultSet rs = pStmt.executeQuery();
+            while (rs.next()) {
+                ol.add(rs.getString(1));
+            }
+            return ol;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
 }

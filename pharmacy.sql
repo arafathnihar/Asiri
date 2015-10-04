@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2015 at 06:23 PM
+-- Generation Time: Oct 03, 2015 at 07:00 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -64,59 +64,6 @@ CREATE TABLE IF NOT EXISTS `distributor` (
   PRIMARY KEY (`dCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `distributor`
---
-
-INSERT INTO `distributor` (`dCode`, `dName`, `dAddress`, `dTelephone`) VALUES
-('a', '', '', ''),
-('b', '', '', ''),
-('e', '', '', ''),
-('f', '', '', ''),
-('i', '', '', ''),
-('j', '', '', ''),
-('k', '', '', ''),
-('l', '', '', ''),
-('m', '', '', ''),
-('n', '', '', ''),
-('o', '', '', ''),
-('p', '', '', ''),
-('q', '', '', ''),
-('r', '', '', ''),
-('s', '', '', ''),
-('t', '', '', ''),
-('u', '', '', ''),
-('v', '', '', ''),
-('w', '', '', ''),
-('x', '', '', ''),
-('y', '', '', ''),
-('z', '', '', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `initem`
---
-
-CREATE TABLE IF NOT EXISTS `initem` (
-  `InItemID` int(10) NOT NULL,
-  `InvoiceID` varchar(255) DEFAULT NULL,
-  `ProductID` varchar(255) DEFAULT NULL,
-  `InItemPackSize` int(10) DEFAULT NULL,
-  `InItemQty` int(10) DEFAULT NULL,
-  `InItemFree` int(10) DEFAULT NULL,
-  `InItemPrice` decimal(19,4) DEFAULT NULL,
-  `InItemMargin` int(10) DEFAULT NULL,
-  `InItemExpiry` datetime DEFAULT NULL,
-  `InItemDisc` decimal(19,4) DEFAULT NULL,
-  `InItemSold` int(10) DEFAULT NULL,
-  PRIMARY KEY (`InItemID`),
-  KEY `InvoiceInItem` (`InvoiceID`),
-  KEY `InvoiceId` (`InvoiceID`),
-  KEY `ProductInItem` (`ProductID`),
-  KEY `ProductId` (`ProductID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 -- --------------------------------------------------------
 
 --
@@ -124,13 +71,34 @@ CREATE TABLE IF NOT EXISTS `initem` (
 --
 
 CREATE TABLE IF NOT EXISTS `invoice` (
-  `InvoiceID` varchar(255) NOT NULL,
-  `DistriCode` varchar(255) DEFAULT NULL,
-  `InvoiceDate` datetime DEFAULT NULL,
-  `InvoiceNote` longtext,
-  `InvoicePayment` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`InvoiceID`),
-  KEY `DistriInvoice` (`DistriCode`)
+  `invoiceID` varchar(255) NOT NULL,
+  `distibutorCode` varchar(255) NOT NULL,
+  `invoiceDate` date NOT NULL,
+  `invoiceNote` varchar(255) DEFAULT NULL,
+  `invoicePayMode` varchar(255) DEFAULT NULL,
+  `invoiceTotal` double NOT NULL,
+  PRIMARY KEY (`invoiceID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoiceitem`
+--
+
+CREATE TABLE IF NOT EXISTS `invoiceitem` (
+  `invoiceItemID` varchar(255) NOT NULL,
+  `invoiceID` varchar(255) NOT NULL,
+  `productID` varchar(255) NOT NULL,
+  `packSize` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `free` int(11) NOT NULL,
+  `price` double NOT NULL,
+  `margin` int(11) NOT NULL,
+  `expireDate` date NOT NULL,
+  `discount` double NOT NULL,
+  `sold` int(11) NOT NULL,
+  PRIMARY KEY (`invoiceItemID`,`invoiceID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -140,17 +108,18 @@ CREATE TABLE IF NOT EXISTS `invoice` (
 --
 
 CREATE TABLE IF NOT EXISTS `product` (
-  `ProductID` varchar(255) NOT NULL,
-  `ProductName` varchar(255) DEFAULT NULL,
-  `ProductDiscription` varchar(255) DEFAULT NULL,
-  `ProductBrand` varchar(255) DEFAULT NULL,
-  `ProductStrength` int(10) DEFAULT NULL,
-  `ProductStype` varchar(255) DEFAULT NULL,
-  `ProductStock` int(10) DEFAULT NULL,
-  `ProductMinStock` double DEFAULT NULL,
-  PRIMARY KEY (`ProductID`)
+  `productID` varchar(255) NOT NULL,
+  `productName` varchar(255) DEFAULT NULL,
+  `productDescription` varchar(255) DEFAULT NULL,
+  `productBrand` varchar(255) DEFAULT NULL,
+  `productStrength` int(10) DEFAULT NULL,
+  `productType` varchar(255) DEFAULT NULL,
+  `productStock` int(10) DEFAULT NULL,
+  `productMinStock` double DEFAULT NULL,
+  PRIMARY KEY (`productID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+

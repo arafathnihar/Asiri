@@ -3,24 +3,18 @@ package Controller;
 import Model.Invoice;
 import Model.InvoiceItem;
 import Model.InvoiceItemModel;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
 public class InvoiceController implements Initializable {
 
@@ -84,11 +78,21 @@ public class InvoiceController implements Initializable {
         marginC.setCellValueFactory(new PropertyValueFactory<>("margin"));
         expireDateC.setCellValueFactory(new PropertyValueFactory<>("expireDate"));
         
-        productID.getItems().addAll("A", "B", "C", "D", "E");
-        distributerCode.getItems().addAll("A", "B", "C", "D", "E");
+        productID.setItems(getProductsID());
+        distributerCode.setItems(getDistributerCode());
     }
 
-    @FXML
+    public ObservableList<String> getProductsID() {
+        ObservableList<String> products = iim.getProductsID();
+        return products;
+    }
+    
+    public ObservableList<String> getDistributerCode() {
+        ObservableList<String> distributers = iim.getDistributerCode();
+        return distributers;
+    }
+
+    /*@FXML
     public void addNewDistributer() {
         Parent root;
         try {
@@ -99,9 +103,9 @@ public class InvoiceController implements Initializable {
             stage.show();
         } catch (IOException e) {
         }
-    }
+    }*/
 
-    @FXML
+    /*@FXML
     public void addNewProduct() {
         Parent root;
         try {
@@ -112,7 +116,7 @@ public class InvoiceController implements Initializable {
             stage.show();
         } catch (IOException e) {
         }
-    }
+    }*/
     
     @FXML
     public void add() {
@@ -203,4 +207,5 @@ public class InvoiceController implements Initializable {
     
     @FXML
     public void cancel() {}
+
 }

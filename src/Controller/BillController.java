@@ -15,7 +15,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-
 public class BillController implements Initializable {
 
     @FXML
@@ -26,7 +25,7 @@ public class BillController implements Initializable {
     private DatePicker billDate;
     @FXML
     private TextField discount;
-    
+
     @FXML
     private ComboBox<String> productID;
     @FXML
@@ -35,10 +34,10 @@ public class BillController implements Initializable {
     private TextField quantity;
     @FXML
     private TextField total;
-   
+
     @FXML
     private TableView<BillItem> itemsTable;
-    
+
     @FXML
     private TableColumn<BillItem, String> productIDC;
     @FXML
@@ -49,7 +48,7 @@ public class BillController implements Initializable {
     private TableColumn<BillItem, Double> totalC;
 
     BillItemModel bm = new BillItemModel();
-    
+
     int index;
 
     @Override
@@ -58,11 +57,18 @@ public class BillController implements Initializable {
         unitPriceC.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         quantityC.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         totalC.setCellValueFactory(new PropertyValueFactory<>("total"));
-        productID.getItems().addAll("A", "B", "C", "D", "E");
+        productID.setItems(getProductID());
     }
 
+    
+    public ObservableList<String> getProductID() {
+        ObservableList<String> products = bm.getProductsID();
+        return products;
+    }
+    
     @FXML
     public void add() {
+
         BillItem bi = new BillItem();
         bi.setProductID(productID.getValue());
         bi.setUnitPrice(Double.parseDouble(unitPrice.getText()));
@@ -90,7 +96,7 @@ public class BillController implements Initializable {
             itemsTable.getItems().clear();
         }
     }
-    
+
     @FXML
     public void edit() {
         index = itemsTable.getSelectionModel().getSelectedIndex();
@@ -100,7 +106,7 @@ public class BillController implements Initializable {
         quantity.setText(String.valueOf(bi.getQuantity()));
         total.setText(String.valueOf(bi.getTotal()));
     }
-    
+
     @FXML
     public void update() {
         BillItem bi = new BillItem();
@@ -112,28 +118,29 @@ public class BillController implements Initializable {
         itemsTable.getItems().set(index, bi);
         clear();
     }
-    
+
     @FXML
     public void delete() {
         index = itemsTable.getSelectionModel().getSelectedIndex();
         itemsTable.getItems().remove(index);
         clear();
     }
-    
+
     @FXML
     public void clear() {
         productID.setValue(null);
         unitPrice.clear();
         quantity.clear();
         total.clear();
-        
+
         billAmount.clear();
         discount.clear();
         billNote.clear();
     }
-    
+
     @FXML
     public void cancel() {
-        
+
     }
+
 }
