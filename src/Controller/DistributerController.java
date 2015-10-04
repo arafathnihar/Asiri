@@ -36,6 +36,7 @@ public class DistributerController implements Initializable {
     private TableColumn<Distributor, String> phoneNoC;
     
     DistributorModel dm = new DistributorModel();
+    int index;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -69,9 +70,10 @@ public class DistributerController implements Initializable {
     
     @FXML
     public void edit() {
-        int index = distributorTable.getSelectionModel().getSelectedIndex();
+        index = distributorTable.getSelectionModel().getSelectedIndex();
         Distributor d = distributorTable.getItems().get(index);
         code.setText(d.getCode());
+        code.setDisable(true);
         name.setText(d.getName());
         address.setText(d.getAddress());
         phoneNo.setText(d.getPhoneNo());
@@ -81,6 +83,7 @@ public class DistributerController implements Initializable {
     public void update() {
         Distributor d = new Distributor();
         d.setCode(code.getText());
+        code.setDisable(false);
         d.setName(name.getText());
         d.setAddress(address.getText());
         d.setPhoneNo(phoneNo.getText());
@@ -91,7 +94,7 @@ public class DistributerController implements Initializable {
     
     @FXML
     public void delete() {
-        int index = distributorTable.getSelectionModel().getSelectedIndex();
+        index = distributorTable.getSelectionModel().getSelectedIndex();
         dm.remove(distributorTable.getItems().get(index).getCode());
         distributorTable.getItems().remove(index);
         distributorTable.setItems(getDistributor());

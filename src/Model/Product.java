@@ -54,7 +54,7 @@ public class Product {
         return productDescription;
     }
 
-    public void setProductDiscription(String productDescription) {
+    public void setProductDescription(String productDescription) {
         this.productDescription = productDescription;
     }
 
@@ -74,11 +74,11 @@ public class Product {
         this.productStrength = productStrength;
     }
 
-    public String getProducttype() {
+    public String getProductType() {
         return productType;
     }
 
-    public void setProducttype(String productType) {
+    public void setProductType(String productType) {
         this.productType = productType;
     }
 
