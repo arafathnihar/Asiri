@@ -10,7 +10,6 @@ public class Asiri extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        
         Parent root = FXMLLoader.load(getClass().getResource("/resource/Dashboard.fxml"));
         
         Scene scene = new Scene(root);

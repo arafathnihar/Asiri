@@ -23,24 +23,6 @@ public class DistributorModel {
             return null;
         }
     }
-    
-    public int isExisting(String code){
-    
-        try (Connection con = ds.getConnection()) {
-            
-            String query = "SELECT count(*) FROM distributor WHERE dCode = ?";
-            PreparedStatement pStmt = con.prepareStatement(query);
-            pStmt.setString(1, code);
-            ResultSet rs = pStmt.executeQuery();
-            if(rs.next()) {
-               return rs.getInt(1);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return 0;
-   
-    }
 
     public void add(Distributor d) {
         try (Connection con = ds.getConnection()) {
