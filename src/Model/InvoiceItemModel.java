@@ -42,10 +42,10 @@ public class InvoiceItemModel {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
+        
     }
 
-    public ObservableList<String> getProductsID() {
+    public ObservableList<String> getProductID() {
         try (Connection con = ds.getConnection()) {
             ObservableList<String> ol = FXCollections.observableArrayList();
             String query = "SELECT productID FROM product";
