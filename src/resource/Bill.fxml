@@ -27,8 +27,8 @@
                         </VBox>
                         <VBox alignment="CENTER">
                            <children>
-                              <Label text="Total" />
-                              <TextField fx:id="billAmount" prefWidth="100.0" />
+                              <Label text="Note" />
+                              <TextField fx:id="billNote" prefWidth="250.0" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER">
@@ -39,8 +39,8 @@
                         </VBox>
                         <VBox alignment="CENTER">
                            <children>
-                              <Label text="Note" />
-                              <TextField fx:id="billNote" prefWidth="250.0" />
+                              <Label text="Total" />
+                              <TextField fx:id="billAmount" prefWidth="100.0" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER">
@@ -69,14 +69,14 @@
                         </VBox>
                         <VBox alignment="CENTER" spacing="5.0">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Quantity" />
-                              <TextField fx:id="quantity" prefWidth="100.0" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Unit Price" />
+                              <TextField fx:id="unitPrice" prefWidth="100.0" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" spacing="5.0">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Unit Price" />
-                              <TextField fx:id="unitPrice" prefWidth="100.0" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Quantity" />
+                              <TextField fx:id="quantity" prefWidth="100.0" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" spacing="5.0">
@@ -110,8 +110,8 @@
                               <TableView fx:id="itemsTable">
                                  <columns>
                                     <TableColumn fx:id="productIDC" prefWidth="100.0" text="Product ID" />
-                                    <TableColumn fx:id="quantityC" prefWidth="110.0" text="Quantity" />
                                     <TableColumn fx:id="unitPriceC" prefWidth="110.0" text="Unit Price" />
+                                    <TableColumn fx:id="quantityC" prefWidth="110.0" text="Quantity" />
                                     <TableColumn fx:id="totalC" prefWidth="100.0" text="Price" />
                                  </columns>
                                  <VBox.margin>
