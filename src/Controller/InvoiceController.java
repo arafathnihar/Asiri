@@ -83,7 +83,7 @@ public class InvoiceController implements Initializable {
     }
 
     public ObservableList<String> getProductsID() {
-        ObservableList<String> products = iim.getProductsID();
+        ObservableList<String> products = iim.getProductID();
         return products;
     }
     
@@ -91,32 +91,6 @@ public class InvoiceController implements Initializable {
         ObservableList<String> distributers = iim.getDistributerCode();
         return distributers;
     }
-
-    /*@FXML
-    public void addNewDistributer() {
-        Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/resource/Distributer.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("Distributer");
-            stage.setScene(new Scene(root, 915, 580));
-            stage.show();
-        } catch (IOException e) {
-        }
-    }*/
-
-    /*@FXML
-    public void addNewProduct() {
-        Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/resource/Product.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("Product");
-            stage.setScene(new Scene(root, 915, 580));
-            stage.show();
-        } catch (IOException e) {
-        }
-    }*/
     
     @FXML
     public void add() {

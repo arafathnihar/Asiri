@@ -23,6 +23,8 @@ public class ProductController implements Initializable {
     private ComboBox<String> type;
     @FXML
     private TextArea description;
+    @FXML
+    private TextField minStock;
 
     @FXML
     private TableView<Product> productTable;
@@ -68,6 +70,7 @@ public class ProductController implements Initializable {
         p.setProductDescription(description.getText());
         p.setProductStrength(Integer.parseInt(strength.getText()));
         p.setProductType(type.getValue());
+        p.setProductMinStock(Integer.parseInt(minStock.getText()));
         productTable.getItems().add(p);
         pm.add(p);
         productTable.setItems(getProducts());
@@ -89,6 +92,7 @@ public class ProductController implements Initializable {
         description.setText(p.getProductDescription());
         strength.setText(String.valueOf(p.getProductStrength()));
         type.setValue(p.getProductType());
+        minStock.setText(String.valueOf(p.getProductMinStock()));
     }
     
     @FXML
@@ -102,7 +106,7 @@ public class ProductController implements Initializable {
         p.setProductStrength(Integer.parseInt(strength.getText()));
         p.setProductType(type.getValue());
         p.setProductStock(p.getProductStock());
-        p.setProductMinStock(p.getProductMinStock());
+        p.setProductMinStock(Integer.parseInt(minStock.getText()));
         pm.update(p);
         productTable.setItems(getProducts());
         clear();
@@ -124,6 +128,7 @@ public class ProductController implements Initializable {
         brand.clear();
         strength.clear();
         description.clear();
+        minStock.clear();
     }
 
     @FXML
