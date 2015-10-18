@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
@@ -24,28 +25,28 @@
                                             <VBox alignment="CENTER" spacing="5.0">
                                                 <children>
                                                     <Label text="Code" />
-                                                    <TextField fx:id="code" prefHeight="25.0" prefWidth="90.0" promptText="xx-xxxx" />
+                                                    <TextField fx:id="code" onKeyPressed="#codeOnPress" prefHeight="25.0" prefWidth="90.0" promptText="xx-xxxx" />
                                           <Label fx:id="codeLabel" textFill="RED" />
                                                 </children>
                                             </VBox>
                                             <VBox alignment="CENTER" layoutX="236.0" layoutY="10.0" spacing="5.0">
                                                 <children>
                                                     <Label text="Name" />
-                                                    <TextField fx:id="name" prefWidth="160.0" promptText="xxxxxxxx" />
+                                                    <TextField fx:id="name" onKeyPressed="#nameOnPress" prefWidth="160.0" promptText="xxxxxxxx" />
                                           <Label fx:id="nameLabel" textFill="RED" />
                                                 </children>
                                             </VBox>
                                             <VBox alignment="CENTER" layoutX="395.0" layoutY="10.0" spacing="5.0">
                                                 <children>
                                                     <Label text="Address" />
-                                                    <TextField fx:id="address" prefHeight="25.0" prefWidth="375.0" promptText="no-xxx xxx road xxx xxxx." />
+                                                    <TextField fx:id="address" onKeyPressed="#addressOnPress" prefHeight="25.0" prefWidth="375.0" promptText="no-xxx xxx road xxx xxxx." />
                                           <Label fx:id="addressLabel" textFill="RED" />
                                                 </children>
                                             </VBox>
                                             <VBox alignment="CENTER" layoutX="467.0" layoutY="10.0" spacing="5.0">
                                                 <children>
                                                     <Label text="Phone Number" />
-                                                    <TextField fx:id="phoneNo" prefWidth="120.0" promptText="0xx-xxxxxxxxx" />
+                                                    <TextField fx:id="phoneNo" onKeyPressed="#phoneOnPress" prefWidth="120.0" promptText="0xx-xxxxxxxxx" />
                                           <Label fx:id="phoneLabel" textFill="RED" />
                                                 </children>
                                             </VBox>
@@ -126,7 +127,12 @@
                     <children>
                         <HBox alignment="CENTER_RIGHT" prefWidth="850.0" spacing="20.0">
                             <children>
-                                <Button mnemonicParsing="false" onAction="#clear" prefWidth="60.0" text="Clear">
+                        <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="752.0" textFill="#59da1d">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font>
+                        </Label>
+                                <Button mnemonicParsing="false" onAction="#clearBtnActon" prefWidth="60.0" text="Clear">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin></Button>

@@ -5,25 +5,23 @@ import Model.DistributorModel;
 import java.net.URL;
 import java.util.Collections;
 import java.util.ResourceBundle;
-import java.util.concurrent.ExecutionException;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 public class DistributerController implements Initializable {
     
@@ -44,9 +42,7 @@ public class DistributerController implements Initializable {
     @FXML
     private TextField phoneNoSearch;
     @FXML
-    private Button addBtn;    
-    //@FXML
-    //private ToggleButton searchBtn; 
+    private Button addBtn; 
     @FXML
     private TableView<Distributor> distributorTable;
     @FXML
@@ -66,6 +62,8 @@ public class DistributerController implements Initializable {
     @FXML
     private Label phoneLabel;
     @FXML
+    private Label messageLabel;
+    @FXML
     private ImageView icon;
     
     DistributorModel dm = new DistributorModel();
@@ -80,26 +78,20 @@ public class DistributerController implements Initializable {
     
     Image imageWarnning = new Image(getClass().getResourceAsStream("/resource/images/warnning.png")); 
     
-    public boolean isValid(){
     
-        if(code.getText().isEmpty()){
-            codeLabel.setText("Requird !");
-            return false;
-        }else if(name.getText().isEmpty()){
-            nameLabel.setText("Requird !");
-            return false;
-        }else if(address.getText().isEmpty()){
-            addressLabel.setText("Requird !");
-            return false;
-        }else if(phoneNo.getText().isEmpty()){
-            phoneLabel.setText("Requird !");
-            return false;
-        }else{
-            return true;
-        }
-    
+
+  
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+       codeC.setCellValueFactory(new PropertyValueFactory<>("code"));
+        nameC.setCellValueFactory(new PropertyValueFactory<>("name"));
+        addressC.setCellValueFactory(new PropertyValueFactory<>("address"));
+        phoneNoC.setCellValueFactory(new PropertyValueFactory<>("phoneNo"));
+        refreshDistributors();
+        
     }
-    public void refreshDistributors(){
+    
+        public void refreshDistributors(){
         // 1. Wrap the ObservableList in a FilteredList (initially display all data).
         FilteredList<Distributor> filteredData = new FilteredList<>(getDistributor(), p -> true);
         
@@ -186,26 +178,37 @@ public class DistributerController implements Initializable {
         distributorTable.setItems(sortedData);
     
     }
-  
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-       codeC.setCellValueFactory(new PropertyValueFactory<>("code"));
-        nameC.setCellValueFactory(new PropertyValueFactory<>("name"));
-        addressC.setCellValueFactory(new PropertyValueFactory<>("address"));
-        phoneNoC.setCellValueFactory(new PropertyValueFactory<>("phoneNo"));
-        //distributorTable.setItems(getDistributor());
-        refreshDistributors();
-       icon.setImage(imageDistri);
-    }
-    
+        
     public ObservableList<Distributor> getDistributor() {
         ObservableList<Distributor> distributors = dm.getDistributors();
         Collections.reverse(distributors);
         return distributors;
     }
+
+    
+    public boolean isValid(){
+    
+        if(code.getText().isEmpty()){
+            codeLabel.setText("Requird !");
+            return false;
+        }else if(name.getText().isEmpty()){
+            nameLabel.setText("Requird !");
+            return false;
+        }else if(address.getText().isEmpty()){
+            addressLabel.setText("Requird !");
+            return false;
+        }else if(phoneNo.getText().isEmpty()){
+            phoneLabel.setText("Requird !");
+            return false;
+        }else{
+            return true;
+        }
+    
+    }
     
     @FXML
     public void addNew() {
+        
         if(isValid()){
         Distributor d = new Distributor();
         d.setCode(code.getText());
@@ -213,21 +216,26 @@ public class DistributerController implements Initializable {
         d.setAddress(address.getText());
         d.setPhoneNo(phoneNo.getText());
         
-        //distributorTable.getItems().add(d);
         if(dm.isExisting(d.getCode())>0){
             System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             System.out.println("Distributer code allready Exist");
+            icon.setImage(imageError);
+            messageLabel.setTextFill(Color.RED);
+            messageLabel.setText(" Distributer code allready Exist ");
+            codeLabel.setText("Existing code");
         }else{
             dm.add(d);
-        }
-        
-        refreshDistributors();
-        clear();
-        icon.setImage(imageSuccess);
+            icon.setImage(imageSuccess);
+            messageLabel.setTextFill(Color.GREEN);
+            messageLabel.setText("New distributer added");
+            refreshDistributors();
+            clear();
+            }
         }else{
             
        icon.setImage(imageError);
-       
+       messageLabel.setTextFill(Color.RED);
+       messageLabel.setText(" Fill all fields ");
       }
     }
     
@@ -252,12 +260,17 @@ public class DistributerController implements Initializable {
         name.setText(d.getName());
         address.setText(d.getAddress());
         phoneNo.setText(d.getPhoneNo());
+        addBtn.setText("Update");
+        icon.setImage(imageDistri);
+        messageLabel.setText("");
         }else{
             System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             System.out.println("Please select a distributer to edit");
             icon.setImage(imageWarnning);
+            messageLabel.setTextFill(Color.ORANGE);
+            messageLabel.setText("Please select a distributer to edit");
         }
-        addBtn.setText("Update");        
+                
     }
     
     @FXML
@@ -270,11 +283,17 @@ public class DistributerController implements Initializable {
         d.setAddress(address.getText());
         d.setPhoneNo(phoneNo.getText());
         dm.update(d);
+        icon.setImage(imageSuccess);
+        messageLabel.setTextFill(Color.GREEN);
+        messageLabel.setText("Distributer is updated");
         refreshDistributors();
         clear();
-        icon.setImage(imageSuccess);
+        
     }else{
-        icon.setImage(imageError);
+            
+       icon.setImage(imageError);
+       messageLabel.setTextFill(Color.RED);
+       messageLabel.setText(" Fill all fields ");
     }
     }
     
@@ -285,18 +304,71 @@ public class DistributerController implements Initializable {
         System.err.println("###########################"+index); 
         if(index>=0){
         dm.remove(distributorTable.getItems().get(index).getCode());
-        //arafath
-       // distributorTable.getItems().remove(index);
-        
-        clear();
-        refreshDistributors();
+                
         icon.setImage(imageSuccess);
+        messageLabel.setTextFill(Color.GREEN);
+        messageLabel.setText("Distributer is deleted");
+        refreshDistributors();
+        clear();
+        
     }else{
-            icon.setImage(imageWarnning);
+           
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         System.out.println("Please select a distributer to Delete");
+         icon.setImage(imageWarnning);
+            messageLabel.setTextFill(Color.ORANGE);
+            messageLabel.setText(" Please select a distributer to Delete ");
     }}
     
+       
+    @FXML
+    public void codeOnPress() {
+        
+        codeLabel.setText("");
+        icon.setImage(imageDistri);
+        messageLabel.setText("");
+                
+    }
+    
+    @FXML
+    public void nameOnPress() {
+        
+        nameLabel.setText("");
+        icon.setImage(imageDistri);
+        messageLabel.setText("");
+               
+    }
+    
+    @FXML
+    public void addressOnPress() {
+        
+        addressLabel.setText("");
+        icon.setImage(imageDistri);
+        messageLabel.setText("");
+               
+    }
+    
+    @FXML
+    public void phoneOnPress() {
+        
+        phoneLabel.setText("");
+        icon.setImage(imageDistri);
+        messageLabel.setText("");
+               
+    }
+   
+     @FXML
+    public void clearSearch() {
+        if(!codeSearch.isFocused())
+        codeSearch.clear();
+        if(!nameSearch.isFocused())
+        nameSearch.clear();
+        if(!nameSearch.isFocused())
+        addressSearch.clear();
+        if(!nameSearch.isFocused())
+        phoneNoSearch.clear();
+               
+    }
     @FXML
     public void clear() {
         
@@ -314,26 +386,15 @@ public class DistributerController implements Initializable {
         phoneNo.clear();
         code.setDisable(false);
         addBtn.setText("Add");
-        icon.setImage(imageDistri);
-       
-    }
-   
-     @FXML
-    public void clearSearch() {
-        if(!codeSearch.isFocused())
-        codeSearch.clear();
-        if(!nameSearch.isFocused())
-        nameSearch.clear();
-        if(!nameSearch.isFocused())
-        addressSearch.clear();
-        if(!nameSearch.isFocused())
-        phoneNoSearch.clear();
                
     }
     
     @FXML
-    public void cancel() {
-        
+    public void clearBtnActon() {
+        clear();
+        messageLabel.setText("");
+        icon.setImage(imageDistri);
+       refreshDistributors();
     }
     
 }
