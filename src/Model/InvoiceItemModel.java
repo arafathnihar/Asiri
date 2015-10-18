@@ -11,7 +11,7 @@ public class InvoiceItemModel {
     public void addInvoice(Invoice i, ObservableList<InvoiceItem> items) {
         try (Connection con = ds.getConnection()) {
             String query = "INSERT INTO invoiceitem" + " VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-            PreparedStatement pStmt = con.prepareStatement(query);            
+            PreparedStatement pStmt = con.prepareStatement(query);
             for (InvoiceItem record : items) {
                 pStmt.setString(1, record.getItemID());
                 pStmt.setString(2, record.getInvoiceID());
@@ -27,25 +27,33 @@ public class InvoiceItemModel {
                 pStmt.addBatch();
             }
             pStmt.executeBatch();
-            
+
             String query1 = "INSERT INTO invoice" + " VALUES (?,?,?,?,?,?)";
             PreparedStatement pStmt1 = con.prepareStatement(query1);
             pStmt1.setString(1, i.getInvoiceID());
             pStmt1.setString(2, i.getDistibutorCode());
-            pStmt1.setDate(3, (Date)i.getInvoiceDate());
+            pStmt1.setDate(3, (Date) i.getInvoiceDate());
             pStmt1.setString(4, i.getInvoiceNote());
             pStmt1.setString(5, i.getInvoicePayMode());
-            pStmt1.setDouble(6,i.getInvoiceTotal());
+            pStmt1.setDouble(6, i.getInvoiceTotal());
             pStmt1.executeUpdate();
-            System.out.println(i.getInvoicePayMode());
-            System.out.println(i.getInvoiceTotal());
+
+            String query3 = "UPDATE product SET productStock = productStock + ? WHERE productID = ? ";
+            PreparedStatement pStmt3 = con.prepareStatement(query3);
+            for (InvoiceItem record : items) {
+                pStmt3.setInt(1, record.getQuantity());
+                pStmt3.setString(2, record.getProductID());
+                pStmt3.addBatch();
+            }
+            pStmt3.executeBatch();
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
     }
 
-    public ObservableList<String> getProductsID() {
+    public ObservableList<String> getProductID() {
         try (Connection con = ds.getConnection()) {
             ObservableList<String> ol = FXCollections.observableArrayList();
             String query = "SELECT productID FROM product";
