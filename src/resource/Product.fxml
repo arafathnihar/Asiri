@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
@@ -8,121 +10,152 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProductController">
-    <stylesheets>
-        <URL value="@product.css" />
-    </stylesheets>
+<AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProductController">
    <children>
-      <VBox alignment="CENTER" prefHeight="580.0" prefWidth="915.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" spacing="20.0">
          <children>
             <HBox alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                  <VBox spacing="5.0">
                      <children>
-                        <VBox alignment="CENTER" spacing="5.0">
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
                            <children>
-                              <Label text="ID" />
-                              <TextField fx:id="id" prefWidth="100.0" />
+                              <VBox alignment="CENTER" spacing="5.0">
+                                 <children>
+                                    <Label text="ID" />
+                                    <TextField fx:id="id" onKeyPressed="#idOnPress" prefWidth="100.0" />
+                                    <Label fx:id="idLabel" layoutX="54.0" layoutY="10.0" textFill="RED" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" layoutX="236.0" layoutY="10.0" spacing="5.0">
+                                 <children>
+                                    <Label text="Name" />
+                                    <TextField fx:id="name" onKeyPressed="#nameOnPress" prefWidth="200.0" />
+                                    <Label fx:id="nameLabel" layoutX="94.0" layoutY="21.0" textFill="RED" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" layoutX="395.0" layoutY="10.0" spacing="5.0">
+                                 <children>
+                                    <Label text="Brand" />
+                                    <TextField fx:id="brand" onKeyPressed="#brandOnPress" prefWidth="130.0" />
+                                    <Label fx:id="brandLabel" layoutX="59.0" layoutY="21.0" textFill="RED" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" layoutX="467.0" layoutY="10.0" spacing="5.0">
+                                 <children>
+                                    <Label prefHeight="15.0" prefWidth="52.0" text="Strength" />
+                                    <TextField fx:id="strength" onKeyPressed="#strenthOnPress" prefWidth="70.0" />
+                                    <Label fx:id="strengthLabel" layoutX="19.0" layoutY="21.0" textFill="RED" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" layoutX="498.0" layoutY="10.0" spacing="5.0">
+                                 <children>
+                                    <Label text="Type" />
+                                    <ComboBox fx:id="type" onMouseClicked="#typeOnPress" prefWidth="70.0" />
+                                    <Label fx:id="typeLabel" layoutX="32.0" layoutY="21.0" textFill="RED" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" spacing="5.0">
+                                 <children>
+                                     <Label alignment="CENTER" text="Min Stock" />
+                                     <TextField fx:id="minStock" onKeyPressed="#minStockOnPress" prefWidth="80.0" />
+                                    <Label fx:id="minStockLabel" alignment="CENTER" layoutX="24.0" layoutY="21.0" textFill="RED" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" layoutX="630.0" layoutY="10.0" spacing="5.0">
+                                 <children>
+                                    <Label alignment="CENTER" text="Discription" />
+                                    <Button mnemonicParsing="false" onAction="#expandDiscription" prefHeight="25.0" prefWidth="200.0" text="Add a discription" />
+                                    <Label fx:id="discriptionLabel" alignment="CENTER" layoutX="82.0" layoutY="21.0" textFill="RED" />
+                                 </children>
+                              </VBox>
                            </children>
-                        </VBox>
-                        <VBox alignment="CENTER" layoutX="236.0" layoutY="10.0" spacing="5.0">
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
                            <children>
-                              <Label text="Name" />
-                              <TextField fx:id="name" prefWidth="200.0" />
+                              <TitledPane fx:id="discriptionPane" expanded="false" prefHeight="25.0" prefWidth="910.0" text="Add a discription">
+                                 <content>
+                                    <TextArea fx:id="description" prefHeight="80.0" prefWidth="720.0" />
+                                 </content>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </HBox.margin>
+                              </TitledPane>
                            </children>
-                        </VBox>
-                        <VBox alignment="CENTER" layoutX="395.0" layoutY="10.0" spacing="5.0">
+                        </HBox>
+                        <VBox>
                            <children>
-                              <Label text="Brand" />
-                              <TextField fx:id="brand" prefWidth="130.0" />
+                              <HBox alignment="CENTER_LEFT" spacing="1.0">
+                                 <children>
+                                    <TextField fx:id="searchId" prefWidth="105.0" promptText="Search id ..." />
+                                    <TextField fx:id="searchName" prefWidth="209.0" promptText="Search name ..." />
+                                    <TextField fx:id="searchBrand" prefWidth="139.0" promptText="Search brand .." />
+                                    <TextField fx:id="searchStrength" prefWidth="79.0" promptText="Search strength ..." />
+                                    <ComboBox fx:id="searchType" prefWidth="79.0" promptText="Search type ..." />
+                                    <TextField fx:id="searchMinStock" prefWidth="89.0" promptText="Search min stock ..." />
+                                    <TextField fx:id="searchDiscription" layoutX="675.0" layoutY="10.0" prefWidth="205.0" promptText="Search discription ..." />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                 <children>
+                                    <TableView fx:id="productTable">
+                                       <columns>
+                                          <TableColumn fx:id="idC" prefWidth="105.0" text="ID" />
+                                          <TableColumn fx:id="nameC" prefWidth="210.0" text="Name" />
+                                          <TableColumn fx:id="brandC" prefWidth="140.0" text="Brand" />
+                                          <TableColumn fx:id="strengthC" text="Strength" />
+                                          <TableColumn fx:id="typeC" text="Type" />
+                                          <TableColumn fx:id="minStockC" prefWidth="90.0" text="Min Stock" />
+                                          <TableColumn fx:id="discriptionC" prefWidth="205.0" text="Discription" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </HBox>
                            </children>
-                        </VBox>
-                        <VBox alignment="CENTER" layoutX="467.0" layoutY="10.0" spacing="5.0">
-                           <children>
-                              <Label text="Strength" />
-                              <TextField fx:id="strength" prefWidth="70.0" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" layoutX="498.0" layoutY="10.0" spacing="5.0">
-                           <children>
-                              <Label text="Type" />
-                              <ComboBox fx:id="type" prefWidth="70.0" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" layoutX="550.0" layoutY="10.0" spacing="5.0">
-                           <children>
-                              <Label />
-                              <Button mnemonicParsing="false" onAction="#search" prefWidth="60.0" text="Search" />
-                           </children>
-                           <padding>
-                              <Insets left="25.0" />
-                           </padding>
                         </VBox>
                      </children>
-                  </HBox>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefWidth="705.0" spacing="10.0">
-               <children>
-                  <HBox alignment="CENTER_LEFT" prefWidth="676.0" spacing="10.0">
+                  </VBox>
+                  <VBox fillWidth="false" spacing="10.0">
                      <children>
-                        <VBox alignment="TOP_CENTER" spacing="5.0">
+                        <Button mnemonicParsing="false" onAction="#add" prefWidth="60.0" text="Add">
+                           <VBox.margin>
+                              <Insets top="22.0" />
+                           </VBox.margin>
+                        </Button>
+                        <VBox alignment="CENTER" fillWidth="false" maxHeight="60.0" maxWidth="60.0" prefHeight="60.0" prefWidth="60.0">
                            <children>
-                              <Label alignment="CENTER" prefWidth="100.0" text="Description" />
-                              <TextArea fx:id="description" prefHeight="50.0" prefWidth="450.0" />
-                           </children>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </VBox>
-                        <VBox alignment="CENTER" spacing="5.0">
-                           <children>
-                               <Label alignment="CENTER" prefWidth="100.0" text="Min Stock" />
-                               <TextField fx:id="minStock" prefWidth="100.0" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefWidth="70.0">
-                           <children>
-                              <Button mnemonicParsing="false" onAction="#add" text="Add" />
+                              <ImageView fx:id="icon" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/product.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </VBox>
+                        <Button mnemonicParsing="false" onAction="#edit" prefWidth="60.0" text="Edit">
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin></Button>
+                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#delete" prefWidth="60.0" text="Delete">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin></Button>
                      </children>
-                  </HBox>
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </VBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="179.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefWidth="676.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="1034.0" spacing="20.0">
                      <children>
-                        <TableView fx:id="productTable" prefHeight="250.0" prefWidth="590.0">
-                           <columns>
-                              <TableColumn fx:id="idC" prefWidth="105.0" text="ID" />
-                              <TableColumn fx:id="nameC" prefWidth="210.0" text="Name" />
-                              <TableColumn fx:id="brandC" prefWidth="160.0" text="Brand" />
-                              <TableColumn fx:id="strengthC" prefWidth="60.0" text="Strength" />
-                              <TableColumn fx:id="typeC" prefWidth="55.0" text="Type" />
-                           </columns>
-                        </TableView>
-                        <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="85.0" spacing="20.0">
-                           <children>
-                              <Button mnemonicParsing="false" onAction="#edit" prefWidth="50.0" text="Edit" />
-                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#update" text="Update" />
-                              <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#delete" text="Delete" />
-                           </children>
-                           <padding>
-                              <Insets top="25.0" />
-                           </padding>
-                        </VBox>
-                     </children>
-                  </HBox>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="179.0" prefWidth="705.0">
-               <children>
-                  <HBox alignment="CENTER_RIGHT" prefWidth="676.0" spacing="20.0">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#clear" prefWidth="51.0" text="Clear" />
-                        <Button layoutX="548.0" layoutY="10.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+                        <Label fx:id="messageLabel" alignment="CENTER" prefWidth="887.0" textFill="#59da1d">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font>
+                        </Label>
+                        <Button mnemonicParsing="false" onAction="#clear" prefWidth="60.0" text="Clear" />
                      </children>
                   </HBox>
                </children>
