@@ -5,6 +5,8 @@ import Model.ProductModel;
 import java.net.*;
 import java.util.*;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,8 +21,15 @@ public class ProductController implements Initializable {
 	private TextField name;@FXML
 	private TextField brand;@FXML
 	private TextField strength;@FXML
-	private ComboBox < String > type;@FXML
 	private TextField minStock;@FXML
+	private TextField searchId;@FXML
+	private TextField searchName;@FXML
+	private TextField searchBrand;@FXML
+	private TextField searchStrength;@FXML
+	private TextField searchMinStock;@FXML
+	private TextField searchDescription;
+
+	@FXML
 	private TextArea description;
 
 	@FXML
@@ -30,16 +39,12 @@ public class ProductController implements Initializable {
 	private Label strengthLabel;@FXML
 	private Label typeLabel;@FXML
 	private Label minStockLabel;@FXML
-	private Label descriptionLabel;
+	private Label descriptionLabel;@FXML
+	private Label messageLabel;
 
 	@FXML
-	private TextField searchId;@FXML
-	private TextField searchName;@FXML
-	private TextField searchBrand;@FXML
-	private TextField searchStrength;@FXML
 	private ComboBox < String > searchType;@FXML
-	private TextField searchMinStock;@FXML
-	private TextArea searchDescription;
+	private ComboBox < String > type;
 
 	@FXML
 	private TableView < Product > productTable;
@@ -55,19 +60,15 @@ public class ProductController implements Initializable {
 
 	@FXML
 	private ImageView icon;@FXML
-	private Label messageLabel;@FXML
-        private TitledPane discriptionPane;
-
-	ProductModel pm = new ProductModel();
+	private TitledPane discriptionPane;@FXML
+	private Button addBtn;
 
 	int index;
+	ProductModel pm = new ProductModel();
 
 	Image imageProduct = new Image(getClass().getResourceAsStream("/resource/images/product.png"));
-
 	Image imageError = new Image(getClass().getResourceAsStream("/resource/images/error.png"));
-
 	Image imageSuccess = new Image(getClass().getResourceAsStream("/resource/images/success.png"));
-
 	Image imageWarnning = new Image(getClass().getResourceAsStream("/resource/images/warnning.png"));
 
 	@Override
@@ -81,11 +82,156 @@ public class ProductController implements Initializable {
 		discriptionC.setCellValueFactory(new PropertyValueFactory < > ("productDescription"));
 
 		type.getItems().addAll("A", "B", "C", "D", "E");
-		productTable.setItems(getProducts());
+		searchType.getItems().addAll("A", "B", "C", "D", "E");
+		refreshProducts();
+	}
+
+
+
+	public void refreshProducts() {
+		// 1. Wrap the ObservableList in a FilteredList (initially display all data).
+		FilteredList < Product > filteredData = new FilteredList < > (getProducts(), p -> true);
+
+
+		// 2. Set the filter Predicate whenever the filter changes.
+		searchId.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredData.setPredicate(product -> {
+				// If filter text is empty, display all items.
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+
+				// Compare id of every item with filter text.
+				String lowerCaseFilter = newValue.toLowerCase();
+
+				if (product.getProductID().toLowerCase().contains(lowerCaseFilter)) {
+					return true; // Filter matches first name.
+				}
+				return false; // Does not match.
+			});
+
+		});
+
+		// 2. Set the filter Predicate whenever the filter changes.
+		searchName.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredData.setPredicate(product -> {
+				// If filter text is empty, display all items.
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+
+				// Compare id of every item with filter text.
+				String lowerCaseFilter = newValue.toLowerCase();
+
+				if (product.getProductName().toLowerCase().contains(lowerCaseFilter)) {
+					return true; // Filter matches first name.
+				}
+				return false; // Does not match.
+			});
+		});
+
+		// 2. Set the filter Predicate whenever the filter changes.
+		searchBrand.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredData.setPredicate(product -> {
+				// If filter text is empty, display all items.
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+
+				// Compare id of every item with filter text.
+				String lowerCaseFilter = newValue.toLowerCase();
+
+				if (product.getProductBrand().toLowerCase().contains(lowerCaseFilter)) {
+					return true; // Filter matches first name.
+				}
+				return false; // Does not match.
+			});
+		});
+
+		// 2. Set the filter Predicate whenever the filter changes.
+		searchStrength.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredData.setPredicate(product -> {
+				// If filter text is empty, display all items.
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+
+				// Compare id of every item with filter text.
+				String lowerCaseFilter = newValue.toLowerCase();
+
+				if (String.valueOf(product.getProductStrength()).toLowerCase().contains(lowerCaseFilter)) {
+					return true; // Filter matches first name.
+				}
+				return false; // Does not match.
+			});
+		});
+
+		// 2. Set the filter Predicate whenever the filter changes.
+		searchType.valueProperty().addListener((observable, oldValue, newValue) -> {
+			filteredData.setPredicate(product -> {
+				// If filter text is empty, display all items.
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+
+				// Compare id of every item with filter text.
+				String lowerCaseFilter = newValue.toLowerCase();
+
+				if (product.getProductType().toLowerCase().contains(lowerCaseFilter)) {
+					return true; // Filter matches first name.
+				}
+				return false; // Does not match.
+			});
+		});
+		// 2. Set the filter Predicate whenever the filter changes.
+		searchMinStock.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredData.setPredicate(product -> {
+				// If filter text is empty, display all items.
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+
+				// Compare id of every item with filter text.
+				String lowerCaseFilter = newValue.toLowerCase();
+
+				if (String.valueOf(product.getProductMinStock()).toLowerCase().contains(lowerCaseFilter)) {
+					return true; // Filter matches first name.
+				}
+				return false; // Does not match.
+			});
+		});
+
+		// 2. Set the filter Predicate whenever the filter changes.
+		searchDescription.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredData.setPredicate(product -> {
+				// If filter text is empty, display all items.
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+
+				// Compare id of every item with filter text.
+				String lowerCaseFilter = newValue.toLowerCase();
+
+				if (product.getProductDescription().toLowerCase().contains(lowerCaseFilter)) {
+					return true; // Filter matches first name.
+				}
+				return false; // Does not match.
+			});
+		});
+		// 3. Wrap the FilteredList in a SortedList. 
+		SortedList < Product > sortedData = new SortedList < > (filteredData);
+
+		// 4. Bind the SortedList comparator to the TableView comparator.
+		sortedData.comparatorProperty().bind(productTable.comparatorProperty());
+
+		// 5. Add sorted (and filtered) data to the table.
+		productTable.setItems(sortedData);
+
 	}
 
 	public ObservableList < Product > getProducts() {
 		ObservableList < Product > products = pm.getDistributors();
+		Collections.reverse(products);
 		return products;
 	}
 
@@ -129,6 +275,13 @@ public class ProductController implements Initializable {
 
 	@FXML
 	public void add() {
+
+		if (id.isDisable()) update();
+		else addNew();
+	}
+
+	@FXML
+	public void addNew() {
 		if (isValid()) {
 
 			if (pm.isExisting(id.getText()) <= 0) {
@@ -143,24 +296,22 @@ public class ProductController implements Initializable {
 						p.setProductStrength(Integer.parseInt(strength.getText()));
 						p.setProductType(type.getValue());
 						p.setProductMinStock(Integer.parseInt(minStock.getText()));
-						productTable.getItems().add(p);
 						pm.add(p);
-						productTable.setItems(getProducts());
-						clear();
-                                                icon.setImage(imageSuccess);
-                                                messageLabel.setTextFill(Color.GREEN);
-                                                messageLabel.setText(" New product added ");
+						clearAll();
+						icon.setImage(imageSuccess);
+						messageLabel.setTextFill(Color.GREEN);
+						messageLabel.setText(" New product added ");
 					} else {
-                                                icon.setImage(imageError);
+						icon.setImage(imageError);
 						minStockLabel.setText("It's not a number");
-                                                messageLabel.setTextFill(Color.RED);
-                                                messageLabel.setText(" Minimum stock should be a numaric value ");
+						messageLabel.setTextFill(Color.RED);
+						messageLabel.setText(" Minimum stock should be a numaric value ");
 					}
 				} else {
-                                        icon.setImage(imageError);
+					icon.setImage(imageError);
 					strengthLabel.setText("It's not a number");
-                                        messageLabel.setTextFill(Color.RED);
-                                        messageLabel.setText(" Strength should be a numaric value ");
+					messageLabel.setTextFill(Color.RED);
+					messageLabel.setText(" Strength should be a numaric value ");
 				}
 			} else {
 				icon.setImage(imageError);
@@ -174,8 +325,145 @@ public class ProductController implements Initializable {
 			messageLabel.setText(" Fill all fields ");
 		}
 	}
-        
-        @FXML
+
+	@FXML
+	public void update() {
+		if (isValid()) {
+			if (isInteger(strength.getText())) {
+				if (isInteger(minStock.getText())) {
+
+
+					Product p = new Product();
+					p.setProductID(id.getText());
+					p.setProductName(name.getText());
+					p.setProductBrand(brand.getText());
+					p.setProductDescription(description.getText());
+					p.setProductStrength(Integer.parseInt(strength.getText()));
+					p.setProductType(type.getValue());
+					p.setProductStock(p.getProductStock());
+					p.setProductMinStock(Integer.parseInt(minStock.getText()));
+					pm.update(p);
+					clear();
+					icon.setImage(imageSuccess);
+					messageLabel.setTextFill(Color.GREEN);
+					messageLabel.setText(" The Product is updated ");
+				} else {
+					icon.setImage(imageError);
+					minStockLabel.setText("It's not a number");
+					messageLabel.setTextFill(Color.RED);
+					messageLabel.setText(" Minimum stock should be a numaric value ");
+				}
+			} else {
+				icon.setImage(imageError);
+				strengthLabel.setText("It's not a number");
+				messageLabel.setTextFill(Color.RED);
+				messageLabel.setText(" Strength should be a numaric value ");
+			}
+		} else {
+			icon.setImage(imageError);
+			messageLabel.setTextFill(Color.RED);
+			messageLabel.setText(" Fill all fields ");
+		}
+	}
+
+	@FXML
+	public void edit() {
+
+		index = productTable.getSelectionModel().getSelectedIndex();
+		if (index >= 0) {
+			Product p = productTable.getItems().get(index);
+			id.setText(p.getProductID());
+			id.setDisable(true);
+			name.setText(p.getProductName());
+			brand.setText(p.getProductBrand());
+			description.setText(p.getProductDescription());
+			strength.setText(String.valueOf(p.getProductStrength()));
+			type.setValue(p.getProductType());
+			minStock.setText(String.valueOf(p.getProductMinStock()));
+			addBtn.setText("Update");
+			icon.setImage(imageProduct);
+			messageLabel.setText("");
+		} else {
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			System.out.println("Please select a Product to edit");
+			icon.setImage(imageWarnning);
+			messageLabel.setTextFill(Color.ORANGE);
+			messageLabel.setText("Please select a Product to edit");
+		}
+
+	}
+
+	@FXML
+	public void delete() {
+		index = productTable.getSelectionModel().getSelectedIndex();
+		if (index >= 0) {
+			pm.remove(productTable.getItems().get(index).getProductID());
+			clear();
+			icon.setImage(imageSuccess);
+			messageLabel.setTextFill(Color.GREEN);
+			messageLabel.setText(" The Product is Deleted ");
+		} else {
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			System.out.println("Please select a Product to delete");
+			icon.setImage(imageWarnning);
+			messageLabel.setTextFill(Color.ORANGE);
+			messageLabel.setText("Please select a Product to delete");
+		}
+	}
+
+	@FXML
+	public void clearSearch() {
+		if (!searchId.isFocused()) searchId.clear();
+		if (!searchName.isFocused()) searchName.clear();
+		if (!searchBrand.isFocused()) searchBrand.clear();
+		if (!searchStrength.isFocused()) searchStrength.clear();
+		if (!searchType.isFocused()) searchType.getSelectionModel().clearSelection();
+		if (!searchMinStock.isFocused()) searchMinStock.clear();
+		if (!searchDescription.isFocused()) searchDescription.clear();
+	}
+
+	public void clear() {
+
+		id.clear();
+		name.clear();
+		brand.clear();
+		strength.clear();
+		type.getSelectionModel().clearSelection();
+		minStock.clear();
+		description.clear();
+
+
+		idLabel.setText("");
+		nameLabel.setText("");
+		brandLabel.setText("");
+		strengthLabel.setText("");
+		typeLabel.setText("");
+		minStockLabel.setText("");
+		descriptionLabel.setText("");
+
+
+		searchId.clear();
+		searchName.clear();
+		searchBrand.clear();
+		searchStrength.clear();
+		searchType.getSelectionModel().clearSelection();
+		searchMinStock.clear();
+		searchDescription.clear();
+		id.setDisable(false);
+		addBtn.setText("Add");
+		discriptionPane.expandedProperty().set(false);
+		refreshProducts();
+	}
+
+	@FXML
+	public void clearAll() {
+		clear();
+		icon.setImage(imageProduct);
+		messageLabel.setText("");
+
+	}
+
+	@FXML
 	public void idOnPress() {
 
 		idLabel.setText("");
@@ -211,7 +499,7 @@ public class ProductController implements Initializable {
 
 	}
 
-        @FXML
+	@FXML
 	public void typeOnPress() {
 
 		typeLabel.setText("");
@@ -219,8 +507,8 @@ public class ProductController implements Initializable {
 		messageLabel.setText("");
 
 	}
-        
-        @FXML
+
+	@FXML
 	public void minStockOnPress() {
 
 		minStockLabel.setText("");
@@ -228,68 +516,14 @@ public class ProductController implements Initializable {
 		messageLabel.setText("");
 
 	}
-        
-        
+
+
 	@FXML
 	public void expandDiscription() {
-            discriptionPane.expandedProperty().set(true);
+		discriptionPane.expandedProperty().set(true);
 	}
 
-	@FXML
-	public void edit() {
-		index = productTable.getSelectionModel().getSelectedIndex();
-		Product p = productTable.getItems().get(index);
-		id.setText(p.getProductID());
-		id.setDisable(true);
-		name.setText(p.getProductName());
-		brand.setText(p.getProductBrand());
-		description.setText(p.getProductDescription());
-		strength.setText(String.valueOf(p.getProductStrength()));
-		type.setValue(p.getProductType());
-		minStock.setText(String.valueOf(p.getProductMinStock()));
-	}
 
-	@FXML
-	public void update() {
-		Product p = new Product();
-		p.setProductID(id.getText());
-		id.setDisable(false);
-		p.setProductName(name.getText());
-		p.setProductBrand(brand.getText());
-		p.setProductDescription(description.getText());
-		p.setProductStrength(Integer.parseInt(strength.getText()));
-		p.setProductType(type.getValue());
-		p.setProductStock(p.getProductStock());
-		p.setProductMinStock(Integer.parseInt(minStock.getText()));
-		pm.update(p);
-		productTable.setItems(getProducts());
-		clear();
-	}
 
-	@FXML
-	public void delete() {
-		index = productTable.getSelectionModel().getSelectedIndex();
-		pm.remove(productTable.getItems().get(index).getProductID());
-		productTable.getItems().remove(index);
-		productTable.setItems(getProducts());
-		clear();
-	}
-
-	@FXML
-	public void clear() {
-            
-		id.clear();
-		name.clear();
-		brand.clear();
-		strength.clear();
-		description.clear();
-		minStock.clear();
-                type.getSelectionModel().clearSelection();
-                
-	}
-
-	@FXML
-	public void cancel() {
-        }
 
 }

@@ -66,7 +66,7 @@
                                  <children>
                                     <Label alignment="CENTER" text="Discription" />
                                     <Button mnemonicParsing="false" onAction="#expandDiscription" prefHeight="25.0" prefWidth="200.0" text="Add a discription" />
-                                    <Label fx:id="discriptionLabel" alignment="CENTER" layoutX="82.0" layoutY="21.0" textFill="RED" />
+                                    <Label fx:id="descriptionLabel" alignment="CENTER" layoutX="82.0" layoutY="21.0" textFill="RED" />
                                  </children>
                               </VBox>
                            </children>
@@ -93,20 +93,20 @@
                                     <TextField fx:id="searchStrength" prefWidth="79.0" promptText="Search strength ..." />
                                     <ComboBox fx:id="searchType" prefWidth="79.0" promptText="Search type ..." />
                                     <TextField fx:id="searchMinStock" prefWidth="89.0" promptText="Search min stock ..." />
-                                    <TextField fx:id="searchDiscription" layoutX="675.0" layoutY="10.0" prefWidth="205.0" promptText="Search discription ..." />
+                                    <TextField fx:id="searchDescription" layoutX="675.0" layoutY="10.0" prefWidth="205.0" promptText="Search discription ..." />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" spacing="10.0">
                                  <children>
                                     <TableView fx:id="productTable">
                                        <columns>
-                                          <TableColumn fx:id="idC" prefWidth="105.0" text="ID" />
-                                          <TableColumn fx:id="nameC" prefWidth="210.0" text="Name" />
-                                          <TableColumn fx:id="brandC" prefWidth="140.0" text="Brand" />
-                                          <TableColumn fx:id="strengthC" text="Strength" />
-                                          <TableColumn fx:id="typeC" text="Type" />
-                                          <TableColumn fx:id="minStockC" prefWidth="90.0" text="Min Stock" />
-                                          <TableColumn fx:id="discriptionC" prefWidth="205.0" text="Discription" />
+                                          <TableColumn fx:id="idC" maxWidth="105.0" minWidth="105.0" prefWidth="105.0" text="ID" />
+                                          <TableColumn fx:id="nameC" maxWidth="210.0" minWidth="210.0" prefWidth="210.0" text="Name" />
+                                          <TableColumn fx:id="brandC" maxWidth="140.0" minWidth="140.0" prefWidth="140.0" text="Brand" />
+                                          <TableColumn fx:id="strengthC" maxWidth="80.0" minWidth="80.0" text="Strength" />
+                                          <TableColumn fx:id="typeC" maxWidth="80.0" minWidth="80.0" text="Type" />
+                                          <TableColumn fx:id="minStockC" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" text="Min Stock" />
+                                          <TableColumn fx:id="discriptionC" maxWidth="205.0" minWidth="205.0" prefWidth="205.0" text="Discription" />
                                        </columns>
                                     </TableView>
                                  </children>
@@ -117,7 +117,7 @@
                   </VBox>
                   <VBox fillWidth="false" spacing="10.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#add" prefWidth="60.0" text="Add">
+                        <Button fx:id="addBtn" mnemonicParsing="false" onAction="#add" prefWidth="60.0" text="Add">
                            <VBox.margin>
                               <Insets top="22.0" />
                            </VBox.margin>
@@ -155,7 +155,7 @@
                               <Font name="System Bold Italic" size="14.0" />
                            </font>
                         </Label>
-                        <Button mnemonicParsing="false" onAction="#clear" prefWidth="60.0" text="Clear" />
+                        <Button mnemonicParsing="false" onAction="#clearAll" prefWidth="60.0" text="Clear" />
                      </children>
                   </HBox>
                </children>

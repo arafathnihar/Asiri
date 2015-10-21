@@ -132,7 +132,7 @@
                               <Font name="System Bold Italic" size="14.0" />
                            </font>
                         </Label>
-                                <Button mnemonicParsing="false" onAction="#clearBtnActon" prefWidth="60.0" text="Clear">
+                                <Button mnemonicParsing="false" onAction="#clearAll" prefWidth="60.0" text="Clear">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin></Button>

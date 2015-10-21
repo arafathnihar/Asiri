@@ -8,8 +8,6 @@ import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -20,7 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 public class DistributerController implements Initializable {
@@ -34,8 +31,6 @@ public class DistributerController implements Initializable {
 	private TextField nameSearch;@FXML
 	private TextField addressSearch;@FXML
 	private TextField phoneNoSearch;@FXML
-	private Button addBtn;@FXML
-	private TableView < Distributor > distributorTable;@FXML
 	private TableColumn < Distributor, String > codeC;@FXML
 	private TableColumn < Distributor, String > nameC;@FXML
 	private TableColumn < Distributor, String > addressC;@FXML
@@ -45,23 +40,18 @@ public class DistributerController implements Initializable {
 	private Label addressLabel;@FXML
 	private Label phoneLabel;@FXML
 	private Label messageLabel;@FXML
-	private ImageView icon;
-
-	DistributorModel dm = new DistributorModel();
-
-	int index;
+	private ImageView icon;@FXML
+        private Button addBtn;@FXML
+	private TableView < Distributor > distributorTable;
 
 	Image imageDistri = new Image(getClass().getResourceAsStream("/resource/images/distributer.png"));
-
 	Image imageError = new Image(getClass().getResourceAsStream("/resource/images/error.png"));
-
 	Image imageSuccess = new Image(getClass().getResourceAsStream("/resource/images/success.png"));
-
 	Image imageWarnning = new Image(getClass().getResourceAsStream("/resource/images/warnning.png"));
 
-
-
-
+        int index;
+        DistributorModel dm = new DistributorModel();
+        
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		codeC.setCellValueFactory(new PropertyValueFactory < > ("code"));
@@ -69,7 +59,6 @@ public class DistributerController implements Initializable {
 		addressC.setCellValueFactory(new PropertyValueFactory < > ("address"));
 		phoneNoC.setCellValueFactory(new PropertyValueFactory < > ("phoneNo"));
 		refreshDistributors();
-
 	}
 
 	public void refreshDistributors() {
@@ -80,12 +69,12 @@ public class DistributerController implements Initializable {
 		// 2. Set the filter Predicate whenever the filter changes.
 		codeSearch.textProperty().addListener((observable, oldValue, newValue) -> {
 			filteredData.setPredicate(distributor -> {
-				// If filter text is empty, display all persons.
+				// If filter text is empty, display all items.
 				if (newValue == null || newValue.isEmpty()) {
 					return true;
 				}
 
-				// Compare first name and last name of every person with filter text.
+				// Compare id of every item with filter text.
 				String lowerCaseFilter = newValue.toLowerCase();
 
 				if (distributor.getCode().toLowerCase().contains(lowerCaseFilter)) {
@@ -99,12 +88,12 @@ public class DistributerController implements Initializable {
 		// 2. Set the filter Predicate whenever the filter changes.
 		nameSearch.textProperty().addListener((observable, oldValue, newValue) -> {
 			filteredData.setPredicate(distributor -> {
-				// If filter text is empty, display all persons.
+				// If filter text is empty, display all items.
 				if (newValue == null || newValue.isEmpty()) {
 					return true;
 				}
 
-				// Compare first name and last name of every person with filter text.
+				// Compare id of every item with filter text.
 				String lowerCaseFilter = newValue.toLowerCase();
 
 				if (distributor.getName().toLowerCase().contains(lowerCaseFilter)) {
@@ -117,12 +106,12 @@ public class DistributerController implements Initializable {
 		// 2. Set the filter Predicate whenever the filter changes.
 		addressSearch.textProperty().addListener((observable, oldValue, newValue) -> {
 			filteredData.setPredicate(distributor -> {
-				// If filter text is empty, display all persons.
+				// If filter text is empty, display all items.
 				if (newValue == null || newValue.isEmpty()) {
 					return true;
 				}
 
-				// Compare first name and last name of every person with filter text.
+				// Compare id of every item with filter text.
 				String lowerCaseFilter = newValue.toLowerCase();
 
 				if (distributor.getAddress().toLowerCase().contains(lowerCaseFilter)) {
@@ -135,12 +124,12 @@ public class DistributerController implements Initializable {
 		// 2. Set the filter Predicate whenever the filter changes.
 		phoneNoSearch.textProperty().addListener((observable, oldValue, newValue) -> {
 			filteredData.setPredicate(distributor -> {
-				// If filter text is empty, display all persons.
+				// If filter text is empty, display all items.
 				if (newValue == null || newValue.isEmpty()) {
 					return true;
 				}
 
-				// Compare first name and last name of every person with filter text.
+				// Compare id of every item with filter text.
 				String lowerCaseFilter = newValue.toLowerCase();
 
 				if (distributor.getPhoneNo().toLowerCase().contains(lowerCaseFilter)) {
@@ -149,6 +138,7 @@ public class DistributerController implements Initializable {
 				return false; // Does not match.
 			});
 		});
+                
 		// 3. Wrap the FilteredList in a SortedList. 
 		SortedList < Distributor > sortedData = new SortedList < > (filteredData);
 
@@ -185,6 +175,13 @@ public class DistributerController implements Initializable {
 			return true;
 		}
 
+	}
+        
+        @FXML
+	public void add() {
+
+		if (code.isDisable()) update();
+		else addNew();
 	}
 
 	@FXML
@@ -223,37 +220,7 @@ public class DistributerController implements Initializable {
 		}
 	}
 
-	@FXML
-	public void add() {
-
-		if (code.isDisable()) update();
-		else addNew();
-	}
-
-
-	@FXML
-	public void edit() {
-
-		index = distributorTable.getSelectionModel().getSelectedIndex();
-		if (index >= 0) {
-			Distributor d = distributorTable.getItems().get(index);
-			code.setText(d.getCode());
-			code.setDisable(true);
-			name.setText(d.getName());
-			address.setText(d.getAddress());
-			phoneNo.setText(d.getPhoneNo());
-			addBtn.setText("Update");
-			icon.setImage(imageDistri);
-			messageLabel.setText("");
-		} else {
-			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-			System.out.println("Please select a distributer to edit");
-			icon.setImage(imageWarnning);
-			messageLabel.setTextFill(Color.ORANGE);
-			messageLabel.setText("Please select a distributer to edit");
-		}
-
-	}
+	
 
 	@FXML
 	public void update() {
@@ -280,6 +247,31 @@ public class DistributerController implements Initializable {
 	}
 
 	@FXML
+	public void edit() {
+
+		index = distributorTable.getSelectionModel().getSelectedIndex();
+		if (index >= 0) {
+			Distributor d = distributorTable.getItems().get(index);
+			code.setText(d.getCode());
+			code.setDisable(true);
+			name.setText(d.getName());
+			address.setText(d.getAddress());
+			phoneNo.setText(d.getPhoneNo());
+			addBtn.setText("Update");
+			icon.setImage(imageDistri);
+			messageLabel.setText("");
+		} else {
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			System.out.println("Please select a distributer to edit");
+			icon.setImage(imageWarnning);
+			messageLabel.setTextFill(Color.ORANGE);
+			messageLabel.setText("Please select a distributer to edit");
+		}
+
+	}
+
+
+	@FXML
 	public void delete() {
 
 		index = distributorTable.getSelectionModel().getSelectedIndex();
@@ -304,6 +296,43 @@ public class DistributerController implements Initializable {
 	}
 
 
+	@FXML
+	public void clearSearch() {
+		if (!codeSearch.isFocused()) codeSearch.clear();
+		if (!nameSearch.isFocused()) nameSearch.clear();
+		if (!nameSearch.isFocused()) addressSearch.clear();
+		if (!nameSearch.isFocused()) phoneNoSearch.clear();
+
+	}
+        
+        @FXML
+	public void clear() {
+
+		codeSearch.clear();
+		nameSearch.clear();
+		addressSearch.clear();
+		phoneNoSearch.clear();
+		codeLabel.setText("");
+		nameLabel.setText("");
+		addressLabel.setText("");
+		phoneLabel.setText("");
+		code.clear();
+		name.clear();
+		address.clear();
+		phoneNo.clear();
+		code.setDisable(false);
+		addBtn.setText("Add");
+
+	}
+
+	@FXML
+	public void clearAll() {
+		clear();
+		messageLabel.setText("");
+		icon.setImage(imageDistri);
+		refreshDistributors();
+	}
+        
 	@FXML
 	public void codeOnPress() {
 
@@ -340,39 +369,5 @@ public class DistributerController implements Initializable {
 
 	}
 
-	@FXML
-	public void clearSearch() {
-		if (!codeSearch.isFocused()) codeSearch.clear();
-		if (!nameSearch.isFocused()) nameSearch.clear();
-		if (!nameSearch.isFocused()) addressSearch.clear();
-		if (!nameSearch.isFocused()) phoneNoSearch.clear();
-
-	}@FXML
-	public void clear() {
-
-		codeSearch.clear();
-		nameSearch.clear();
-		addressSearch.clear();
-		phoneNoSearch.clear();
-		codeLabel.setText("");
-		nameLabel.setText("");
-		addressLabel.setText("");
-		phoneLabel.setText("");
-		code.clear();
-		name.clear();
-		address.clear();
-		phoneNo.clear();
-		code.setDisable(false);
-		addBtn.setText("Add");
-
-	}
-
-	@FXML
-	public void clearBtnActon() {
-		clear();
-		messageLabel.setText("");
-		icon.setImage(imageDistri);
-		refreshDistributors();
-	}
 
 }

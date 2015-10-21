@@ -12,19 +12,15 @@
         <URL value="@dashboard.css" />
     </stylesheets>
    <children>
-      <TabPane layoutX="100.0" layoutY="71.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TabPane prefHeight="1089.0" prefWidth="1060.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
           <Tab text="INVOICE">
             <content>
-                  <AnchorPane>
+                  <VBox>
                      <children>
-                        <VBox alignment="CENTER">
-                           <children>
-                          <AnchorPane fx:id="invoiceTab" />
-                           </children>
-                        </VBox>
+                        <AnchorPane fx:id="invoiceTab" />
                      </children>
-                  </AnchorPane>
+                  </VBox>
             </content>
           </Tab>
             <Tab text="BILL">
