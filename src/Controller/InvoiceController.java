@@ -62,14 +62,14 @@ public class InvoiceController implements Initializable {
 	private Label messageLabel;
 
 	@FXML
-	private TextField searchProductID;@FXML
+	private ComboBox <String> searchProductID;@FXML
 	private TextField searchPackSize;@FXML
 	private TextField searchQuantity;@FXML
 	private TextField searchPrice;@FXML
 	private TextField searchDiscount;@FXML
 	private TextField searchFree;@FXML
 	private TextField searchMargin;@FXML
-	private TextField searchExpireDate;
+	private DatePicker searchExpireDate;
 
 	InvoiceItemModel iim = new InvoiceItemModel();
 	int index;
