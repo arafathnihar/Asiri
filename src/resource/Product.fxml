@@ -87,13 +87,13 @@
                            <children>
                               <HBox alignment="CENTER_LEFT" spacing="1.0">
                                  <children>
-                                    <TextField fx:id="searchId" prefWidth="105.0" promptText="Search id ..." />
-                                    <TextField fx:id="searchName" prefWidth="209.0" promptText="Search name ..." />
-                                    <TextField fx:id="searchBrand" prefWidth="139.0" promptText="Search brand .." />
-                                    <TextField fx:id="searchStrength" prefWidth="79.0" promptText="Search strength ..." />
-                                    <ComboBox fx:id="searchType" prefWidth="79.0" promptText="Search type ..." />
-                                    <TextField fx:id="searchMinStock" prefWidth="89.0" promptText="Search min stock ..." />
-                                    <TextField fx:id="searchDescription" layoutX="675.0" layoutY="10.0" prefWidth="205.0" promptText="Search discription ..." />
+                                    <TextField fx:id="searchId" onKeyPressed="#clearSearch" prefWidth="105.0" promptText="Search id ..." />
+                                    <TextField fx:id="searchName" onKeyPressed="#clearSearch" prefWidth="209.0" promptText="Search name ..." />
+                                    <TextField fx:id="searchBrand" onKeyPressed="#clearSearch" prefWidth="139.0" promptText="Search brand .." />
+                                    <TextField fx:id="searchStrength" onKeyPressed="#clearSearch" prefWidth="79.0" promptText="Search strength ..." />
+                                    <ComboBox fx:id="searchType" onKeyPressed="#clearSearch" onMouseClicked="#clearSearch" prefWidth="79.0" promptText="Search type ..." />
+                                    <TextField fx:id="searchMinStock" onKeyPressed="#clearSearch" prefWidth="89.0" promptText="Search min stock ..." />
+                                    <TextField fx:id="searchDescription" layoutX="675.0" layoutY="10.0" onKeyPressed="#clearSearch" prefWidth="205.0" promptText="Search discription ..." />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" spacing="10.0">

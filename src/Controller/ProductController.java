@@ -81,8 +81,8 @@ public class ProductController implements Initializable {
 		minStockC.setCellValueFactory(new PropertyValueFactory < > ("productMinStock"));
 		discriptionC.setCellValueFactory(new PropertyValueFactory < > ("productDescription"));
 
-		type.getItems().addAll("A", "B", "C", "D", "E");
-		searchType.getItems().addAll("A", "B", "C", "D", "E");
+		type.getItems().addAll("one", "two", "three", "four", "five","six","seven","eight","nine","ten");
+		searchType.getItems().addAll("one", "two", "three", "four", "five","six","seven","eight","nine","ten");
 		refreshProducts();
 	}
 
@@ -226,6 +226,9 @@ public class ProductController implements Initializable {
 
 		// 5. Add sorted (and filtered) data to the table.
 		productTable.setItems(sortedData);
+                
+                // bind the sortedList comparator to the TableView comparator
+               sortedData.comparatorProperty().bind(productTable.comparatorProperty());
 
 	}
 
@@ -297,7 +300,7 @@ public class ProductController implements Initializable {
 						p.setProductType(type.getValue());
 						p.setProductMinStock(Integer.parseInt(minStock.getText()));
 						pm.add(p);
-						clearAll();
+						clear();
 						icon.setImage(imageSuccess);
 						messageLabel.setTextFill(Color.GREEN);
 						messageLabel.setText(" New product added ");
@@ -458,8 +461,7 @@ public class ProductController implements Initializable {
 	@FXML
 	public void clearAll() {
 		clear();
-		icon.setImage(imageProduct);
-		messageLabel.setText("");
+                onPressAnything();
 
 	}
 
@@ -467,8 +469,7 @@ public class ProductController implements Initializable {
 	public void idOnPress() {
 
 		idLabel.setText("");
-		icon.setImage(imageProduct);
-		messageLabel.setText("");
+                onPressAnything();
 
 	}
 
@@ -476,8 +477,7 @@ public class ProductController implements Initializable {
 	public void nameOnPress() {
 
 		nameLabel.setText("");
-		icon.setImage(imageProduct);
-		messageLabel.setText("");
+                onPressAnything();
 
 	}
 
@@ -485,8 +485,7 @@ public class ProductController implements Initializable {
 	public void brandOnPress() {
 
 		brandLabel.setText("");
-		icon.setImage(imageProduct);
-		messageLabel.setText("");
+                onPressAnything();
 
 	}
 
@@ -494,8 +493,7 @@ public class ProductController implements Initializable {
 	public void strenthOnPress() {
 
 		strengthLabel.setText("");
-		icon.setImage(imageProduct);
-		messageLabel.setText("");
+                onPressAnything();
 
 	}
 
@@ -503,8 +501,7 @@ public class ProductController implements Initializable {
 	public void typeOnPress() {
 
 		typeLabel.setText("");
-		icon.setImage(imageProduct);
-		messageLabel.setText("");
+                onPressAnything();
 
 	}
 
@@ -512,18 +509,21 @@ public class ProductController implements Initializable {
 	public void minStockOnPress() {
 
 		minStockLabel.setText("");
-		icon.setImage(imageProduct);
-		messageLabel.setText("");
+                onPressAnything();
 
 	}
+        
+        @FXML
+	public void onPressAnything() {
 
+		icon.setImage(imageProduct);
+		messageLabel.setText("");
+	}
 
 	@FXML
 	public void expandDiscription() {
 		discriptionPane.expandedProperty().set(true);
 	}
-
-
 
 
 }

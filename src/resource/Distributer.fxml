@@ -10,17 +10,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane stylesheets="@distributer.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DistributerController">
+<AnchorPane onMouseClicked="#onPressAnything" stylesheets="@distributer.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DistributerController">
     <children>
-        <VBox alignment="CENTER" prefHeight="580.0" prefWidth="915.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox alignment="CENTER" onMouseClicked="#onPressAnything" prefHeight="580.0" prefWidth="915.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER" onMouseClicked="#onPressAnything">
                <children>
-                  <VBox alignment="CENTER" spacing="5.0">
+                  <VBox alignment="CENTER" onMouseClicked="#onPressAnything" spacing="5.0">
                      <children>
-                            <HBox alignment="CENTER">
+                            <HBox alignment="CENTER" onMouseClicked="#onPressAnything">
                                 <children>
-                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                    <HBox alignment="CENTER_LEFT" onMouseClicked="#onPressAnything" spacing="10.0">
                                         <children>
                                             <VBox alignment="CENTER" spacing="5.0">
                                                 <children>
@@ -60,10 +60,10 @@
                                  <children>
                                     <HBox alignment="CENTER">
                                        <children>
-                                          <TextField fx:id="codeSearch" onKeyPressed="#clearSearch" prefHeight="20.0" prefWidth="95.0" promptText="Search code ..." />
-                                          <TextField fx:id="nameSearch" onKeyPressed="#clearSearch" prefHeight="20.0" prefWidth="170.0" promptText="Search name ..." />
-                                          <TextField fx:id="addressSearch" onKeyPressed="#clearSearch" prefHeight="20.0" prefWidth="385.0" promptText="Search address ..." />
-                                          <TextField fx:id="phoneNoSearch" onKeyPressed="#clearSearch" prefHeight="20.0" prefWidth="125.0" promptText="Search phone no ..." />
+                                          <TextField fx:id="codeSearch" onKeyPressed="#clearSearch" onMouseClicked="#onPressAnything" prefHeight="20.0" prefWidth="95.0" promptText="Search code ..." />
+                                          <TextField fx:id="nameSearch" onKeyPressed="#clearSearch" onMouseClicked="#onPressAnything" prefHeight="20.0" prefWidth="170.0" promptText="Search name ..." />
+                                          <TextField fx:id="addressSearch" onKeyPressed="#clearSearch" onMouseClicked="#onPressAnything" prefHeight="20.0" prefWidth="385.0" promptText="Search address ..." />
+                                          <TextField fx:id="phoneNoSearch" onKeyPressed="#clearSearch" onMouseClicked="#onPressAnything" prefHeight="20.0" prefWidth="125.0" promptText="Search phone no ..." />
                                        </children>
                                     </HBox>
                                  </children>
@@ -72,7 +72,7 @@
                                       <children>
                                           <HBox alignment="CENTER" spacing="10.0">
                                               <children>
-                                                    <TableView fx:id="distributorTable" editable="true">
+                                                    <TableView fx:id="distributorTable" editable="true" onMouseClicked="#onPressAnything">
                                                         <columns>
                                                             <TableColumn fx:id="codeC" prefWidth="95.0" text="Code" />
                                                             <TableColumn fx:id="nameC" prefWidth="170.0" text="Name" />

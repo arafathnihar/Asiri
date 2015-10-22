@@ -147,6 +147,9 @@ public class DistributerController implements Initializable {
 
 		// 5. Add sorted (and filtered) data to the table.
 		distributorTable.setItems(sortedData);
+                
+                // bind the sortedList comparator to the TableView comparator
+               sortedData.comparatorProperty().bind(distributorTable.comparatorProperty());
 
 	}
 
@@ -200,7 +203,6 @@ public class DistributerController implements Initializable {
 				icon.setImage(imageSuccess);
 				messageLabel.setTextFill(Color.GREEN);
 				messageLabel.setText("New distributer added");
-				refreshDistributors();
 				clear();
 
 
@@ -235,7 +237,6 @@ public class DistributerController implements Initializable {
 			icon.setImage(imageSuccess);
 			messageLabel.setTextFill(Color.GREEN);
 			messageLabel.setText("Distributer is updated");
-			refreshDistributors();
 			clear();
 
 		} else {
@@ -282,7 +283,6 @@ public class DistributerController implements Initializable {
 			icon.setImage(imageSuccess);
 			messageLabel.setTextFill(Color.GREEN);
 			messageLabel.setText("Distributer is deleted");
-			refreshDistributors();
 			clear();
 
 		} else {
@@ -300,8 +300,8 @@ public class DistributerController implements Initializable {
 	public void clearSearch() {
 		if (!codeSearch.isFocused()) codeSearch.clear();
 		if (!nameSearch.isFocused()) nameSearch.clear();
-		if (!nameSearch.isFocused()) addressSearch.clear();
-		if (!nameSearch.isFocused()) phoneNoSearch.clear();
+		if (!addressSearch.isFocused()) addressSearch.clear();
+		if (!phoneNoSearch.isFocused()) phoneNoSearch.clear();
 
 	}
         
@@ -322,41 +322,35 @@ public class DistributerController implements Initializable {
 		phoneNo.clear();
 		code.setDisable(false);
 		addBtn.setText("Add");
-
+                refreshDistributors();
 	}
 
 	@FXML
 	public void clearAll() {
 		clear();
-		messageLabel.setText("");
-		icon.setImage(imageDistri);
-		refreshDistributors();
+                onPressAnything();
+
 	}
         
 	@FXML
 	public void codeOnPress() {
 
 		codeLabel.setText("");
-		icon.setImage(imageDistri);
-		messageLabel.setText("");
-
+                onPressAnything();
 	}
 
 	@FXML
 	public void nameOnPress() {
 
 		nameLabel.setText("");
-		icon.setImage(imageDistri);
-		messageLabel.setText("");
-
+                onPressAnything();
 	}
 
 	@FXML
 	public void addressOnPress() {
 
 		addressLabel.setText("");
-		icon.setImage(imageDistri);
-		messageLabel.setText("");
+		onPressAnything();
 
 	}
 
@@ -364,10 +358,13 @@ public class DistributerController implements Initializable {
 	public void phoneOnPress() {
 
 		phoneLabel.setText("");
-		icon.setImage(imageDistri);
-		messageLabel.setText("");
+		onPressAnything();
 
 	}
 
-
+        @FXML
+        public void onPressAnything() {
+            messageLabel.setText("");
+            icon.setImage(imageDistri);
+        }
 }
