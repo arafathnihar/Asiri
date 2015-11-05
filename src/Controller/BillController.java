@@ -60,15 +60,13 @@ public class BillController implements Initializable {
         productID.setItems(getProductID());
     }
 
-    
     public ObservableList<String> getProductID() {
         ObservableList<String> products = bm.getProductsID();
         return products;
     }
-    
+
     @FXML
     public void add() {
-
         BillItem bi = new BillItem();
         bi.setProductID(productID.getValue());
         bi.setUnitPrice(Double.parseDouble(unitPrice.getText()));
@@ -132,7 +130,6 @@ public class BillController implements Initializable {
         unitPrice.clear();
         quantity.clear();
         total.clear();
-
         billAmount.clear();
         discount.clear();
         billNote.clear();
