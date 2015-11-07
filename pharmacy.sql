@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `productStrength` int(10) DEFAULT NULL,
   `productType` varchar(255) DEFAULT NULL,
   `productStock` int(10) DEFAULT NULL,
-  `productMinStock` double DEFAULT NULL,
+  `productMinStock` int(10) DEFAULT NULL,
   PRIMARY KEY (`productID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

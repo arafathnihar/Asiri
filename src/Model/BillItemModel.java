@@ -28,7 +28,6 @@ public class BillItemModel {
                 bName = bName + Integer.toString(1);
                 b.setBillNo(bName);
             }
-
             for (int i = 0; i < items.size(); i++) {
                 items.get(i).setBillNo(bName);
             }

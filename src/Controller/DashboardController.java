@@ -6,17 +6,18 @@ import javafx.fxml.*;
 import java.io.*;
 import javafx.scene.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 public class DashboardController implements Initializable {
 
     @FXML
-    private AnchorPane invoiceTab;
+    private VBox invoiceTab;
     @FXML
-    private AnchorPane billTab;
+    private VBox billTab;
     @FXML
-    private AnchorPane productTab;
+    private VBox productTab;
     @FXML
-    private AnchorPane distributerTab;
+    private VBox distributerTab;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

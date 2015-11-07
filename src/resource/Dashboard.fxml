@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.util.*?>
@@ -7,48 +9,88 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashboardController">
+<AnchorPane id="AnchorPane" minHeight="700.0" minWidth="1100.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashboardController">
     <stylesheets>
         <URL value="@dashboard.css" />
     </stylesheets>
    <children>
-      <TabPane prefHeight="1089.0" prefWidth="1060.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TabPane prefHeight="67.0" prefWidth="573.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
-          <Tab text="INVOICE">
+          <Tab text="   INVOICE    ">
             <content>
+                  <VBox fx:id="invoiceTab" alignment="CENTER" />
+            </content>
+               <graphic>
                   <VBox>
                      <children>
-                        <AnchorPane fx:id="invoiceTab" />
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/invoiceTab.png" />
+                           </image>
+                        </ImageView>
                      </children>
+                     <padding>
+                        <Insets bottom="5.0" top="5.0" />
+                     </padding>
                   </VBox>
-            </content>
+               </graphic>
           </Tab>
-            <Tab text="BILL">
+            <Tab text="     BILL        ">
                <content>
-                  <VBox alignment="CENTER">
-                     <children>
-                        <AnchorPane fx:id="billTab" />
-                     </children>
-                  </VBox>
+                  <VBox fx:id="billTab" alignment="CENTER" />
                </content>
+               <graphic>
+                  <VBox>
+                     <children>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/billTab.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </graphic>
             </Tab>
-            <Tab text="PRODUCT">
+            <Tab text="   PRODUCT    ">
                <content>
-                  <VBox alignment="CENTER">
-                     <children>
-                        <AnchorPane fx:id="productTab" />
-                     </children>
-                  </VBox>
+                  <VBox fx:id="productTab" alignment="CENTER" />
                </content>
+               <graphic>
+                  <VBox>
+                     <children>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/productTab.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </graphic>
             </Tab>
             <Tab text="DISTRIBUTOR">
                <content>
-                  <VBox alignment="CENTER">
-                     <children>
-                        <AnchorPane fx:id="distributerTab" />
-                     </children>
-                  </VBox>
+                  <VBox fx:id="distributerTab" alignment="CENTER" />
                </content>
+               <graphic>
+                  <VBox>
+                     <children>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/distributerTab.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </graphic>
             </Tab>
         </tabs>
       </TabPane>

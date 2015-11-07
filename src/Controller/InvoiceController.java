@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -21,14 +22,13 @@ public class InvoiceController implements Initializable {
     @FXML
     private TextField invoiceID;
     @FXML
-    private ComboBox<String> distributerCode;
+    private ComboBox< String> distributerCode;
     @FXML
     private DatePicker date;
     @FXML
     private TextField invoiceNote;
-    
     @FXML
-    private ComboBox<String> productID;
+    private ComboBox< String> productID;
     @FXML
     private TextField packSize;
     @FXML
@@ -38,35 +38,75 @@ public class InvoiceController implements Initializable {
     @FXML
     private TextField discount;
     @FXML
-    private TextField free; 
+    private TextField free;
     @FXML
     private TextField margin;
     @FXML
     private DatePicker expireDate;
-    
     @FXML
-    private TableView<InvoiceItem> invoiceItemTable;
-    
+    private TableView< InvoiceItem> invoiceItemTable;
     @FXML
-    private TableColumn<InvoiceItem, String> productIDC; 
+    private TableColumn< InvoiceItem, String> productIDC;
     @FXML
-    private TableColumn<InvoiceItem, Integer> packSizeC;
+    private TableColumn< InvoiceItem, Integer> packSizeC;
     @FXML
-    private TableColumn<InvoiceItem, Integer> quantityC;
+    private TableColumn< InvoiceItem, Integer> quantityC;
     @FXML
-    private TableColumn<InvoiceItem, Double> priceC;
+    private TableColumn< InvoiceItem, Double> priceC;
     @FXML
-    private TableColumn<InvoiceItem, Double> discountC;
+    private TableColumn< InvoiceItem, Double> discountC;
     @FXML
-    private TableColumn<InvoiceItem, Integer> freeC;
+    private TableColumn< InvoiceItem, Integer> freeC;
     @FXML
-    private TableColumn<InvoiceItem, Integer> marginC;
+    private TableColumn< InvoiceItem, Integer> marginC;
     @FXML
-    private TableColumn<InvoiceItem, Date> expireDateC;
-    
+    private TableColumn< InvoiceItem, Date> expireDateC;
+    @FXML
+    private Label invoiceIdLabel;
+    @FXML
+    private Label distriCodeLabel;
+    @FXML
+    private Label dateLabel;
+    @FXML
+    private Label noteLabel;
+    @FXML
+    private Label productIdLabel;
+    @FXML
+    private Label packSizeLabel;
+    @FXML
+    private Label quantityLabel;
+    @FXML
+    private Label priceLabel;
+    @FXML
+    private Label discountLabel;
+    @FXML
+    private Label freeLabel;
+    @FXML
+    private Label marginLabel;
+    @FXML
+    private Label expireDateLabel;
+    @FXML
+    private Label messageLabel;
+    @FXML
+    private ComboBox<String> searchProductID;
+    @FXML
+    private TextField searchPackSize;
+    @FXML
+    private TextField searchQuantity;
+    @FXML
+    private TextField searchPrice;
+    @FXML
+    private TextField searchDiscount;
+    @FXML
+    private TextField searchFree;
+    @FXML
+    private TextField searchMargin;
+    @FXML
+    private DatePicker searchExpireDate;
+
     InvoiceItemModel iim = new InvoiceItemModel();
     int index;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         productIDC.setCellValueFactory(new PropertyValueFactory<>("productID"));
@@ -77,21 +117,20 @@ public class InvoiceController implements Initializable {
         freeC.setCellValueFactory(new PropertyValueFactory<>("free"));
         marginC.setCellValueFactory(new PropertyValueFactory<>("margin"));
         expireDateC.setCellValueFactory(new PropertyValueFactory<>("expireDate"));
-        
-        productID.setItems(getProductsID());
         distributerCode.setItems(getDistributerCode());
+        productID.setItems(getProductsID());
     }
 
-    public ObservableList<String> getProductsID() {
-        ObservableList<String> products = iim.getProductID();
+    public ObservableList< String> getProductsID() {
+        ObservableList< String> products = iim.getProductID();
         return products;
     }
-    
-    public ObservableList<String> getDistributerCode() {
-        ObservableList<String> distributers = iim.getDistributerCode();
+
+    public ObservableList< String> getDistributerCode() {
+        ObservableList< String> distributers = iim.getDistributerCode();
         return distributers;
     }
-    
+
     @FXML
     public void add() {
         InvoiceItem ii = new InvoiceItem();
@@ -101,12 +140,12 @@ public class InvoiceController implements Initializable {
         ii.setFree(Integer.parseInt(free.getText()));
         ii.setPrice(Double.parseDouble(price.getText()));
         ii.setMargin(Integer.parseInt(margin.getText()));
-        ii.setExpireDate(java.sql.Date.valueOf(expireDate.getValue()));        
+        ii.setExpireDate(java.sql.Date.valueOf(expireDate.getValue()));
         ii.setDiscount(Double.parseDouble(discount.getText()));
-        invoiceItemTable.getItems().add(ii);   
+        invoiceItemTable.getItems().add(ii);
         clear();
     }
-    
+
     @FXML
     public void save() {
         Invoice i = new Invoice();
@@ -114,7 +153,7 @@ public class InvoiceController implements Initializable {
         i.setDistibutorCode(distributerCode.getValue());
         i.setInvoiceDate(java.sql.Date.valueOf(date.getValue()));
         i.setInvoiceNote(invoiceNote.getText());
-        ObservableList<InvoiceItem> items = invoiceItemTable.getItems();
+        ObservableList< InvoiceItem> items = invoiceItemTable.getItems();
         int j = 1;
         for (int k = 0; k < items.size(); k++) {
             items.get(k).setInvoiceID(invoiceID.getText());
@@ -127,7 +166,7 @@ public class InvoiceController implements Initializable {
             invoiceItemTable.getItems().clear();
         }
     }
-    
+
     @FXML
     public void edit() {
         index = invoiceItemTable.getSelectionModel().getSelectedIndex();
@@ -141,8 +180,9 @@ public class InvoiceController implements Initializable {
         //expireDate.setValue(ii.getExpireDate());
         discount.setText(String.valueOf(ii.getDiscount()));
     }
+
     @FXML
-    public void update(){
+    public void update() {
         InvoiceItem ii = new InvoiceItem();
         ii.setProductID(productID.getValue());
         ii.setPackSize(Integer.parseInt(packSize.getText()));
@@ -150,26 +190,25 @@ public class InvoiceController implements Initializable {
         ii.setFree(Integer.parseInt(free.getText()));
         ii.setPrice(Double.parseDouble(price.getText()));
         ii.setMargin(Integer.parseInt(margin.getText()));
-        ii.setExpireDate(java.sql.Date.valueOf(expireDate.getValue()));        
+        ii.setExpireDate(java.sql.Date.valueOf(expireDate.getValue()));
         ii.setDiscount(Double.parseDouble(discount.getText()));
         index = invoiceItemTable.getSelectionModel().getSelectedIndex();
-        invoiceItemTable.getItems().set(index, ii);  
+        invoiceItemTable.getItems().set(index, ii);
         clear();
     }
-    
+
     @FXML
     public void delete() {
         index = invoiceItemTable.getSelectionModel().getSelectedIndex();
         invoiceItemTable.getItems().remove(index);
         clear();
     }
-    
+
     @FXML
     public void clear() {
         invoiceID.clear();
         distributerCode.setValue(null);
         invoiceNote.clear();
-    
         productID.setValue(null);
         packSize.clear();
         quantity.clear();
@@ -178,8 +217,9 @@ public class InvoiceController implements Initializable {
         free.clear();
         margin.clear();
     }
-    
+
     @FXML
-    public void cancel() {}
+    public void cancel() {
+    }
 
 }
