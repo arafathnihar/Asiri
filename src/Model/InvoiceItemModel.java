@@ -1,18 +1,29 @@
 package Model;
 
 import java.sql.*;
+import java.time.LocalDate;
 import javax.sql.*;
 import javafx.collections.*;
 
 public class InvoiceItemModel {
 
     DataSource ds = DatabaseSource.getMySQLDataSource();
-
-    public void addInvoice(Invoice i, ObservableList<InvoiceItem> items) {
+    
+    public Date getSqlDate(LocalDate localDate){
+        Date date = Date.valueOf(localDate);
+        return date;
+    }
+    
+    public LocalDate getLocalDate(Date date){
+        LocalDate localD = date.toLocalDate();
+        return localD;
+    }
+    
+    public void addInvoice(Invoice i) {
         try (Connection con = ds.getConnection()) {
             String query = "INSERT INTO invoiceitem" + " VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pStmt = con.prepareStatement(query);
-            for (InvoiceItem record : items) {
+            for (InvoiceItem record : i.getItems()) {
                 pStmt.setString(1, record.getItemID());
                 pStmt.setString(2, record.getInvoiceID());
                 pStmt.setString(3, record.getProductID());
@@ -21,7 +32,7 @@ public class InvoiceItemModel {
                 pStmt.setInt(6, record.getFree());
                 pStmt.setDouble(7, record.getPrice());
                 pStmt.setInt(8, record.getMargin());
-                pStmt.setDate(9, (Date) record.getExpireDate());
+                pStmt.setDate(9, getSqlDate(record.getExpireDate()));
                 pStmt.setDouble(10, record.getDiscount());
                 pStmt.setInt(11, record.getSold());
                 pStmt.addBatch();
@@ -40,7 +51,7 @@ public class InvoiceItemModel {
 
             String query3 = "UPDATE product SET productStock = productStock + ? WHERE productID = ? ";
             PreparedStatement pStmt3 = con.prepareStatement(query3);
-            for (InvoiceItem record : items) {
+            for (InvoiceItem record : i.getItems()) {
                 pStmt3.setInt(1, record.getQuantity());
                 pStmt3.setString(2, record.getProductID());
                 pStmt3.addBatch();
