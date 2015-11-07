@@ -16,8 +16,8 @@ public class InvoiceItem {
     private double discount;
     private int sold;
 
-    public InvoiceItem(String itemID, String invoiceID, String productID, int packSize, 
-            int quantity, int free, double price, int margin, 
+    public InvoiceItem(String itemID, String invoiceID, String productID, int packSize,
+            int quantity, int free, double price, int margin,
             Date expireDate, double discount, int sold) {
         this.itemID = itemID;
         this.invoiceID = invoiceID;
@@ -32,6 +32,12 @@ public class InvoiceItem {
         this.sold = sold;
     }
     
+    public InvoiceItem(String productID, int quantity, Date expireDate) {
+        this.productID = productID;
+        this.quantity = quantity;
+        this.expireDate = expireDate;
+    }
+
     public InvoiceItem() {
         this.itemID = "";
         this.invoiceID = "";
@@ -49,6 +55,7 @@ public class InvoiceItem {
     public String getItemID() {
         return itemID;
     }
+
     public void setItemID(String itemID) {
         this.itemID = itemID;
     }
@@ -56,6 +63,7 @@ public class InvoiceItem {
     public String getInvoiceID() {
         return invoiceID;
     }
+
     public void setInvoiceID(String invoiceID) {
         this.invoiceID = invoiceID;
     }
@@ -63,15 +71,15 @@ public class InvoiceItem {
     public String getProductID() {
         return productID;
     }
-    
+
     public void setProductID(String productID) {
         this.productID = productID;
     }
 
-    
     public int getPackSize() {
         return packSize;
     }
+
     public void setPackSize(int packSize) {
         this.packSize = packSize;
     }
@@ -79,6 +87,7 @@ public class InvoiceItem {
     public int getQuantity() {
         return quantity;
     }
+
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
@@ -86,6 +95,7 @@ public class InvoiceItem {
     public int getFree() {
         return free;
     }
+
     public void setFree(int free) {
         this.free = free;
     }
@@ -93,6 +103,7 @@ public class InvoiceItem {
     public double getPrice() {
         return price;
     }
+
     public void setPrice(double price) {
         this.price = price;
     }
@@ -100,7 +111,7 @@ public class InvoiceItem {
     public int getMargin() {
         return margin;
     }
-    
+
     public void setMargin(int margin) {
         this.margin = margin;
     }
@@ -108,6 +119,7 @@ public class InvoiceItem {
     public Date getExpireDate() {
         return expireDate;
     }
+
     public void setExpireDate(Date expireDate) {
         this.expireDate = expireDate;
     }
@@ -115,6 +127,7 @@ public class InvoiceItem {
     public double getDiscount() {
         return discount;
     }
+
     public void setDiscount(double discount) {
         this.discount = discount;
     }
@@ -122,6 +135,7 @@ public class InvoiceItem {
     public int getSold() {
         return sold;
     }
+
     public void setSold(int sold) {
         this.sold = sold;
     }

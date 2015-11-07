@@ -345,4 +345,5 @@ public class DistributerController implements Initializable {
         messageLabel.setText("");
         icon.setImage(imageDistri);
     }
+    
 }

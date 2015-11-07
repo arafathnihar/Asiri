@@ -22,6 +22,13 @@ public class Product {
         this.productStock = productStock;
         this.productMinStock = productMinStock;
     }
+    
+    public Product(String productID, String productName, int productStock, int productMinStock) {
+        this.productID = productID;
+        this.productName = productName;
+        this.productStock = productStock;
+        this.productMinStock = productMinStock;
+    }
 
     public Product() {
         this.productID = "";

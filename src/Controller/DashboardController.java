@@ -5,7 +5,6 @@ import java.util.*;
 import javafx.fxml.*;
 import java.io.*;
 import javafx.scene.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 public class DashboardController implements Initializable {
@@ -27,6 +26,7 @@ public class DashboardController implements Initializable {
             productTab.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Product.fxml")));
             distributerTab.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Distributer.fxml")));
         } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 }
