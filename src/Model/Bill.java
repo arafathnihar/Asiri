@@ -15,7 +15,7 @@ public class Bill {
         this.billNote = billNote;
         this.billAmount = billAmount;
     }
-    
+   
     public Bill(){
         this.billNo = "";
         this.billDate = null;

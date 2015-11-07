@@ -269,7 +269,6 @@ public class ProductController implements Initializable {
 
     @FXML
     public void add() {
-
         if (id.isDisable()) {
             update();
         } else {

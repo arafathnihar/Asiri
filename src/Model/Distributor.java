@@ -1,7 +1,7 @@
 package Model;
 
 public class Distributor {
-    
+
     private String code;
     private String name;
     private String address;
@@ -13,17 +13,18 @@ public class Distributor {
         this.address = address;
         this.phoneNo = phoneNo;
     }
-    
-    public Distributor(){
+
+    public Distributor() {
         this.code = "";
         this.name = "";
         this.address = "";
         this.phoneNo = "";
     }
- 
+
     public String getCode() {
         return code;
     }
+
     public void setCode(String code) {
         this.code = code;
     }
@@ -31,6 +32,7 @@ public class Distributor {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -38,6 +40,7 @@ public class Distributor {
     public String getAddress() {
         return address;
     }
+
     public void setAddress(String address) {
         this.address = address;
     }
@@ -45,8 +48,9 @@ public class Distributor {
     public String getPhoneNo() {
         return phoneNo;
     }
+
     public void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
     }
-    
+
 }

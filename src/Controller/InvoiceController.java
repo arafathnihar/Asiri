@@ -87,22 +87,7 @@ public class InvoiceController implements Initializable {
     private Label expireDateLabel;
     @FXML
     private Label messageLabel;
-    @FXML
-    private ComboBox<String> searchProductID;
-    @FXML
-    private TextField searchPackSize;
-    @FXML
-    private TextField searchQuantity;
-    @FXML
-    private TextField searchPrice;
-    @FXML
-    private TextField searchDiscount;
-    @FXML
-    private TextField searchFree;
-    @FXML
-    private TextField searchMargin;
-    @FXML
-    private DatePicker searchExpireDate;
+    
 
     InvoiceItemModel iim = new InvoiceItemModel();
     int index;
@@ -303,7 +288,7 @@ public class InvoiceController implements Initializable {
         Invoice i = new Invoice();
         i.setInvoiceID(invoiceID.getText());
         i.setDistibutorCode(distributerCode.getValue());
-        i.setInvoiceDate(java.sql.Date.valueOf(date.getValue()));
+        i.setInvoiceDate(date.getValue());
         i.setInvoiceNote(invoiceNote.getText());
         ObservableList< InvoiceItem> items = invoiceItemTable.getItems();
         int j = 1;
@@ -364,15 +349,6 @@ public class InvoiceController implements Initializable {
         free.clear();
         margin.clear();
         expireDate.setValue(null);
-        searchProductID.setValue(null);
-        searchPackSize.clear();
-        searchQuantity.clear();
-        searchPrice.clear();
-        searchDiscount.clear();
-        searchFree.clear();
-        searchMargin.clear();
-        searchExpireDate.setValue(null);
-        
     }
 
     @FXML

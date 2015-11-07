@@ -18,7 +18,7 @@ public class BillItemModel {
             while (rs1.next()) {
                 rs1.last();
                 String temp1 = rs1.getString("billNo");
-                int bNo = Integer.parseInt(temp1.substring(5));
+                int bNo = Integer.parseInt(temp1.substring(5,temp1.length()));
                 bNo++;
                 bName = bName + Integer.toString(bNo);
                 b.setBillNo(bName);

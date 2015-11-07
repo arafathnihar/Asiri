@@ -13,11 +13,8 @@ public class InvoiceItemModel {
         Date date = Date.valueOf(localDate);
         return date;
     }
+   
     
-    public LocalDate getLocalDate(Date date){
-        LocalDate localD = date.toLocalDate();
-        return localD;
-    }
     
     public void addInvoice(Invoice i) {
         try (Connection con = ds.getConnection()) {
@@ -43,7 +40,7 @@ public class InvoiceItemModel {
             PreparedStatement pStmt1 = con.prepareStatement(query1);
             pStmt1.setString(1, i.getInvoiceID());
             pStmt1.setString(2, i.getDistibutorCode());
-            pStmt1.setDate(3, (Date) i.getInvoiceDate());
+            pStmt1.setDate(3, getSqlDate(i.getInvoiceDate()));
             pStmt1.setString(4, i.getInvoiceNote());
             pStmt1.setString(5, i.getInvoicePayMode());
             pStmt1.setDouble(6, i.getInvoiceTotal());
