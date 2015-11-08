@@ -38,7 +38,14 @@ public class InvoiceItem {
         this.quantity = quantity;
         this.expireDate = expireDate;
     }
-
+    
+    public InvoiceItem(String itemID, String productID, int quantity, int sold) {
+        this.itemID = itemID;
+        this.productID = productID;
+        this.quantity = quantity;
+        this.sold = sold;
+    }
+    
     public InvoiceItem() {
         this.itemID = "";
         this.invoiceID = "";

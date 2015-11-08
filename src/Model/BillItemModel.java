@@ -9,16 +9,19 @@ public class BillItemModel {
     DataSource ds = DatabaseSource.getMySQLDataSource();
 
     public void addBill(Bill b, ObservableList<BillItem> items) {
+        String query;
+        PreparedStatement pStmt;
+        ResultSet rs;
         try (Connection con = ds.getConnection()) {
             boolean empty = true;
-            String query1 = "SELECT * FROM bill";
-            PreparedStatement pStmt1 = con.prepareStatement(query1);
-            ResultSet rs1 = pStmt1.executeQuery();
+            query = "SELECT * FROM bill";
+            pStmt= con.prepareStatement(query);
+            rs = pStmt.executeQuery();
             String bName = "Bill-";
-            while (rs1.next()) {
-                rs1.last();
-                String temp1 = rs1.getString("billNo");
-                int bNo = Integer.parseInt(temp1.substring(5,temp1.length()));
+            while (rs.next()) {
+                rs.last();
+                String temp1 = rs.getString("billNo");
+                int bNo = Integer.parseInt(temp1.substring(5, temp1.length()));
                 bNo++;
                 bName = bName + Integer.toString(bNo);
                 b.setBillNo(bName);
@@ -32,36 +35,84 @@ public class BillItemModel {
                 items.get(i).setBillNo(bName);
             }
 
-            String query2 = "INSERT INTO billitem" + " VALUES (?,?,?,?,?,?)";
-            PreparedStatement pStmt2 = con.prepareStatement(query2);
+            query = "INSERT INTO billitem" + " VALUES (?,?,?,?,?,?)";
+            pStmt = con.prepareStatement(query);
             for (BillItem record : items) {
-                pStmt2.setString(1, record.getBillNo());
-                pStmt2.setString(2, record.getBillItemNo());
-                pStmt2.setString(3, record.getProductID());
-                pStmt2.setDouble(4, record.getUnitPrice());
-                pStmt2.setInt(5, record.getQuantity());
-                pStmt2.setDouble(6, record.getTotal());
-                pStmt2.addBatch();
+                pStmt.setString(1, record.getBillNo());
+                pStmt.setString(2, record.getBillItemNo());
+                pStmt.setString(3, record.getProductID());
+                pStmt.setDouble(4, record.getUnitPrice());
+                pStmt.setInt(5, record.getQuantity());
+                pStmt.setDouble(6, record.getTotal());
+                pStmt.addBatch();
             }
-            pStmt2.executeBatch();
+            pStmt.executeBatch();
 
-            String query3 = "UPDATE product SET productStock = productStock - ? WHERE productID = ? ";
-            PreparedStatement pStmt3 = con.prepareStatement(query3);
+            query = "UPDATE product SET productStock = productStock - ? WHERE productID = ? ";
+            pStmt = con.prepareStatement(query);
             for (BillItem record : items) {
-                pStmt3.setInt(1, record.getQuantity());
-                pStmt3.setString(2, record.getProductID());
-                pStmt3.addBatch();
+                pStmt.setInt(1, record.getQuantity());
+                pStmt.setString(2, record.getProductID());
+                pStmt.addBatch();
             }
-            pStmt3.executeBatch();
+            pStmt.executeBatch();
 
-            String query = "INSERT INTO bill" + " VALUES (?,?,?,?)";
-            PreparedStatement pStmt = con.prepareStatement(query);
+            for (int i = 0; i < items.size(); i++) {
+                updateInvoice(items.get(i));
+            }
+
+            query = "INSERT INTO bill" + " VALUES (?,?,?,?)";
+            pStmt = con.prepareStatement(query);
             pStmt.setString(1, b.getBillNo());
             pStmt.setDate(2, (Date) b.getBillDate());
             pStmt.setString(3, b.getBillNote());
             pStmt.setDouble(4, b.getBillAmount());
             pStmt.executeUpdate();
 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void updateInvoice(BillItem bi) {
+        String query;
+        PreparedStatement pStmt;
+        ResultSet rs;
+        try (Connection con = ds.getConnection()) {
+            query = "SELECT invoiceItemID, productID, quantity, sold FROM invoiceitem WHERE productID='" + bi.getProductID() + "' and quantity>0 ORDER BY expireDate";
+            pStmt = con.prepareStatement(query);
+            rs = pStmt.executeQuery();
+            ObservableList<InvoiceItem> ol = FXCollections.observableArrayList();
+            while (rs.next()) {
+                ol.add(new InvoiceItem(rs.getString("invoiceItemID"), rs.getString("productID"), rs.getInt("quantity"), rs.getInt("sold")));
+            }
+            int q = bi.getQuantity();
+            int i = 0;
+            boolean flag = true;
+            while (flag) {
+                if (q > ol.get(i).getQuantity()) {
+                    q = q - ol.get(i).getQuantity();
+                    ol.get(i).setSold(ol.get(i).getSold()+ol.get(i).getQuantity());
+                    ol.get(i).setQuantity(0);
+                    i++;
+                }
+                if (q <= ol.get(i).getQuantity()) {
+                    ol.get(i).setQuantity(ol.get(i).getSold()+ol.get(i).getQuantity() - q);
+                    ol.get(i).setSold(q);
+                    q = 0;
+                    flag = false;
+                }
+            }
+            query = "UPDATE invoiceitem SET quantity = ? , sold = ? WHERE invoiceItemID = ? AND productID = ?";
+            pStmt = con.prepareStatement(query);
+            for (InvoiceItem record : ol) {
+                pStmt.setInt(1, record.getQuantity());
+                pStmt.setInt(2, record.getSold());
+                pStmt.setString(3, record.getItemID());
+                pStmt.setString(4, record.getProductID());
+                pStmt.addBatch();
+            }
+            pStmt.executeBatch();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
