@@ -1,13 +1,19 @@
 package Model;
 
 import java.sql.*;
+import java.time.LocalDate;
 import javax.sql.*;
 import javafx.collections.*;
 
 public class BillItemModel {
 
     DataSource ds = DatabaseSource.getMySQLDataSource();
-
+    
+    public Date getSqlDate(LocalDate localDate){
+        Date date = Date.valueOf(localDate);
+        return date;
+    }
+    
     public void addBill(Bill b, ObservableList<BillItem> items) {
         String query;
         PreparedStatement pStmt;
@@ -62,7 +68,7 @@ public class BillItemModel {
             query = "INSERT INTO bill" + " VALUES (?,?,?,?)";
             pStmt = con.prepareStatement(query);
             pStmt.setInt(1, b.getBillNo());
-            pStmt.setDate(2, (Date) b.getBillDate());
+            pStmt.setDate(2, getSqlDate(b.getBillDate()));
             pStmt.setString(3, b.getBillNote());
             pStmt.setDouble(4, b.getBillAmount());
             pStmt.executeUpdate();

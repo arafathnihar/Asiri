@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +16,11 @@ import javax.sql.DataSource;
 public class SalesModel {
     
     DataSource ds = DatabaseSource.getMySQLDataSource();
+    
+    public LocalDate getLocalDate(Date date){
+        LocalDate localD = date.toLocalDate();
+        return localD;
+    }
     
     public ObservableList monthlyBillSum(){
         try (Connection con = ds.getConnection()) {
@@ -35,7 +41,7 @@ public class SalesModel {
             PreparedStatement pStmt = con.prepareStatement(query);
             ResultSet rs = pStmt.executeQuery();
             while (rs.next()) {
-                ol.add(new Bill(rs.getDate(1),rs.getDouble(2)));
+                ol.add(new Bill(getLocalDate(rs.getDate(1)),rs.getDouble(2)));
             }
             return ol;
         } catch (SQLException ex) {

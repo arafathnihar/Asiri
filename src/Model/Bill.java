@@ -1,22 +1,23 @@
 package Model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Bill {
 
     private int billNo;
-    private Date billDate;
+    private LocalDate billDate;
     private String billNote;
     private double billAmount;
 
-    public Bill(int billNo, Date billDate, String billNote, double billAmount) {
+    public Bill(int billNo, LocalDate billDate, String billNote, double billAmount) {
         this.billNo = billNo;
         this.billDate = billDate;
         this.billNote = billNote;
         this.billAmount = billAmount;
     }
     
-    public Bill(Date billDate, double billAmount) {
+    public Bill(LocalDate billDate, double billAmount) {
         this.billDate = billDate;
         this.billAmount = billAmount;
     }
@@ -36,11 +37,11 @@ public class Bill {
         this.billNo = billNo;
     }
 
-    public Date getBillDate() {
+    public LocalDate getBillDate() {
         return billDate;
     }
 
-    public void setBillDate(Date billDate) {
+    public void setBillDate(LocalDate billDate) {
         this.billDate = billDate;
     }
 

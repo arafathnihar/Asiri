@@ -79,7 +79,6 @@ public class BillController implements Initializable {
     @FXML
     public void save() {
         Bill b = new Bill();
-        b.setBillDate(java.sql.Date.valueOf(billDate.getValue()));
         b.setBillNote(billNote.getText());
         b.setBillAmount(Double.parseDouble(billAmount.getText()));
         ObservableList<BillItem> items = itemsTable.getItems();
