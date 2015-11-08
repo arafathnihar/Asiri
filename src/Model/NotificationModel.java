@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +17,10 @@ public class NotificationModel {
 
     DataSource ds = DatabaseSource.getMySQLDataSource();
 
+    public LocalDate getLocalDate(Date date){
+        LocalDate localD = date.toLocalDate();
+        return localD;
+    }
     public ObservableList minStockNotification() {
         try (Connection con = ds.getConnection()) {
             ObservableList<Product> ol = FXCollections.observableArrayList();
@@ -46,7 +51,7 @@ public class NotificationModel {
             PreparedStatement pStmt = con.prepareStatement(query);
             ResultSet rs = pStmt.executeQuery();
             while (rs.next()) {
-                ol.add(new InvoiceItem(rs.getString(1), rs.getInt(2), rs.getDate(3)));
+                ol.add(new InvoiceItem(rs.getString(1), rs.getInt(2), getLocalDate(rs.getDate(3))));
                 System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getDate(3));
             }
             return ol;

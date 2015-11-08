@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InvoiceController">
+<AnchorPane id="AnchorPane" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InvoiceController">
     <stylesheets>
         <URL value="@invoice.css" />
     </stylesheets>
@@ -117,18 +117,6 @@
                            <children>
                               <HBox alignment="CENTER">
                                  <children>
-                                    <ComboBox fx:id="searchProductID" maxWidth="105.0" minWidth="105.0" prefWidth="105.0" promptText="Search product id" />
-                                    <TextField fx:id="searchPackSize" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" promptText="Search pack size" />
-                                    <TextField fx:id="searchQuantity" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" promptText="Search pack size" />
-                                    <TextField fx:id="searchPrice" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" promptText="Search price" />
-                                    <TextField fx:id="searchDiscount" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" promptText="Search discount" />
-                                    <TextField fx:id="searchFree" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" promptText="Search free" />
-                                    <TextField fx:id="searchMargin" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" promptText="Search margin" />
-                                    <DatePicker fx:id="searchExpireDate" maxWidth="105.0" minWidth="105.0" prefWidth="105.0" promptText="Search ecpire date" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER">
-                                 <children>
                                     <TableView fx:id="invoiceItemTable">
                                        <columns>
                                           <TableColumn fx:id="productIDC" maxWidth="105.0" minWidth="105.0" prefWidth="105.0" text="Product ID" />
@@ -188,6 +176,11 @@
                               <Insets top="20.0" />
                            </VBox.margin>
                         </Button>
+                        <Button mnemonicParsing="false" onAction="#clear" prefWidth="60.0" text="Clear">
+                           <VBox.margin>
+                              <Insets top="200.0" />
+                           </VBox.margin>
+                        </Button>
                      </children>
                   </VBox>
                </children>
@@ -199,7 +192,7 @@
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" onAction="#clear" prefWidth="60.0" text="Clear" />
+                  <Button mnemonicParsing="false" onAction="#cancel" prefWidth="60.0" text="Cancel" />
                </children>
             </HBox>
          </children>

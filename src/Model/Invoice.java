@@ -1,17 +1,23 @@
 package Model;
 
-import java.util.Date;
+import java.time.LocalDate;
+import javafx.collections.ObservableList;
 
 public class Invoice {
 
     private String invoiceID;
     private String distibutorCode;
-    private Date invoiceDate;
+    private LocalDate invoiceDate;
+
+    
     private String invoiceNote;
     private String invoicePayMode;
     private double invoiceTotal;
+    private ObservableList<InvoiceItem> items;
+    
+   
 
-    public Invoice(String invoiceID, String distibutorCode, Date invoiceDate, String invoiceNote,
+    public Invoice(String invoiceID, String distibutorCode, LocalDate invoiceDate, String invoiceNote,
             String invoicePayMode, double invoiceTotal) {
         this.invoiceID = invoiceID;
         this.distibutorCode = distibutorCode;
@@ -46,14 +52,6 @@ public class Invoice {
         this.distibutorCode = distibutorCode;
     }
 
-    public Date getInvoiceDate() {
-        return invoiceDate;
-    }
-
-    public void setInvoiceDate(Date invoiceDate) {
-        this.invoiceDate = invoiceDate;
-    }
-
     public String getInvoiceNote() {
         return invoiceNote;
     }
@@ -78,4 +76,19 @@ public class Invoice {
         this.invoiceTotal = invoiceTotal;
     }
 
+    public ObservableList<InvoiceItem> getItems() {
+        return items;
+    }
+
+    public void setItems(ObservableList<InvoiceItem> items) {
+        this.items = items;
+    }
+    
+    public LocalDate getInvoiceDate() {
+        return invoiceDate;
+    }
+
+    public void setInvoiceDate(LocalDate invoiceDate) {
+        this.invoiceDate = invoiceDate;
+    }
 }

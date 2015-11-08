@@ -1,6 +1,6 @@
 package Model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class InvoiceItem {
 
@@ -12,13 +12,14 @@ public class InvoiceItem {
     private int free;
     private double price;
     private int margin;
-    private Date expireDate;
+    private LocalDate expireDate;
     private double discount;
     private int sold;
 
-    public InvoiceItem(String itemID, String invoiceID, String productID, int packSize,
-            int quantity, int free, double price, int margin,
-            Date expireDate, double discount, int sold) {
+    public InvoiceItem(String itemID, String invoiceID, String productID, int packSize, 
+            int quantity, int free, double price, int margin, 
+            LocalDate expireDate, double discount, int sold) {
+
         this.itemID = itemID;
         this.invoiceID = invoiceID;
         this.productID = productID;
@@ -32,7 +33,7 @@ public class InvoiceItem {
         this.sold = sold;
     }
     
-    public InvoiceItem(String productID, int quantity, Date expireDate) {
+    public InvoiceItem(String productID, int quantity, LocalDate expireDate) {
         this.productID = productID;
         this.quantity = quantity;
         this.expireDate = expireDate;
@@ -123,14 +124,6 @@ public class InvoiceItem {
         this.margin = margin;
     }
 
-    public Date getExpireDate() {
-        return expireDate;
-    }
-
-    public void setExpireDate(Date expireDate) {
-        this.expireDate = expireDate;
-    }
-
     public double getDiscount() {
         return discount;
     }
@@ -146,5 +139,11 @@ public class InvoiceItem {
     public void setSold(int sold) {
         this.sold = sold;
     }
+    public LocalDate getExpireDate() {
+        return expireDate;
+    }
 
+    public void setExpireDate(LocalDate expireDate) {
+        this.expireDate = expireDate;
+    }
 }

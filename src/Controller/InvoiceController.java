@@ -87,22 +87,7 @@ public class InvoiceController implements Initializable {
     private Label expireDateLabel;
     @FXML
     private Label messageLabel;
-    @FXML
-    private ComboBox<String> searchProductID;
-    @FXML
-    private TextField searchPackSize;
-    @FXML
-    private TextField searchQuantity;
-    @FXML
-    private TextField searchPrice;
-    @FXML
-    private TextField searchDiscount;
-    @FXML
-    private TextField searchFree;
-    @FXML
-    private TextField searchMargin;
-    @FXML
-    private DatePicker searchExpireDate;
+    
 
     InvoiceItemModel iim = new InvoiceItemModel();
     int index;
@@ -119,8 +104,151 @@ public class InvoiceController implements Initializable {
         expireDateC.setCellValueFactory(new PropertyValueFactory<>("expireDate"));
         distributerCode.setItems(getDistributerCode());
         productID.setItems(getProductsID());
+       // searchProductID.setItems(getProductsID());
+     //   refreshInvoiceItems();
     }
+/*
+    public void refreshInvoiceItems(){
+        
+        // 1. Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList< InvoiceItem> filteredData = new FilteredList<>( invoiceItems, p -> true);
+        
+        // 2. Set the filter Predicate whenever the filter changes.
+        searchProductID.valueProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(invoiceItem -> {
+                // If filter text is empty, display all items.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                // Compare id of every item with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (invoiceItem.getProductID().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                }
+                return false; // Does not match.
+            });
+        });
+        // 2. Set the filter Predicate whenever the filter changes.
+        searchPackSize.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(invoiceItem -> {
+                // If filter text is empty, display all items.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                // Compare id of every item with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (String.valueOf(invoiceItem.getPackSize()).toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                }
+                return false; // Does not match.
+            });
+        });
+        // 2. Set the filter Predicate whenever the filter changes.
+        searchQuantity.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(invoiceItem -> {
+                // If filter text is empty, display all items.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                // Compare id of every item with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (String.valueOf(invoiceItem.getQuantity()).toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                }
+                return false; // Does not match.
+            });
+        });
+        // 2. Set the filter Predicate whenever the filter changes.
+        searchPrice.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(invoiceItem -> {
+                // If filter text is empty, display all items.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                // Compare id of every item with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (String.valueOf(invoiceItem.getPrice()).toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                }
+                return false; // Does not match.
+            });
+        });
+        // 2. Set the filter Predicate whenever the filter changes.
+        searchDiscount.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(invoiceItem -> {
+                // If filter text is empty, display all items.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                // Compare id of every item with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (String.valueOf(invoiceItem.getDiscount()).toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                }
+                return false; // Does not match.
+            });
+        });
+        
+        // 2. Set the filter Predicate whenever the filter changes.
+        searchFree.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(invoiceItem -> {
+                // If filter text is empty, display all items.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                // Compare id of every item with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (String.valueOf(invoiceItem.getFree()).toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                }
+                return false; // Does not match.
+            });
+        });
+        
+        // 2. Set the filter Predicate whenever the filter changes.
+        searchMargin.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(invoiceItem -> {
+                // If filter text is empty, display all items.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                // Compare id of every item with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (String.valueOf(invoiceItem.getMargin()).toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                }
+                return false; // Does not match.
+            });
+        });
+        
+        // 2. Set the filter Predicate whenever the filter changes.
+        searchExpireDate.valueProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(invoiceItem -> {
+                // If filter text is empty, display all items.
+                if (newValue == null) {
+                    return true;
+                }
+                // Compare id of every item with filter text.
+               // String lowerCaseFilter = newValue.toLowerCase();
+                if (String.valueOf(invoiceItem.getMargin()).contains(newValue.toString())) {
+                    return true; // Filter matches first name.
+                }
+                return false; // Does not match.
+            });
+        });
+        
+         // 3. Wrap the FilteredList in a SortedList. 
+        SortedList< InvoiceItem> sortedData = new SortedList<>(filteredData);
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(invoiceItemTable.comparatorProperty());
+        // 5. Add sorted (and filtered) data to the table.
+        invoiceItemTable.setItems(sortedData);
+        // bind the sortedList comparator to the TableView comparator
+        sortedData.comparatorProperty().bind(invoiceItemTable.comparatorProperty());
 
+       }
+   */
+    
     public ObservableList< String> getProductsID() {
         ObservableList< String> products = iim.getProductID();
         return products;
@@ -133,6 +261,15 @@ public class InvoiceController implements Initializable {
 
     @FXML
     public void add() {
+        if (productID.isDisable()) {
+            update();
+        } else {
+            addNew();
+        }
+    }
+
+    @FXML
+    public void addNew() {
         InvoiceItem ii = new InvoiceItem();
         ii.setProductID(productID.getValue());
         ii.setPackSize(Integer.parseInt(packSize.getText()));
@@ -140,18 +277,18 @@ public class InvoiceController implements Initializable {
         ii.setFree(Integer.parseInt(free.getText()));
         ii.setPrice(Double.parseDouble(price.getText()));
         ii.setMargin(Integer.parseInt(margin.getText()));
-        ii.setExpireDate(java.sql.Date.valueOf(expireDate.getValue()));
+        ii.setExpireDate(expireDate.getValue());
         ii.setDiscount(Double.parseDouble(discount.getText()));
         invoiceItemTable.getItems().add(ii);
         clear();
     }
-
+    
     @FXML
     public void save() {
         Invoice i = new Invoice();
         i.setInvoiceID(invoiceID.getText());
         i.setDistibutorCode(distributerCode.getValue());
-        i.setInvoiceDate(java.sql.Date.valueOf(date.getValue()));
+        i.setInvoiceDate(date.getValue());
         i.setInvoiceNote(invoiceNote.getText());
         ObservableList< InvoiceItem> items = invoiceItemTable.getItems();
         int j = 1;
@@ -160,11 +297,9 @@ public class InvoiceController implements Initializable {
             items.get(k).setItemID("Item-" + j);
             j++;
         }
-        iim.addInvoice(i, items);
-        clear();
-        for (int l = 0; l < invoiceItemTable.getItems().size(); l++) {
-            invoiceItemTable.getItems().clear();
-        }
+        i.setItems(items);
+        iim.addInvoice(i);
+        cancel();       
     }
 
     @FXML
@@ -177,7 +312,7 @@ public class InvoiceController implements Initializable {
         free.setText(String.valueOf(ii.getFree()));
         price.setText(String.valueOf(ii.getPrice()));
         margin.setText(String.valueOf(ii.getMargin()));
-        //expireDate.setValue(ii.getExpireDate());
+        expireDate.setValue(ii.getExpireDate());
         discount.setText(String.valueOf(ii.getDiscount()));
     }
 
@@ -190,7 +325,7 @@ public class InvoiceController implements Initializable {
         ii.setFree(Integer.parseInt(free.getText()));
         ii.setPrice(Double.parseDouble(price.getText()));
         ii.setMargin(Integer.parseInt(margin.getText()));
-        ii.setExpireDate(java.sql.Date.valueOf(expireDate.getValue()));
+        ii.setExpireDate(expireDate.getValue());
         ii.setDiscount(Double.parseDouble(discount.getText()));
         index = invoiceItemTable.getSelectionModel().getSelectedIndex();
         invoiceItemTable.getItems().set(index, ii);
@@ -206,9 +341,6 @@ public class InvoiceController implements Initializable {
 
     @FXML
     public void clear() {
-        invoiceID.clear();
-        distributerCode.setValue(null);
-        invoiceNote.clear();
         productID.setValue(null);
         packSize.clear();
         quantity.clear();
@@ -216,10 +348,16 @@ public class InvoiceController implements Initializable {
         discount.clear();
         free.clear();
         margin.clear();
+        expireDate.setValue(null);
     }
 
     @FXML
     public void cancel() {
+        invoiceID.clear();
+        distributerCode.setValue(null);
+        date.setValue(null);
+        invoiceNote.clear();
+        invoiceItemTable.getItems().clear();
     }
 
 }
