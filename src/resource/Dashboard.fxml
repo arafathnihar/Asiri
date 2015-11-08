@@ -9,16 +9,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" minHeight="700.0" minWidth="1100.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashboardController">
+<AnchorPane id="AnchorPane" minHeight="700.0" minWidth="1100.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashboardController">
     <stylesheets>
         <URL value="@dashboard.css" />
     </stylesheets>
    <children>
-      <TabPane prefHeight="67.0" prefWidth="573.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TabPane fx:id="DashTabPane" prefHeight="67.0" prefWidth="573.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
-          <Tab text="   INVOICE    ">
+          <Tab fx:id="invoiceTab" text="   INVOICE    ">
             <content>
-                  <VBox fx:id="invoiceTab" alignment="CENTER" />
+                  <VBox fx:id="invoiceTabVbx" alignment="CENTER" />
             </content>
                <graphic>
                   <VBox>
@@ -35,9 +35,9 @@
                   </VBox>
                </graphic>
           </Tab>
-            <Tab text="     BILL        ">
+            <Tab fx:id="billTab" text="     BILL        ">
                <content>
-                  <VBox fx:id="billTab" alignment="CENTER" />
+                  <VBox fx:id="billTabVbx" alignment="CENTER" />
                </content>
                <graphic>
                   <VBox>
@@ -54,9 +54,9 @@
                   </VBox>
                </graphic>
             </Tab>
-            <Tab text="   PRODUCT    ">
+            <Tab fx:id="productTab" text="   PRODUCT    ">
                <content>
-                  <VBox fx:id="productTab" alignment="CENTER" />
+                  <VBox fx:id="productTabVbx" alignment="CENTER" />
                </content>
                <graphic>
                   <VBox>
@@ -73,9 +73,9 @@
                   </VBox>
                </graphic>
             </Tab>
-            <Tab text="DISTRIBUTOR">
+            <Tab fx:id="distributerTab" text="DISTRIBUTOR">
                <content>
-                  <VBox fx:id="distributerTab" alignment="CENTER" />
+                  <VBox fx:id="distributerTabVbx" alignment="CENTER" />
                </content>
                <graphic>
                   <VBox>
@@ -92,14 +92,14 @@
                   </VBox>
                </graphic>
             </Tab>
-            <Tab text="NOTIFICATION">
+            <Tab fx:id="notificationTab" text="NOTIFICATION">
                <content>
-                  <VBox fx:id="notificationTab" alignment="CENTER" />
+                  <VBox fx:id="notificationTabVbx" alignment="CENTER" />
                </content>
                <graphic>
                   <VBox>
                      <children>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="notifyingImage" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@images/notificationTab.png" />
                            </image>
