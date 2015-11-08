@@ -17,28 +17,26 @@ public class BillItemModel {
             query = "SELECT * FROM bill";
             pStmt= con.prepareStatement(query);
             rs = pStmt.executeQuery();
-            String bName = "Bill-";
+            int bNo = 1;
             while (rs.next()) {
-                rs.last();
-                String temp1 = rs.getString("billNo");
-                int bNo = Integer.parseInt(temp1.substring(5, temp1.length()));
+                rs.last();  
+                bNo = rs.getInt("billNo");
                 bNo++;
-                bName = bName + Integer.toString(bNo);
-                b.setBillNo(bName);
+                b.setBillNo(bNo);
                 empty = false;
             }
             if (empty) {
-                bName = bName + Integer.toString(1);
-                b.setBillNo(bName);
+                bNo = 0;
+                b.setBillNo(bNo);
             }
             for (int i = 0; i < items.size(); i++) {
-                items.get(i).setBillNo(bName);
+                items.get(i).setBillNo(bNo);
             }
 
             query = "INSERT INTO billitem" + " VALUES (?,?,?,?,?,?)";
             pStmt = con.prepareStatement(query);
             for (BillItem record : items) {
-                pStmt.setString(1, record.getBillNo());
+                pStmt.setInt(1, record.getBillNo());
                 pStmt.setString(2, record.getBillItemNo());
                 pStmt.setString(3, record.getProductID());
                 pStmt.setDouble(4, record.getUnitPrice());
@@ -63,7 +61,7 @@ public class BillItemModel {
 
             query = "INSERT INTO bill" + " VALUES (?,?,?,?)";
             pStmt = con.prepareStatement(query);
-            pStmt.setString(1, b.getBillNo());
+            pStmt.setInt(1, b.getBillNo());
             pStmt.setDate(2, (Date) b.getBillDate());
             pStmt.setString(3, b.getBillNote());
             pStmt.setDouble(4, b.getBillAmount());

@@ -2,14 +2,14 @@ package Model;
 
 public class BillItem {
     
-    private String billNo;
+    private int billNo;
     private String billItemNo;
     private String productID;
     private double unitPrice;
     private int quantity;
     private double total;
 
-    public BillItem(String billNo, String billItemNo, String productID, double unitPrice, int quantity, double total) {
+    public BillItem(int billNo, String billItemNo, String productID, double unitPrice, int quantity, double total) {
         this.billNo = billNo;
         this.billItemNo = billItemNo;
         this.productID = productID;
@@ -19,7 +19,7 @@ public class BillItem {
     }
 
     public BillItem() {
-        this.billNo = "";
+        this.billNo = 0;
         this.billItemNo = "";
         this.productID = "";
         this.unitPrice = 0.00;
@@ -27,11 +27,11 @@ public class BillItem {
         this.total = 0.00;
     }
 
-    public String getBillNo() {
+    public int getBillNo() {
         return billNo;
     }
 
-    public void setBillNo(String billNo) {
+    public void setBillNo(int billNo) {
         this.billNo = billNo;
     }
     
