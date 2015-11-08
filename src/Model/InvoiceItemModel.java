@@ -14,8 +14,6 @@ public class InvoiceItemModel {
         return date;
     }
    
-    
-    
     public void addInvoice(Invoice i) {
         try (Connection con = ds.getConnection()) {
             String query = "INSERT INTO invoiceitem" + " VALUES (?,?,?,?,?,?,?,?,?,?,?)";
@@ -58,7 +56,6 @@ public class InvoiceItemModel {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
     }
 
     public ObservableList<String> getProductID() {

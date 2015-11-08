@@ -39,13 +39,13 @@ public class DistributerController implements Initializable {
     @FXML
     private TextField phoneNoSearch;
     @FXML
-    private TableColumn< Distributor, String> codeC;
+    private TableColumn< Distributor,String> codeC;
     @FXML
-    private TableColumn< Distributor, String> nameC;
+    private TableColumn< Distributor,String> nameC;
     @FXML
-    private TableColumn< Distributor, String> addressC;
+    private TableColumn< Distributor,String> addressC;
     @FXML
-    private TableColumn< Distributor, String> phoneNoC;
+    private TableColumn<Distributor,String> phoneNoC;
     @FXML
     private Label codeLabel;
     @FXML
@@ -61,7 +61,7 @@ public class DistributerController implements Initializable {
     @FXML
     private Button addBtn;
     @FXML
-    private TableView< Distributor> distributorTable;
+    private TableView<Distributor> distributorTable;
 
     Image imageDistri = new Image(getClass().getResourceAsStream("/resource/images/distributer.png"));
     Image imageError = new Image(getClass().getResourceAsStream("/resource/images/error.png"));

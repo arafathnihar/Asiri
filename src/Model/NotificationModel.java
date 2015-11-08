@@ -21,6 +21,7 @@ public class NotificationModel {
         LocalDate localD = date.toLocalDate();
         return localD;
     }
+    
     public ObservableList minStockNotification() {
         try (Connection con = ds.getConnection()) {
             ObservableList<Product> ol = FXCollections.observableArrayList();

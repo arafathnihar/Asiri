@@ -25,29 +25,26 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class NotificationController implements Initializable {
 
     @FXML
-    private TableView< Product> outOfStockTable;
+    private TableView<Product> outOfStockTable;
     @FXML
-    private TableColumn< Product, String> outProductIDC;
+    private TableColumn<Product,String> outProductIDC;
     @FXML
-    private TableColumn< Product, String> outProductNameC;
+    private TableColumn<Product,String> outProductNameC;
     @FXML
-    private TableColumn< Product, Integer> outCurrentStockC;
+    private TableColumn<Product,Integer> outCurrentStockC;
     @FXML
-    private TableColumn< Product, Integer> outMinStockC;
+    private TableColumn<Product,Integer> outMinStockC;
     @FXML
-    private TableView< InvoiceItem> expStockTable;
+    private TableView<InvoiceItem> expStockTable;
     @FXML
-    private TableColumn< InvoiceItem, String> expProductIDC;
+    private TableColumn<InvoiceItem,String> expProductIDC;
     @FXML
-    private TableColumn< InvoiceItem, String> expProductNameC;
+    private TableColumn<Product,String> expProductNameC;
     @FXML
-    private TableColumn< InvoiceItem, Integer> expQuantityC;
+    private TableColumn<InvoiceItem,Integer> expQuantityC;
     @FXML
-    private TableColumn< InvoiceItem, LocalDate> expStockDate;
+    private TableColumn<InvoiceItem,LocalDate> expStockDate;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -81,4 +78,5 @@ public class NotificationController implements Initializable {
     public void setExpStockTable(TableView<InvoiceItem> expStockTable) {
         this.expStockTable = expStockTable;
     }
+    
 }

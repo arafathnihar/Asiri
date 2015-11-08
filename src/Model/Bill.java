@@ -15,6 +15,11 @@ public class Bill {
         this.billNote = billNote;
         this.billAmount = billAmount;
     }
+    
+    public Bill(Date billDate, double billAmount) {
+        this.billDate = billDate;
+        this.billAmount = billAmount;
+    }
    
     public Bill(){
         this.billNo = 0;

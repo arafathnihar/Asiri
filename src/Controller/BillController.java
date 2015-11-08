@@ -39,13 +39,13 @@ public class BillController implements Initializable {
     private TableView<BillItem> itemsTable;
 
     @FXML
-    private TableColumn<BillItem, String> productIDC;
+    private TableColumn<BillItem,String> productIDC;
     @FXML
-    private TableColumn<BillItem, Double> unitPriceC;
+    private TableColumn<BillItem,Double> unitPriceC;
     @FXML
-    private TableColumn<BillItem, Integer> quantityC;
+    private TableColumn<BillItem,Integer> quantityC;
     @FXML
-    private TableColumn<BillItem, Double> totalC;
+    private TableColumn<BillItem,Double> totalC;
 
     BillItemModel bm = new BillItemModel();
 

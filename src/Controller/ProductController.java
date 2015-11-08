@@ -59,25 +59,25 @@ public class ProductController implements Initializable {
     @FXML
     private Label messageLabel;
     @FXML
-    private ComboBox< String> searchType;
+    private ComboBox<String> searchType;
     @FXML
-    private ComboBox< String> type;
+    private ComboBox<String> type;
     @FXML
-    private TableView< Product> productTable;
+    private TableView<Product> productTable;
     @FXML
-    private TableColumn< Product, String> idC;
+    private TableColumn<Product,String> idC;
     @FXML
-    private TableColumn< Product, String> nameC;
+    private TableColumn<Product,String> nameC;
     @FXML
-    private TableColumn< Product, String> brandC;
+    private TableColumn<Product,String> brandC;
     @FXML
-    private TableColumn< Product, Integer> strengthC;
+    private TableColumn<Product,Integer> strengthC;
     @FXML
-    private TableColumn< Product, String> typeC;
+    private TableColumn<Product,String> typeC;
     @FXML
-    private TableColumn< Product, Integer> minStockC;
+    private TableColumn<Product,Integer> minStockC;
     @FXML
-    private TableColumn< Product, String> discriptionC;
+    private TableColumn<Product,String> discriptionC;
     @FXML
     private ImageView icon;
     @FXML

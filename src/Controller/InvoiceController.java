@@ -28,7 +28,7 @@ public class InvoiceController implements Initializable {
     @FXML
     private TextField invoiceNote;
     @FXML
-    private ComboBox< String> productID;
+    private ComboBox<String> productID;
     @FXML
     private TextField packSize;
     @FXML
@@ -44,23 +44,23 @@ public class InvoiceController implements Initializable {
     @FXML
     private DatePicker expireDate;
     @FXML
-    private TableView< InvoiceItem> invoiceItemTable;
+    private TableView<InvoiceItem> invoiceItemTable;
     @FXML
-    private TableColumn< InvoiceItem, String> productIDC;
+    private TableColumn<InvoiceItem,String> productIDC;
     @FXML
-    private TableColumn< InvoiceItem, Integer> packSizeC;
+    private TableColumn<InvoiceItem,Integer> packSizeC;
     @FXML
-    private TableColumn< InvoiceItem, Integer> quantityC;
+    private TableColumn<InvoiceItem,Integer> quantityC;
     @FXML
-    private TableColumn< InvoiceItem, Double> priceC;
+    private TableColumn<InvoiceItem,Double> priceC;
     @FXML
-    private TableColumn< InvoiceItem, Double> discountC;
+    private TableColumn<InvoiceItem,Double> discountC;
     @FXML
-    private TableColumn< InvoiceItem, Integer> freeC;
+    private TableColumn<InvoiceItem,Integer> freeC;
     @FXML
-    private TableColumn< InvoiceItem, Double> marginC;
+    private TableColumn<InvoiceItem,Double> marginC;
     @FXML
-    private TableColumn< InvoiceItem, Date> expireDateC;
+    private TableColumn<InvoiceItem,Date> expireDateC;
     @FXML
     private Label invoiceIdLabel;
     @FXML

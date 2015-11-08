@@ -132,14 +132,14 @@ public class BillItemModel {
         }
     }
 
-    /*public static ObservableList getBills() {
+     /*public ObservableList getBills() {
      try (Connection con = ds.getConnection()) {
      ObservableList<Bill> ol = FXCollections.observableArrayList();
      String query = "SELECT * FROM bill";
      PreparedStatement pStmt = con.prepareStatement(query);
      ResultSet rs = pStmt.executeQuery();
      while (rs.next()) {
-     ol.add(new Bill(rs.getString(1), rs.getDate(2), rs.getString(3), rs.getDouble(4)));
+     ol.add(new Bill(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getDouble(4)));
      }
      return ol;
      } catch (SQLException ex) {
@@ -147,14 +147,15 @@ public class BillItemModel {
      return null;
      }
      }*/
-    /*public ObservableList getBillItems(Bill b) {
+    
+     /*public ObservableList getBillItems(Bill b) {
      try (Connection con = ds.getConnection()) {
      ObservableList<BillItem> ol = FXCollections.observableArrayList();
      String query = "SELECT * FROM billitem WHERE billNo='"+b.getBillNo()+"'";
      PreparedStatement pStmt = con.prepareStatement(query);
      ResultSet rs = pStmt.executeQuery();
      while (rs.next()) {
-     ol.add(new BillItem(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getInt(5),rs.getDouble(6)));
+     ol.add(new BillItem(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getInt(5),rs.getDouble(6)));
      }
      return ol;
      } catch (SQLException ex) {
