@@ -4,12 +4,12 @@ import java.util.Date;
 
 public class Bill {
 
-    private String billNo;
+    private int billNo;
     private Date billDate;
     private String billNote;
     private double billAmount;
 
-    public Bill(String billNo, Date billDate, String billNote, double billAmount) {
+    public Bill(int billNo, Date billDate, String billNote, double billAmount) {
         this.billNo = billNo;
         this.billDate = billDate;
         this.billNote = billNote;
@@ -17,17 +17,17 @@ public class Bill {
     }
    
     public Bill(){
-        this.billNo = "";
+        this.billNo = 0;
         this.billDate = null;
         this.billNote = "";
         this.billAmount = 0.00;
     }
     
-    public String getBillNo() {
+    public int getBillNo() {
         return billNo;
     }
 
-    public void setBillNo(String billNo) {
+    public void setBillNo(int billNo) {
         this.billNo = billNo;
     }
 

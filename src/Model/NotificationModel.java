@@ -29,7 +29,6 @@ public class NotificationModel {
             ResultSet rs = pStmt.executeQuery();
             while (rs.next()) {
                 ol.add(new Product(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4)));
-                System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getInt(3) + " " + rs.getInt(4));
             }
             return ol;
         } catch (SQLException ex) {
@@ -53,7 +52,6 @@ public class NotificationModel {
             ResultSet rs = pStmt.executeQuery();
             while (rs.next()) {
                 ol.add(new InvoiceItem(rs.getString(1), rs.getString(2), rs.getInt(3), getLocalDate(rs.getDate(4))));
-                System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getInt(3) + " " + rs.getDate(4));
             }
             return ol;
         } catch (SQLException ex) {
@@ -63,12 +61,6 @@ public class NotificationModel {
             ex.printStackTrace();
             return null;
         }
-    }
-
-    public static void main(String[] args) throws ParseException {
-        NotificationModel nm = new NotificationModel();
-        nm.minStockNotification();
-        nm.expireNotification();
     }
 
 }
