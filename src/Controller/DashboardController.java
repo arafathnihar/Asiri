@@ -17,7 +17,9 @@ public class DashboardController implements Initializable {
     private VBox productTab;
     @FXML
     private VBox distributerTab;
-
+    @FXML
+    private VBox notificationTab;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -25,6 +27,7 @@ public class DashboardController implements Initializable {
             billTab.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Bill.fxml")));
             productTab.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Product.fxml")));
             distributerTab.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Distributer.fxml")));
+            notificationTab.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Notification.fxml")));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
