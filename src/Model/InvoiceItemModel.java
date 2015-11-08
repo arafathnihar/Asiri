@@ -28,7 +28,7 @@ public class InvoiceItemModel {
                 pStmt.setInt(5, record.getQuantity());
                 pStmt.setInt(6, record.getFree());
                 pStmt.setDouble(7, record.getPrice());
-                pStmt.setInt(8, record.getMargin());
+                pStmt.setDouble(8, record.getMargin());
                 pStmt.setDate(9, getSqlDate(record.getExpireDate()));
                 pStmt.setDouble(10, record.getDiscount());
                 pStmt.setInt(11, record.getSold());

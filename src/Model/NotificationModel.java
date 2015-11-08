@@ -47,18 +47,20 @@ public class NotificationModel {
             java.util.Date date = sdf.parse(timeStamp);
             java.sql.Date sqlDate = new Date(date.getTime());
             ObservableList<InvoiceItem> ol = FXCollections.observableArrayList();
-            String query = "SELECT productID, quantity, expireDate FROM invoiceitem WHERE quantity > 0 and expireDate ='" + sqlDate + "'";
+            String query = "SELECT productID, (SELECT productName FROM product WHERE productID = invoiceitem.productID) AS productName, "
+                           + "quantity, expireDate FROM invoiceitem WHERE quantity > 0 and expireDate ='" + sqlDate + "'";
             PreparedStatement pStmt = con.prepareStatement(query);
             ResultSet rs = pStmt.executeQuery();
             while (rs.next()) {
-                ol.add(new InvoiceItem(rs.getString(1), rs.getInt(2), getLocalDate(rs.getDate(3))));
-                System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getDate(3));
+                ol.add(new InvoiceItem(rs.getString(1), rs.getString(2), rs.getInt(3), getLocalDate(rs.getDate(4))));
+                System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getInt(3) + " " + rs.getDate(4));
             }
             return ol;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
         } catch (ParseException ex) {
+            ex.printStackTrace();
             return null;
         }
     }
