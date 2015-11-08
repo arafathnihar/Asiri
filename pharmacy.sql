@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2015 at 07:00 PM
+-- Generation Time: Nov 08, 2015 at 04:48 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `bill` (
-  `billNo` varchar(255) NOT NULL,
+  `billNo` int(10) NOT NULL,
   `billDate` date NOT NULL,
   `billNote` varchar(255) DEFAULT NULL,
   `billAmount` double NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `bill` (
 --
 
 CREATE TABLE IF NOT EXISTS `billitem` (
-  `billNo` varchar(255) NOT NULL,
+  `billNo` int(10) NOT NULL,
   `billItemNo` varchar(255) NOT NULL,
   `productID` varchar(10) NOT NULL,
   `unitPrice` double NOT NULL,
@@ -63,6 +63,21 @@ CREATE TABLE IF NOT EXISTS `distributor` (
   `dTelephone` varchar(255) NOT NULL,
   PRIMARY KEY (`dCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `distributor`
+--
+
+INSERT INTO `distributor` (`dCode`, `dName`, `dAddress`, `dTelephone`) VALUES
+('ABC', 'A.Baur & Co. (Pvt) Ltd.', 'No. 62, Jethawana Road, Colombo 14', '4728706'),
+('AL', 'Alaris Lanka', 'No.9/3, Horana Road, Kesbawa, Piliyandala', '+94112620251'),
+('BL', 'Bio Labs', 'No. 239, Kottala Road, Veyangoda, Sri Lanka', '+94771262587'),
+('CBL', 'CBL Foods International(Pvt) Ltd.', 'none', '00000'),
+('CQD', 'Cargills Quality Diaries', 'No. 16, Colombo Road, Negombo', '+94312224492'),
+('GRO ', 'GRO Universal Marketing', 'No. 49, Poorbarama Place, (Dias Place) Colombo 12', '+94112393520'),
+('NGD', 'New Global Distributors', 'No. 428, Dutugamunu mawatha, Thalagama North, Battaramulla', '+94112791149'),
+('PRA', 'Pharma Rowland Associates', '101, Kandy Road, Kiribathgoda.', '+94770231521'),
+('RO', 'Real One pharma', '', '');
 
 -- --------------------------------------------------------
 
@@ -94,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `invoiceitem` (
   `quantity` int(11) NOT NULL,
   `free` int(11) NOT NULL,
   `price` double NOT NULL,
-  `margin` int(11) NOT NULL,
+  `margin` double NOT NULL,
   `expireDate` date NOT NULL,
   `discount` double NOT NULL,
   `sold` int(11) NOT NULL,
@@ -122,4 +137,3 @@ CREATE TABLE IF NOT EXISTS `product` (
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
