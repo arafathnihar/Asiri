@@ -25,33 +25,58 @@ public class NotificationController implements Initializable {
     @FXML
     private TableView< Product> outOfStockTable;
     @FXML
-    private TableColumn< Product, String> productIDC;
+    private TableColumn< Product, String> outProductIDC;
     @FXML
-    private TableColumn< Product, String> productNameC;
+    private TableColumn< Product, String> outProductNameC;
     @FXML
-    private TableColumn< Product, String> currentStockC;
+    private TableColumn< Product, String> outCurrentStockC;
     @FXML
-    private TableColumn< Product, String> minStockC;
-   
+    private TableColumn< Product, String> outMinStockC;
+    @FXML
+    private TableView< Product> expStockTable;
+    @FXML
+    private TableColumn< Product, String> expProductIDC;
+    @FXML
+    private TableColumn< Product, String> expProductNameC;
+    @FXML
+    private TableColumn< Product, String> expQuantityC;
+    @FXML
+    private TableColumn< Product, String> expStockDate;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        productIDC.setCellValueFactory(new PropertyValueFactory<>("productID"));
-        productNameC.setCellValueFactory(new PropertyValueFactory<>("productName"));
-        currentStockC.setCellValueFactory(new PropertyValueFactory<>("productStock"));
-        minStockC.setCellValueFactory(new PropertyValueFactory<>("productMinStock"));
+        outProductIDC.setCellValueFactory(new PropertyValueFactory<>("productID"));
+        outProductNameC.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        outCurrentStockC.setCellValueFactory(new PropertyValueFactory<>("productStock"));
+        outMinStockC.setCellValueFactory(new PropertyValueFactory<>("productMinStock"));
+
+        expProductIDC.setCellValueFactory(new PropertyValueFactory<>("productID"));
+        expProductNameC.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        expQuantityC.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        expStockDate.setCellValueFactory(new PropertyValueFactory<>("expireDate"));
+
         NotificationModel nm = new NotificationModel();
         outOfStockTable.setItems(nm.minStockNotification());
-    }    
-    
+        expStockTable.setItems(nm.expireNotification());
+    }
+
     public TableView<Product> getOutOfStockTable() {
         return outOfStockTable;
     }
 
     public void setOutOfStockTable(TableView<Product> outOfStockTable) {
         this.outOfStockTable = outOfStockTable;
+    }
+
+    public TableView<Product> getExpStockTable() {
+        return expStockTable;
+    }
+
+    public void setExpStockTable(TableView<Product> expStockTable) {
+        this.expStockTable = expStockTable;
     }
 }

@@ -104,151 +104,35 @@ public class InvoiceController implements Initializable {
         expireDateC.setCellValueFactory(new PropertyValueFactory<>("expireDate"));
         distributerCode.setItems(getDistributerCode());
         productID.setItems(getProductsID());
-       // searchProductID.setItems(getProductsID());
-     //   refreshInvoiceItems();
     }
-/*
-    public void refreshInvoiceItems(){
-        
-        // 1. Wrap the ObservableList in a FilteredList (initially display all data).
-        FilteredList< InvoiceItem> filteredData = new FilteredList<>( invoiceItems, p -> true);
-        
-        // 2. Set the filter Predicate whenever the filter changes.
-        searchProductID.valueProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(invoiceItem -> {
-                // If filter text is empty, display all items.
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                // Compare id of every item with filter text.
-                String lowerCaseFilter = newValue.toLowerCase();
-                if (invoiceItem.getProductID().toLowerCase().contains(lowerCaseFilter)) {
-                    return true; // Filter matches first name.
-                }
-                return false; // Does not match.
-            });
-        });
-        // 2. Set the filter Predicate whenever the filter changes.
-        searchPackSize.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(invoiceItem -> {
-                // If filter text is empty, display all items.
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                // Compare id of every item with filter text.
-                String lowerCaseFilter = newValue.toLowerCase();
-                if (String.valueOf(invoiceItem.getPackSize()).toLowerCase().contains(lowerCaseFilter)) {
-                    return true; // Filter matches first name.
-                }
-                return false; // Does not match.
-            });
-        });
-        // 2. Set the filter Predicate whenever the filter changes.
-        searchQuantity.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(invoiceItem -> {
-                // If filter text is empty, display all items.
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                // Compare id of every item with filter text.
-                String lowerCaseFilter = newValue.toLowerCase();
-                if (String.valueOf(invoiceItem.getQuantity()).toLowerCase().contains(lowerCaseFilter)) {
-                    return true; // Filter matches first name.
-                }
-                return false; // Does not match.
-            });
-        });
-        // 2. Set the filter Predicate whenever the filter changes.
-        searchPrice.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(invoiceItem -> {
-                // If filter text is empty, display all items.
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                // Compare id of every item with filter text.
-                String lowerCaseFilter = newValue.toLowerCase();
-                if (String.valueOf(invoiceItem.getPrice()).toLowerCase().contains(lowerCaseFilter)) {
-                    return true; // Filter matches first name.
-                }
-                return false; // Does not match.
-            });
-        });
-        // 2. Set the filter Predicate whenever the filter changes.
-        searchDiscount.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(invoiceItem -> {
-                // If filter text is empty, display all items.
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                // Compare id of every item with filter text.
-                String lowerCaseFilter = newValue.toLowerCase();
-                if (String.valueOf(invoiceItem.getDiscount()).toLowerCase().contains(lowerCaseFilter)) {
-                    return true; // Filter matches first name.
-                }
-                return false; // Does not match.
-            });
-        });
-        
-        // 2. Set the filter Predicate whenever the filter changes.
-        searchFree.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(invoiceItem -> {
-                // If filter text is empty, display all items.
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                // Compare id of every item with filter text.
-                String lowerCaseFilter = newValue.toLowerCase();
-                if (String.valueOf(invoiceItem.getFree()).toLowerCase().contains(lowerCaseFilter)) {
-                    return true; // Filter matches first name.
-                }
-                return false; // Does not match.
-            });
-        });
-        
-        // 2. Set the filter Predicate whenever the filter changes.
-        searchMargin.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(invoiceItem -> {
-                // If filter text is empty, display all items.
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                // Compare id of every item with filter text.
-                String lowerCaseFilter = newValue.toLowerCase();
-                if (String.valueOf(invoiceItem.getMargin()).toLowerCase().contains(lowerCaseFilter)) {
-                    return true; // Filter matches first name.
-                }
-                return false; // Does not match.
-            });
-        });
-        
-        // 2. Set the filter Predicate whenever the filter changes.
-        searchExpireDate.valueProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(invoiceItem -> {
-                // If filter text is empty, display all items.
-                if (newValue == null) {
-                    return true;
-                }
-                // Compare id of every item with filter text.
-               // String lowerCaseFilter = newValue.toLowerCase();
-                if (String.valueOf(invoiceItem.getMargin()).contains(newValue.toString())) {
-                    return true; // Filter matches first name.
-                }
-                return false; // Does not match.
-            });
-        });
-        
-         // 3. Wrap the FilteredList in a SortedList. 
-        SortedList< InvoiceItem> sortedData = new SortedList<>(filteredData);
-        // 4. Bind the SortedList comparator to the TableView comparator.
-        sortedData.comparatorProperty().bind(invoiceItemTable.comparatorProperty());
-        // 5. Add sorted (and filtered) data to the table.
-        invoiceItemTable.setItems(sortedData);
-        // bind the sortedList comparator to the TableView comparator
-        sortedData.comparatorProperty().bind(invoiceItemTable.comparatorProperty());
-
-       }
-   */
     
+        public boolean isValid() {
+        if (productID.getSelectionModel().isEmpty()) {
+            productIdLabel.setText("Requird !");
+            return false;
+        } else if (packSize.getText().isEmpty()) {
+            packSizeLabel.setText("Requird !");
+            return false;
+        } else if (quantity.getText().isEmpty()) {
+            quantityLabel.setText("Requird !");
+            return false;
+        } else if (price.getText().isEmpty()) {
+            priceLabel.setText("Requird !");
+            return false;
+        } else if (discount.getText().isEmpty()) {
+            discountLabel.setText("Requird !");
+            return false;
+        } else if (free.getText().isEmpty()) {
+            freeLabel.setText("Requird !");
+            return false;
+        } else if (margin.getText().isEmpty()) {
+            marginLabel.setText("Requird !");
+            return false;
+        } else {
+            return true;
+        }
+    }
+        
     public ObservableList< String> getProductsID() {
         ObservableList< String> products = iim.getProductID();
         return products;
@@ -314,6 +198,7 @@ public class InvoiceController implements Initializable {
         margin.setText(String.valueOf(ii.getMargin()));
         expireDate.setValue(ii.getExpireDate());
         discount.setText(String.valueOf(ii.getDiscount()));
+        productID.setDisable(true);
     }
 
     @FXML
@@ -349,6 +234,7 @@ public class InvoiceController implements Initializable {
         free.clear();
         margin.clear();
         expireDate.setValue(null);
+        productID.setDisable(false);
     }
 
     @FXML

@@ -120,7 +120,8 @@ public class DashboardController implements Initializable {
 
     public void reloadNotificationTab() {
         NotificationModel nm = new NotificationModel();
-        if (nm.minStockNotification() != null && !nm.minStockNotification().isEmpty()) {
+        if ((nm.minStockNotification() != null && !nm.minStockNotification().isEmpty())
+                || (nm.expireNotification()!= null && !nm.expireNotification().isEmpty())) {
             Image i = new Image("/resource/images/notificationNotChecked.png");
             notifyingImage.setImage(i);
         } else {

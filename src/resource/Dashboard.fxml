@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" minHeight="700.0" minWidth="1100.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashboardController">
+<AnchorPane id="AnchorPane" minHeight="700.0" minWidth="1100.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashboardController">
     <stylesheets>
         <URL value="@dashboard.css" />
     </stylesheets>
@@ -102,6 +102,25 @@
                         <ImageView fx:id="notifyingImage" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@images/notificationTab.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </graphic>
+            </Tab>
+            <Tab fx:id="notificationTab1" text="SALES REPORT">
+               <content>
+                  <VBox fx:id="notificationTabVbx1" alignment="CENTER" />
+               </content>
+               <graphic>
+                  <VBox>
+                     <children>
+                        <ImageView fx:id="notifyingImage1" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/salesTab.png" />
                            </image>
                         </ImageView>
                      </children>
