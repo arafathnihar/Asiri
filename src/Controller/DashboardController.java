@@ -27,6 +27,8 @@ public class DashboardController implements Initializable {
     @FXML
     private VBox notificationTabVbx;
     @FXML
+    private VBox salesTabVbx;
+    @FXML
     private ImageView notifyingImage;
     @FXML
     private Tab invoiceTab;
@@ -38,7 +40,8 @@ public class DashboardController implements Initializable {
     private Tab distributerTab;
     @FXML
     private Tab notificationTab;
-
+    @FXML
+    private Tab saelsTab;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         invoiceTab.setOnSelectionChanged((Event t) -> {
@@ -64,6 +67,11 @@ public class DashboardController implements Initializable {
         notificationTab.setOnSelectionChanged((Event t) -> {
             if (notificationTab.isSelected()) {
                 reloadNotificationTab();
+            }
+        });
+        saelsTab.setOnSelectionChanged((Event t) -> {
+            if (saelsTab.isSelected()) {
+                reloadSalesTab();
             }
         });
         try {
@@ -132,6 +140,15 @@ public class DashboardController implements Initializable {
         notificationTabVbx.getChildren().clear();
         try {
             notificationTabVbx.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Notification.fxml")));
+        } catch (IOException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void reloadSalesTab() {
+        salesTabVbx.getChildren().clear();
+        try {
+            salesTabVbx.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Sales.fxml")));
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
