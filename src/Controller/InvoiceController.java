@@ -58,7 +58,7 @@ public class InvoiceController implements Initializable {
     @FXML
     private TableColumn< InvoiceItem, Integer> freeC;
     @FXML
-    private TableColumn< InvoiceItem, Integer> marginC;
+    private TableColumn< InvoiceItem, Double> marginC;
     @FXML
     private TableColumn< InvoiceItem, Date> expireDateC;
     @FXML
@@ -276,7 +276,7 @@ public class InvoiceController implements Initializable {
         ii.setQuantity(Integer.parseInt(quantity.getText()));
         ii.setFree(Integer.parseInt(free.getText()));
         ii.setPrice(Double.parseDouble(price.getText()));
-        ii.setMargin(Integer.parseInt(margin.getText()));
+        ii.setMargin(Double.parseDouble(margin.getText()));
         ii.setExpireDate(expireDate.getValue());
         ii.setDiscount(Double.parseDouble(discount.getText()));
         invoiceItemTable.getItems().add(ii);
@@ -324,7 +324,7 @@ public class InvoiceController implements Initializable {
         ii.setQuantity(Integer.parseInt(quantity.getText()));
         ii.setFree(Integer.parseInt(free.getText()));
         ii.setPrice(Double.parseDouble(price.getText()));
-        ii.setMargin(Integer.parseInt(margin.getText()));
+        ii.setMargin(Double.parseDouble(margin.getText()));
         ii.setExpireDate(expireDate.getValue());
         ii.setDiscount(Double.parseDouble(discount.getText()));
         index = invoiceItemTable.getSelectionModel().getSelectedIndex();

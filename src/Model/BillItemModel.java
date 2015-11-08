@@ -97,8 +97,8 @@ public class BillItemModel {
                     i++;
                 }
                 if (q <= ol.get(i).getQuantity()) {
-                    ol.get(i).setQuantity(ol.get(i).getSold()+ol.get(i).getQuantity() - q);
-                    ol.get(i).setSold(q);
+                    ol.get(i).setQuantity(ol.get(i).getQuantity() - q);
+                    ol.get(i).setSold(ol.get(i).getSold()+q);
                     q = 0;
                     flag = false;
                 }

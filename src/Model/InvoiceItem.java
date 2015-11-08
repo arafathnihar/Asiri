@@ -7,17 +7,18 @@ public class InvoiceItem {
     private String itemID;
     private String invoiceID;
     private String productID;
+    private String productName;
     private int packSize;
     private int quantity;
     private int free;
     private double price;
-    private int margin;
+    private double margin;
     private LocalDate expireDate;
     private double discount;
     private int sold;
 
     public InvoiceItem(String itemID, String invoiceID, String productID, int packSize, 
-            int quantity, int free, double price, int margin, 
+            int quantity, int free, double price, double margin, 
             LocalDate expireDate, double discount, int sold) {
 
         this.itemID = itemID;
@@ -33,8 +34,9 @@ public class InvoiceItem {
         this.sold = sold;
     }
     
-    public InvoiceItem(String productID, int quantity, LocalDate expireDate) {
+    public InvoiceItem(String productID, String productName, int quantity, LocalDate expireDate) {
         this.productID = productID;
+        this.productName = productName;
         this.quantity = quantity;
         this.expireDate = expireDate;
     }
@@ -54,7 +56,7 @@ public class InvoiceItem {
         this.quantity = 0;
         this.free = 0;
         this.price = 0.0;
-        this.margin = 0;
+        this.margin = 0.0;
         this.expireDate = null;
         this.discount = 0.0;
         this.sold = 0;
@@ -116,11 +118,11 @@ public class InvoiceItem {
         this.price = price;
     }
 
-    public int getMargin() {
+    public double getMargin() {
         return margin;
     }
 
-    public void setMargin(int margin) {
+    public void setMargin(double margin) {
         this.margin = margin;
     }
 
