@@ -72,7 +72,8 @@ public class DashboardController implements Initializable {
             productTabVbx.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Product.fxml")));
             distributerTabVbx.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Distributer.fxml")));
             NotificationModel nm = new NotificationModel();
-            if (nm.minStockNotification() != null && !nm.minStockNotification().isEmpty()) {
+            if ((nm.minStockNotification() != null && !nm.minStockNotification().isEmpty())
+                || (nm.expireNotification()!= null && !nm.expireNotification().isEmpty())) {
                 Image i = new Image("/resource/images/notificationNotChecked.png");
                 notifyingImage.setImage(i);
             }

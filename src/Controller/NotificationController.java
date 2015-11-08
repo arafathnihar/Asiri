@@ -5,9 +5,11 @@ package Controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import Model.InvoiceItem;
 import Model.NotificationModel;
 import Model.Product;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,19 +31,19 @@ public class NotificationController implements Initializable {
     @FXML
     private TableColumn< Product, String> outProductNameC;
     @FXML
-    private TableColumn< Product, String> outCurrentStockC;
+    private TableColumn< Product, Integer> outCurrentStockC;
     @FXML
-    private TableColumn< Product, String> outMinStockC;
+    private TableColumn< Product, Integer> outMinStockC;
     @FXML
-    private TableView< Product> expStockTable;
+    private TableView< InvoiceItem> expStockTable;
     @FXML
-    private TableColumn< Product, String> expProductIDC;
+    private TableColumn< InvoiceItem, String> expProductIDC;
     @FXML
-    private TableColumn< Product, String> expProductNameC;
+    private TableColumn< InvoiceItem, String> expProductNameC;
     @FXML
-    private TableColumn< Product, String> expQuantityC;
+    private TableColumn< InvoiceItem, Integer> expQuantityC;
     @FXML
-    private TableColumn< Product, String> expStockDate;
+    private TableColumn< InvoiceItem, LocalDate> expStockDate;
 
     /**
      * Initializes the controller class.
@@ -72,11 +74,11 @@ public class NotificationController implements Initializable {
         this.outOfStockTable = outOfStockTable;
     }
 
-    public TableView<Product> getExpStockTable() {
+    public TableView<InvoiceItem> getExpStockTable() {
         return expStockTable;
     }
 
-    public void setExpStockTable(TableView<Product> expStockTable) {
+    public void setExpStockTable(TableView<InvoiceItem> expStockTable) {
         this.expStockTable = expStockTable;
     }
 }

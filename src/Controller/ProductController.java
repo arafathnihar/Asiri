@@ -71,11 +71,11 @@ public class ProductController implements Initializable {
     @FXML
     private TableColumn< Product, String> brandC;
     @FXML
-    private TableColumn< Product, String> strengthC;
+    private TableColumn< Product, Integer> strengthC;
     @FXML
     private TableColumn< Product, String> typeC;
     @FXML
-    private TableColumn< Product, String> minStockC;
+    private TableColumn< Product, Integer> minStockC;
     @FXML
     private TableColumn< Product, String> discriptionC;
     @FXML
