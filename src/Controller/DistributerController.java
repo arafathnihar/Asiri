@@ -20,6 +20,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
+/**
+ *
+ * @author testing
+ */
 public class DistributerController implements Initializable {
 
     @FXML
@@ -80,6 +84,9 @@ public class DistributerController implements Initializable {
         refreshDistributors();
     }
 
+    /**
+     *
+     */
     public void refreshDistributors() {
         // 1. Wrap the ObservableList in a FilteredList (initially display all data).
         FilteredList< Distributor> filteredData = new FilteredList<>(getDistributor(), p -> true);
@@ -155,12 +162,20 @@ public class DistributerController implements Initializable {
         sortedData.comparatorProperty().bind(distributorTable.comparatorProperty());
     }
 
+    /**
+     *
+     * @return
+     */
     public ObservableList< Distributor> getDistributor() {
         ObservableList< Distributor> distributors = dm.getDistributors();
         Collections.reverse(distributors);
         return distributors;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isValid() {
         if (code.getText().isEmpty()) {
             codeLabel.setText("Requird !");
@@ -179,6 +194,9 @@ public class DistributerController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     @FXML
     public void add() {
         if (code.isDisable()) {
@@ -188,6 +206,9 @@ public class DistributerController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     @FXML
     public void addNew() {
         if (isValid()) {
@@ -215,6 +236,9 @@ public class DistributerController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     @FXML
     public void update() {
         if (isValid()) {
@@ -236,6 +260,9 @@ public class DistributerController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     @FXML
     public void edit() {
         index = distributorTable.getSelectionModel().getSelectedIndex();
@@ -256,6 +283,9 @@ public class DistributerController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     @FXML
     public void delete() {
         index = distributorTable.getSelectionModel().getSelectedIndex();
@@ -272,6 +302,9 @@ public class DistributerController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     @FXML
     public void clearSearch() {
         if (!codeSearch.isFocused()) {
@@ -288,6 +321,9 @@ public class DistributerController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     @FXML
     public void clear() {
         codeSearch.clear();
@@ -310,36 +346,54 @@ public class DistributerController implements Initializable {
         refreshDistributors();
     }
 
+    /**
+     *
+     */
     @FXML
     public void clearAll() {
         clear();
         onPressAnything();
     }
 
+    /**
+     *
+     */
     @FXML
     public void codeOnPress() {
         codeLabel.setText("");
         onPressAnything();
     }
 
+    /**
+     *
+     */
     @FXML
     public void nameOnPress() {
         nameLabel.setText("");
         onPressAnything();
     }
 
+    /**
+     *
+     */
     @FXML
     public void addressOnPress() {
         addressLabel.setText("");
         onPressAnything();
     }
 
+    /**
+     *
+     */
     @FXML
     public void phoneOnPress() {
         phoneLabel.setText("");
         onPressAnything();
     }
 
+    /**
+     *
+     */
     @FXML
     public void onPressAnything() {
         messageLabel.setText("");

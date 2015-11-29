@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.sql.DataSource;
@@ -81,5 +83,20 @@ public class ProductModel {
             ex.printStackTrace();
         }
     }
-
+    
+    public List<String> getProductNames() {
+        try (Connection con = ds.getConnection()) {
+            List<String> lis = new ArrayList<>();
+            String query = "SELECT productName FROM product";
+            PreparedStatement pStmt = con.prepareStatement(query);
+            ResultSet rs = pStmt.executeQuery();
+            while (rs.next()) {
+                lis.add(rs.getString(1));
+            }
+            return lis;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 }

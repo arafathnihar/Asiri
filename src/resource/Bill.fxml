@@ -13,94 +13,106 @@
         <URL value="@bill.css" />
     </stylesheets>
    <children>
-      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="562.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" prefHeight="615.0" prefWidth="832.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="CENTER" spacing="10.0">
                <children>
-                  <VBox alignment="CENTER" spacing="10.0">
+                  <VBox alignment="CENTER" spacing="5.0">
                      <children>
-                        <HBox alignment="CENTER" spacing="10.0">
+                        <HBox alignment="CENTER" spacing="20.0">
                            <children>
                               <VBox alignment="CENTER">
                                  <children>
                                     <Label text="Date" />
-                                    <DatePicker fx:id="billDate" prefWidth="160.0" />
+                                    <DatePicker fx:id="billDate" prefHeight="30.0" prefWidth="200.0" />
                                     <Label />
                                  </children>
                               </VBox>
                               <VBox alignment="CENTER">
                                  <children>
                                     <Label text="Discount" />
-                                    <TextField fx:id="discount" prefWidth="160.0" />
+                                    <TextField fx:id="discount" prefHeight="30.0" prefWidth="200.0" />
                                     <Label />
                                  </children>
                               </VBox>
-                              <VBox alignment="CENTER">
+                              <VBox alignment="CENTER" prefWidth="300.0">
                                  <children>
                                     <Label text="Total" />
-                                    <TextField fx:id="billAmount" prefWidth="160.0" />
+                                    <TextField fx:id="billAmount" alignment="CENTER" prefHeight="30.0" prefWidth="160.0" />
                                     <Label />
                                  </children>
                               </VBox>
                            </children>
                         </HBox>
+                        <VBox>
+                           <children>
+                              <HBox alignment="CENTER" spacing="5.0">
+                                 <children>
+                                    <VBox alignment="CENTER" spacing="5.0">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Product ID" />
+                                          <ComboBox fx:id="productID" editable="true" onAction="#autoFillById" prefWidth="102.5" />
+                                          <Label />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" spacing="5.0">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Unit Price" />
+                                          <TextField fx:id="unitPrice" prefWidth="105.0" />
+                                          <Label />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" layoutX="138.0" layoutY="10.0" spacing="5.0">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Name" />
+                                          <TextField fx:id="productName" prefWidth="305.0" />
+                                          <Label />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" spacing="5.0">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Quantity" />
+                                          <TextField fx:id="quantity" prefWidth="105.0" />
+                                          <Label />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" spacing="5.0">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Price" />
+                                          <TextField fx:id="total" editable="true" prefWidth="102.5" />
+                                          <Label />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <TableView fx:id="itemsTable">
+                                       <columns>
+                                          <TableColumn fx:id="productIDC" prefWidth="105.0" text="Product ID" />
+                                          <TableColumn fx:id="unitPriceC" prefWidth="110.0" text="Unit Price" />
+                                          <TableColumn fx:id="unitPriceC1" prefWidth="310.0" text="Name" />
+                                          <TableColumn fx:id="quantityC" prefWidth="110.0" text="Quantity" />
+                                          <TableColumn fx:id="totalC" prefWidth="105.0" text="Price" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                         <HBox alignment="CENTER" spacing="10.0">
                            <children>
                               <VBox alignment="CENTER">
                                  <children>
                                     <Label text="Note" />
-                                    <TextField fx:id="billNote" prefWidth="500.0" />
+                                    <TextField fx:id="billNote" prefWidth="742.0" />
                                  </children>
                               </VBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" spacing="10.0">
-                           <children>
-                              <VBox alignment="CENTER" spacing="5.0">
-                                 <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Product ID" />
-                                    <ComboBox fx:id="productID" prefWidth="117.5" />
-                                    <Label />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" spacing="5.0">
-                                 <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Unit Price" />
-                                    <TextField fx:id="unitPrice" prefWidth="117.5" />
-                                    <Label />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" spacing="5.0">
-                                 <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Quantity" />
-                                    <TextField fx:id="quantity" prefWidth="117.5" />
-                                    <Label />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER" spacing="5.0">
-                                 <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Price" />
-                                    <TextField fx:id="total" editable="true" prefWidth="117.5" />
-                                    <Label />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER">
-                           <children>
-                              <TableView fx:id="itemsTable">
-                                 <columns>
-                                    <TableColumn fx:id="productIDC" prefWidth="122.5" text="Product ID" />
-                                    <TableColumn fx:id="unitPriceC" prefWidth="127.5" text="Unit Price" />
-                                    <TableColumn fx:id="quantityC" prefWidth="127.5" text="Quantity" />
-                                    <TableColumn fx:id="totalC" prefWidth="122.5" text="Price" />
-                                 </columns>
-                              </TableView>
                            </children>
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox alignment="TOP_CENTER" spacing="10.0">
+                  <VBox alignment="TOP_CENTER" spacing="20.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -108,23 +120,31 @@
                         <VBox alignment="CENTER">
                            <children>
                               <Label />
-                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#save" prefWidth="60.0" text="Save" />
+                              <Button mnemonicParsing="false" onAction="#save" prefHeight="30.0" prefWidth="60.0" text="Save" />
                            </children>
                         </VBox>
                         <Button mnemonicParsing="false" onAction="#add" prefWidth="60.0" text="Add">
                            <VBox.margin>
-                              <Insets top="151.0" />
-                           </VBox.margin></Button>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#edit" prefWidth="60.0" text="Edit" />
-                        <Button mnemonicParsing="false" onAction="#update" prefWidth="60.0" text="Update" />
-                        <Button mnemonicParsing="false" onAction="#delete" prefWidth="60.0" text="Delete" />
-                        <Button mnemonicParsing="false" onAction="#clear" prefWidth="60.0" text="Clear" />
-                        <Button mnemonicParsing="false" onAction="#cancel" prefWidth="60.0" text="Cancel" />
+                              <Insets top="24.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button layoutX="10.0" layoutY="100.0" mnemonicParsing="false" onAction="#edit" prefWidth="60.0" text="Edit">
+                           <VBox.margin>
+                              <Insets top="80.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button layoutX="10.0" layoutY="135.0" mnemonicParsing="false" onAction="#update" prefWidth="60.0" text="Update" />
+                        <Button layoutX="10.0" layoutY="170.0" mnemonicParsing="false" onAction="#delete" prefWidth="60.0" text="Delete" />
+                        <Button layoutX="10.0" layoutY="205.0" mnemonicParsing="false" onAction="#clear" prefWidth="60.0" text="Clear" />
+                        <Button layoutX="10.0" layoutY="240.0" mnemonicParsing="false" onAction="#cancel" prefWidth="60.0" text="Cancel" />
                      </children>
                   </VBox>
                </children>
             </HBox>
          </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
       </VBox>
    </children>
 </AnchorPane>

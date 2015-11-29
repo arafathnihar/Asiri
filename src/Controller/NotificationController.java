@@ -63,18 +63,34 @@ public class NotificationController implements Initializable {
         expStockTable.setItems(nm.expireNotification());
     }
 
+    /**
+     *
+     * @return
+     */
     public TableView<Product> getOutOfStockTable() {
         return outOfStockTable;
     }
 
+    /**
+     *
+     * @param outOfStockTable
+     */
     public void setOutOfStockTable(TableView<Product> outOfStockTable) {
         this.outOfStockTable = outOfStockTable;
     }
 
+    /**
+     *
+     * @return
+     */
     public TableView<InvoiceItem> getExpStockTable() {
         return expStockTable;
     }
 
+    /**
+     *
+     * @param expStockTable
+     */
     public void setExpStockTable(TableView<InvoiceItem> expStockTable) {
         this.expStockTable = expStockTable;
     }

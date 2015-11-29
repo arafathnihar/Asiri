@@ -14,6 +14,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
+/**
+ *
+ * @author testing
+ */
 public class ProductController implements Initializable {
 
     @FXML
@@ -107,6 +111,9 @@ public class ProductController implements Initializable {
         refreshProducts();
     }
 
+    /**
+     *
+     */
     public void refreshProducts() {
         // 1. Wrap the ObservableList in a FilteredList (initially display all data).
         FilteredList< Product> filteredData = new FilteredList<>(getProducts(), p -> true);
@@ -225,12 +232,20 @@ public class ProductController implements Initializable {
         sortedData.comparatorProperty().bind(productTable.comparatorProperty());
     }
 
+    /**
+     *
+     * @return
+     */
     public ObservableList< Product> getProducts() {
         ObservableList< Product> products = pm.getDistributors();
         Collections.reverse(products);
         return products;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isValid() {
         if (id.getText().isEmpty()) {
             idLabel.setText("Requird !");
@@ -255,6 +270,11 @@ public class ProductController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param s
+     * @return
+     */
     public boolean isInteger(String s) {
         try {
             Integer.parseInt(s);
@@ -267,6 +287,9 @@ public class ProductController implements Initializable {
         return true;
     }
 
+    /**
+     *
+     */
     @FXML
     public void add() {
         if (id.isDisable()) {
@@ -276,6 +299,9 @@ public class ProductController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     @FXML
     public void addNew() {
         if (isValid()) {
@@ -320,6 +346,9 @@ public class ProductController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     @FXML
     public void update() {
         if (isValid()) {
@@ -358,6 +387,9 @@ public class ProductController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     @FXML
     public void edit() {
         index = productTable.getSelectionModel().getSelectedIndex();
@@ -381,6 +413,9 @@ public class ProductController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     @FXML
     public void delete() {
         index = productTable.getSelectionModel().getSelectedIndex();
@@ -397,6 +432,9 @@ public class ProductController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     @FXML
     public void clearSearch() {
         if (!searchId.isFocused()) {
@@ -422,6 +460,9 @@ public class ProductController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     public void clear() {
         id.clear();
         name.clear();
@@ -453,54 +494,81 @@ public class ProductController implements Initializable {
         refreshProducts();
     }
 
+    /**
+     *
+     */
     @FXML
     public void clearAll() {
         clear();
         onPressAnything();
     }
 
+    /**
+     *
+     */
     @FXML
     public void idOnPress() {
         idLabel.setText("");
         onPressAnything();
     }
 
+    /**
+     *
+     */
     @FXML
     public void nameOnPress() {
         nameLabel.setText("");
         onPressAnything();
     }
 
+    /**
+     *
+     */
     @FXML
     public void brandOnPress() {
         brandLabel.setText("");
         onPressAnything();
     }
 
+    /**
+     *
+     */
     @FXML
     public void strenthOnPress() {
         strengthLabel.setText("");
         onPressAnything();
     }
 
+    /**
+     *
+     */
     @FXML
     public void typeOnPress() {
         typeLabel.setText("");
         onPressAnything();
     }
 
+    /**
+     *
+     */
     @FXML
     public void minStockOnPress() {
         minStockLabel.setText("");
         onPressAnything();
     }
 
+    /**
+     *
+     */
     @FXML
     public void onPressAnything() {
         icon.setImage(imageProduct);
         messageLabel.setText("");
     }
 
+    /**
+     *
+     */
     @FXML
     public void expandDiscription() {
         discriptionPane.expandedProperty().set(true);

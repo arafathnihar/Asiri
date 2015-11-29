@@ -8,7 +8,8 @@ public class BillItem {
     private double unitPrice;
     private int quantity;
     private double total;
-
+    private String productName;
+    
     public BillItem(int billNo, String billItemNo, String productID, double unitPrice, int quantity, double total) {
         this.billNo = billNo;
         this.billItemNo = billItemNo;
@@ -73,6 +74,14 @@ public class BillItem {
     
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
     
 }

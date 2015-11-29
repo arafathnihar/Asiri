@@ -14,6 +14,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
+/**
+ *
+ * @author testing
+ */
 public class DashboardController implements Initializable {
 
     @FXML
@@ -91,6 +95,9 @@ public class DashboardController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     public void reloadInvoiceTab() {
         invoiceTabVbx.getChildren().clear();
         try {
@@ -100,6 +107,9 @@ public class DashboardController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     public void reloadBillTab() {
         billTabVbx.getChildren().clear();
         try {
@@ -109,6 +119,9 @@ public class DashboardController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     public void reloadProductTab() {
         productTabVbx.getChildren().clear();
         try {
@@ -118,6 +131,9 @@ public class DashboardController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     public void reloadDistributerTab() {
         distributerTabVbx.getChildren().clear();
         try {
@@ -127,6 +143,9 @@ public class DashboardController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     public void reloadNotificationTab() {
         NotificationModel nm = new NotificationModel();
         if ((nm.minStockNotification() != null && !nm.minStockNotification().isEmpty())
@@ -145,6 +164,9 @@ public class DashboardController implements Initializable {
         }
     }
     
+    /**
+     *
+     */
     public void reloadSalesTab() {
         salesTabVbx.getChildren().clear();
         try {

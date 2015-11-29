@@ -8,12 +8,12 @@ import javafx.collections.*;
 public class BillItemModel {
 
     DataSource ds = DatabaseSource.getMySQLDataSource();
-    
-    public Date getSqlDate(LocalDate localDate){
+
+    public Date getSqlDate(LocalDate localDate) {
         Date date = Date.valueOf(localDate);
         return date;
     }
-    
+
     public void addBill(Bill b, ObservableList<BillItem> items) {
         String query;
         PreparedStatement pStmt;
@@ -21,11 +21,11 @@ public class BillItemModel {
         try (Connection con = ds.getConnection()) {
             boolean empty = true;
             query = "SELECT * FROM bill";
-            pStmt= con.prepareStatement(query);
+            pStmt = con.prepareStatement(query);
             rs = pStmt.executeQuery();
             int bNo = 1;
             while (rs.next()) {
-                rs.last();  
+                rs.last();
                 bNo = rs.getInt("billNo");
                 bNo++;
                 b.setBillNo(bNo);
@@ -96,13 +96,13 @@ public class BillItemModel {
             while (flag) {
                 if (q > ol.get(i).getQuantity()) {
                     q = q - ol.get(i).getQuantity();
-                    ol.get(i).setSold(ol.get(i).getSold()+ol.get(i).getQuantity());
+                    ol.get(i).setSold(ol.get(i).getSold() + ol.get(i).getQuantity());
                     ol.get(i).setQuantity(0);
                     i++;
                 }
                 if (q <= ol.get(i).getQuantity()) {
                     ol.get(i).setQuantity(ol.get(i).getQuantity() - q);
-                    ol.get(i).setSold(ol.get(i).getSold()+q);
+                    ol.get(i).setSold(ol.get(i).getSold() + q);
                     q = 0;
                     flag = false;
                 }
@@ -138,35 +138,53 @@ public class BillItemModel {
         }
     }
 
-     /*public ObservableList getBills() {
-     try (Connection con = ds.getConnection()) {
-     ObservableList<Bill> ol = FXCollections.observableArrayList();
-     String query = "SELECT * FROM bill";
-     PreparedStatement pStmt = con.prepareStatement(query);
-     ResultSet rs = pStmt.executeQuery();
-     while (rs.next()) {
-     ol.add(new Bill(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getDouble(4)));
-     }
-     return ol;
-     } catch (SQLException ex) {
-     ex.printStackTrace();
-     return null;
-     }
-     }*/
-    
-     /*public ObservableList getBillItems(Bill b) {
-     try (Connection con = ds.getConnection()) {
-     ObservableList<BillItem> ol = FXCollections.observableArrayList();
-     String query = "SELECT * FROM billitem WHERE billNo='"+b.getBillNo()+"'";
-     PreparedStatement pStmt = con.prepareStatement(query);
-     ResultSet rs = pStmt.executeQuery();
-     while (rs.next()) {
-     ol.add(new BillItem(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getInt(5),rs.getDouble(6)));
-     }
-     return ol;
-     } catch (SQLException ex) {
-     ex.printStackTrace();
-     return null;
-     }
-     }*/
+    public BillItem getBillItem(String productID) {
+        if(productID != null){
+        try (Connection con = ds.getConnection()) {
+            String query = "SELECT * FROM product WHERE productID='" + productID + "'";
+            PreparedStatement pStmt = con.prepareStatement(query);
+            ResultSet rs = pStmt.executeQuery();
+            BillItem bi = new BillItem();
+            if (rs.next()) {
+                bi.setProductID(rs.getString(1));
+                bi.setProductName(rs.getString(2));
+                bi.setUnitPrice(Double.parseDouble(rs.getString(9)));
+            }
+
+            return bi;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        }else{
+            return null;
+        }
+    }
+
+        public BillItem getBillItemByName(String productName) {
+            if(productName != null){
+        try (Connection con = ds.getConnection()) {
+            String query = "SELECT * FROM product WHERE productName='" + productName + "'";
+            PreparedStatement pStmt = con.prepareStatement(query);
+            ResultSet rs = pStmt.executeQuery();
+            BillItem bi = new BillItem();
+            if (rs.next()) {
+                bi.setProductID(rs.getString(1));
+                bi.setProductName(rs.getString(2));
+                bi.setUnitPrice(Double.parseDouble(rs.getString(9)));
+                return bi;
+            }
+
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        
+            }
+            return null;
+        }
+        
+                
+   
 }

@@ -17,6 +17,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ *
+ * @author testing
+ */
 public class InvoiceController implements Initializable {
 
     @FXML
@@ -106,7 +110,11 @@ public class InvoiceController implements Initializable {
         productID.setItems(getProductsID());
     }
     
-        public boolean isValid() {
+    /**
+     *
+     * @return
+     */
+    public boolean isValid() {
         if (productID.getSelectionModel().isEmpty()) {
             productIdLabel.setText("Requird !");
             return false;
@@ -133,16 +141,27 @@ public class InvoiceController implements Initializable {
         }
     }
         
+    /**
+     *
+     * @return
+     */
     public ObservableList< String> getProductsID() {
         ObservableList< String> products = iim.getProductID();
         return products;
     }
 
+    /**
+     *
+     * @return
+     */
     public ObservableList< String> getDistributerCode() {
         ObservableList< String> distributers = iim.getDistributerCode();
         return distributers;
     }
 
+    /**
+     *
+     */
     @FXML
     public void add() {
         if (productID.isDisable()) {
@@ -152,6 +171,9 @@ public class InvoiceController implements Initializable {
         }
     }
 
+    /**
+     *
+     */
     @FXML
     public void addNew() {
         InvoiceItem ii = new InvoiceItem();
@@ -167,6 +189,9 @@ public class InvoiceController implements Initializable {
         clear();
     }
     
+    /**
+     *
+     */
     @FXML
     public void save() {
         Invoice i = new Invoice();
@@ -186,6 +211,9 @@ public class InvoiceController implements Initializable {
         cancel();       
     }
 
+    /**
+     *
+     */
     @FXML
     public void edit() {
         index = invoiceItemTable.getSelectionModel().getSelectedIndex();
@@ -201,6 +229,9 @@ public class InvoiceController implements Initializable {
         productID.setDisable(true);
     }
 
+    /**
+     *
+     */
     @FXML
     public void update() {
         InvoiceItem ii = new InvoiceItem();
@@ -217,6 +248,9 @@ public class InvoiceController implements Initializable {
         clear();
     }
 
+    /**
+     *
+     */
     @FXML
     public void delete() {
         index = invoiceItemTable.getSelectionModel().getSelectedIndex();
@@ -224,6 +258,9 @@ public class InvoiceController implements Initializable {
         clear();
     }
 
+    /**
+     *
+     */
     @FXML
     public void clear() {
         productID.setValue(null);
@@ -237,6 +274,9 @@ public class InvoiceController implements Initializable {
         productID.setDisable(false);
     }
 
+    /**
+     *
+     */
     @FXML
     public void cancel() {
         invoiceID.clear();
