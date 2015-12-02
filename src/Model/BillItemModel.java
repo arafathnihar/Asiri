@@ -38,7 +38,6 @@ public class BillItemModel {
             for (int i = 0; i < items.size(); i++) {
                 items.get(i).setBillNo(bNo);
             }
-
             query = "INSERT INTO billitem" + " VALUES (?,?,?,?,?,?)";
             pStmt = con.prepareStatement(query);
             for (BillItem record : items) {
@@ -51,7 +50,6 @@ public class BillItemModel {
                 pStmt.addBatch();
             }
             pStmt.executeBatch();
-
             query = "UPDATE product SET productStock = productStock - ? WHERE productID = ? ";
             pStmt = con.prepareStatement(query);
             for (BillItem record : items) {
@@ -60,11 +58,9 @@ public class BillItemModel {
                 pStmt.addBatch();
             }
             pStmt.executeBatch();
-
             for (int i = 0; i < items.size(); i++) {
                 updateInvoice(items.get(i));
             }
-
             query = "INSERT INTO bill" + " VALUES (?,?,?,?)";
             pStmt = con.prepareStatement(query);
             pStmt.setInt(1, b.getBillNo());
@@ -72,7 +68,6 @@ public class BillItemModel {
             pStmt.setString(3, b.getBillNote());
             pStmt.setDouble(4, b.getBillAmount());
             pStmt.executeUpdate();
-
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -139,52 +134,46 @@ public class BillItemModel {
     }
 
     public BillItem getBillItem(String productID) {
-        if(productID != null){
-        try (Connection con = ds.getConnection()) {
-            String query = "SELECT * FROM product WHERE productID='" + productID + "'";
-            PreparedStatement pStmt = con.prepareStatement(query);
-            ResultSet rs = pStmt.executeQuery();
-            BillItem bi = new BillItem();
-            if (rs.next()) {
-                bi.setProductID(rs.getString(1));
-                bi.setProductName(rs.getString(2));
-                bi.setUnitPrice(Double.parseDouble(rs.getString(9)));
+        if (productID != null) {
+            try (Connection con = ds.getConnection()) {
+                String query = "SELECT * FROM product WHERE productID='" + productID + "'";
+                PreparedStatement pStmt = con.prepareStatement(query);
+                ResultSet rs = pStmt.executeQuery();
+                BillItem bi = new BillItem();
+                if (rs.next()) {
+                    bi.setProductID(rs.getString(1));
+                    bi.setProductName(rs.getString(2));
+                    bi.setUnitPrice(Double.parseDouble(rs.getString(9)));
+                }
+                return bi;
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                return null;
             }
-
-            return bi;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        }else{
+        } else {
             return null;
         }
     }
 
-        public BillItem getBillItemByName(String productName) {
-            if(productName != null){
-        try (Connection con = ds.getConnection()) {
-            String query = "SELECT * FROM product WHERE productName='" + productName + "'";
-            PreparedStatement pStmt = con.prepareStatement(query);
-            ResultSet rs = pStmt.executeQuery();
-            BillItem bi = new BillItem();
-            if (rs.next()) {
-                bi.setProductID(rs.getString(1));
-                bi.setProductName(rs.getString(2));
-                bi.setUnitPrice(Double.parseDouble(rs.getString(9)));
-                return bi;
+    public BillItem getBillItemByName(String productName) {
+        if (productName != null) {
+            try (Connection con = ds.getConnection()) {
+                String query = "SELECT * FROM product WHERE productName='" + productName + "'";
+                PreparedStatement pStmt = con.prepareStatement(query);
+                ResultSet rs = pStmt.executeQuery();
+                BillItem bi = new BillItem();
+                if (rs.next()) {
+                    bi.setProductID(rs.getString(1));
+                    bi.setProductName(rs.getString(2));
+                    bi.setUnitPrice(Double.parseDouble(rs.getString(9)));
+                    return bi;
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                return null;
             }
+        }
+        return null;
+    }
 
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        
-            }
-            return null;
-        }
-        
-                
-   
 }

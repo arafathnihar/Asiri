@@ -1,10 +1,5 @@
 package Controller;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import Model.InvoiceItem;
 import Model.NotificationModel;
 import Model.Product;
@@ -17,37 +12,31 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-/**
- * FXML Controller class
- *
- * @author testing
- */
 public class NotificationController implements Initializable {
 
     @FXML
     private TableView<Product> outOfStockTable;
     @FXML
-    private TableColumn<Product,String> outProductIDC;
+    private TableColumn<Product, String> outProductIDC;
     @FXML
-    private TableColumn<Product,String> outProductNameC;
+    private TableColumn<Product, String> outProductNameC;
     @FXML
-    private TableColumn<Product,Integer> outCurrentStockC;
+    private TableColumn<Product, Integer> outCurrentStockC;
     @FXML
-    private TableColumn<Product,Integer> outMinStockC;
+    private TableColumn<Product, Integer> outMinStockC;
     @FXML
     private TableView<InvoiceItem> expStockTable;
     @FXML
-    private TableColumn<InvoiceItem,String> expProductIDC;
+    private TableColumn<InvoiceItem, String> expProductIDC;
     @FXML
-    private TableColumn<Product,String> expProductNameC;
+    private TableColumn<Product, String> expProductNameC;
     @FXML
-    private TableColumn<InvoiceItem,Integer> expQuantityC;
+    private TableColumn<InvoiceItem, Integer> expQuantityC;
     @FXML
-    private TableColumn<InvoiceItem,LocalDate> expStockDate;
+    private TableColumn<InvoiceItem, LocalDate> expStockDate;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         outProductIDC.setCellValueFactory(new PropertyValueFactory<>("productID"));
         outProductNameC.setCellValueFactory(new PropertyValueFactory<>("productName"));
         outCurrentStockC.setCellValueFactory(new PropertyValueFactory<>("productStock"));
@@ -63,36 +52,20 @@ public class NotificationController implements Initializable {
         expStockTable.setItems(nm.expireNotification());
     }
 
-    /**
-     *
-     * @return
-     */
     public TableView<Product> getOutOfStockTable() {
         return outOfStockTable;
     }
 
-    /**
-     *
-     * @param outOfStockTable
-     */
     public void setOutOfStockTable(TableView<Product> outOfStockTable) {
         this.outOfStockTable = outOfStockTable;
     }
 
-    /**
-     *
-     * @return
-     */
     public TableView<InvoiceItem> getExpStockTable() {
         return expStockTable;
     }
 
-    /**
-     *
-     * @param expStockTable
-     */
     public void setExpStockTable(TableView<InvoiceItem> expStockTable) {
         this.expStockTable = expStockTable;
     }
-    
+
 }

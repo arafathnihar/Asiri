@@ -20,10 +20,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
-/**
- *
- * @author testing
- */
 public class DistributerController implements Initializable {
 
     @FXML
@@ -43,13 +39,13 @@ public class DistributerController implements Initializable {
     @FXML
     private TextField phoneNoSearch;
     @FXML
-    private TableColumn< Distributor,String> codeC;
+    private TableColumn< Distributor, String> codeC;
     @FXML
-    private TableColumn< Distributor,String> nameC;
+    private TableColumn< Distributor, String> nameC;
     @FXML
-    private TableColumn< Distributor,String> addressC;
+    private TableColumn< Distributor, String> addressC;
     @FXML
-    private TableColumn<Distributor,String> phoneNoC;
+    private TableColumn<Distributor, String> phoneNoC;
     @FXML
     private Label codeLabel;
     @FXML
@@ -84,9 +80,6 @@ public class DistributerController implements Initializable {
         refreshDistributors();
     }
 
-    /**
-     *
-     */
     public void refreshDistributors() {
         // 1. Wrap the ObservableList in a FilteredList (initially display all data).
         FilteredList< Distributor> filteredData = new FilteredList<>(getDistributor(), p -> true);
@@ -105,7 +98,7 @@ public class DistributerController implements Initializable {
                 return false; // Does not match.
             });
         });
-        // 2. Set the filter Predicate whenever the filter changes.
+        // 3. Set the filter Predicate whenever the filter changes.
         nameSearch.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(distributor -> {
                 // If filter text is empty, display all items.
@@ -121,7 +114,7 @@ public class DistributerController implements Initializable {
                 return false; // Does not match.
             });
         });
-        // 2. Set the filter Predicate whenever the filter changes.
+        // 4. Set the filter Predicate whenever the filter changes.
         addressSearch.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(distributor -> {
                 // If filter text is empty, display all items.
@@ -137,7 +130,7 @@ public class DistributerController implements Initializable {
                 return false; // Does not match.
             });
         });
-        // 2. Set the filter Predicate whenever the filter changes.
+        // 5. Set the filter Predicate whenever the filter changes.
         phoneNoSearch.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(distributor -> {
                 // If filter text is empty, display all items.
@@ -152,7 +145,7 @@ public class DistributerController implements Initializable {
                 return false; // Does not match.
             });
         });
-        // 3. Wrap the FilteredList in a SortedList. 
+        // 6. Wrap the FilteredList in a SortedList. 
         SortedList< Distributor> sortedData = new SortedList<>(filteredData);
         // 4. Bind the SortedList comparator to the TableView comparator.
         sortedData.comparatorProperty().bind(distributorTable.comparatorProperty());
@@ -162,20 +155,12 @@ public class DistributerController implements Initializable {
         sortedData.comparatorProperty().bind(distributorTable.comparatorProperty());
     }
 
-    /**
-     *
-     * @return
-     */
     public ObservableList< Distributor> getDistributor() {
         ObservableList< Distributor> distributors = dm.getDistributors();
         Collections.reverse(distributors);
         return distributors;
     }
 
-    /**
-     *
-     * @return
-     */
     public boolean isValid() {
         if (code.getText().isEmpty()) {
             codeLabel.setText("Requird !");
@@ -194,9 +179,6 @@ public class DistributerController implements Initializable {
         }
     }
 
-    /**
-     *
-     */
     @FXML
     public void add() {
         if (code.isDisable()) {
@@ -206,9 +188,6 @@ public class DistributerController implements Initializable {
         }
     }
 
-    /**
-     *
-     */
     @FXML
     public void addNew() {
         if (isValid()) {
@@ -236,9 +215,6 @@ public class DistributerController implements Initializable {
         }
     }
 
-    /**
-     *
-     */
     @FXML
     public void update() {
         if (isValid()) {
@@ -260,9 +236,6 @@ public class DistributerController implements Initializable {
         }
     }
 
-    /**
-     *
-     */
     @FXML
     public void edit() {
         index = distributorTable.getSelectionModel().getSelectedIndex();
@@ -283,9 +256,6 @@ public class DistributerController implements Initializable {
         }
     }
 
-    /**
-     *
-     */
     @FXML
     public void delete() {
         index = distributorTable.getSelectionModel().getSelectedIndex();
@@ -302,9 +272,6 @@ public class DistributerController implements Initializable {
         }
     }
 
-    /**
-     *
-     */
     @FXML
     public void clearSearch() {
         if (!codeSearch.isFocused()) {
@@ -321,9 +288,6 @@ public class DistributerController implements Initializable {
         }
     }
 
-    /**
-     *
-     */
     @FXML
     public void clear() {
         codeSearch.clear();
@@ -346,58 +310,40 @@ public class DistributerController implements Initializable {
         refreshDistributors();
     }
 
-    /**
-     *
-     */
     @FXML
     public void clearAll() {
         clear();
         onPressAnything();
     }
 
-    /**
-     *
-     */
     @FXML
     public void codeOnPress() {
         codeLabel.setText("");
         onPressAnything();
     }
 
-    /**
-     *
-     */
     @FXML
     public void nameOnPress() {
         nameLabel.setText("");
         onPressAnything();
     }
 
-    /**
-     *
-     */
     @FXML
     public void addressOnPress() {
         addressLabel.setText("");
         onPressAnything();
     }
 
-    /**
-     *
-     */
     @FXML
     public void phoneOnPress() {
         phoneLabel.setText("");
         onPressAnything();
     }
 
-    /**
-     *
-     */
     @FXML
     public void onPressAnything() {
         messageLabel.setText("");
         icon.setImage(imageDistri);
     }
-    
+
 }

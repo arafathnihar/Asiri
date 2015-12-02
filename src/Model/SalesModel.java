@@ -29,12 +29,10 @@ public class SalesModel {
             String todayDate = sdf.format(calendar.getTime());
             java.util.Date tDate = sdf.parse(todayDate);
             java.sql.Date sqlTDate = new Date(tDate.getTime());
-            
             calendar.add(Calendar.DAY_OF_MONTH, -30);
             String beforeDate = sdf.format(calendar.getTime());
             java.util.Date bDate = sdf.parse(beforeDate);
             java.sql.Date sqlBDate = new Date(bDate.getTime());
-            
             ObservableList<Bill> ol = FXCollections.observableArrayList();
             String query = "SELECT billDate, SUM(billAmount) AS total FROM bill WHERE billDate between '"+ sqlBDate +"' and '"+ sqlTDate +"' "
                     + "GROUP BY billDate";
