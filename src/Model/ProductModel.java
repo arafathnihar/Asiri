@@ -83,7 +83,7 @@ public class ProductModel {
             ex.printStackTrace();
         }
     }
-    
+
     public List<String> getProductNames() {
         try (Connection con = ds.getConnection()) {
             List<String> lis = new ArrayList<>();

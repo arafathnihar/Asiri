@@ -21,9 +21,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.controlsfx.control.textfield.TextFields;
 
-/**
- * @author testing
- */
 public class BillController implements Initializable {
 
     @FXML
@@ -70,7 +67,7 @@ public class BillController implements Initializable {
     private Label quantityLbl;
     @FXML
     private Label priceLbl;
-    
+
     private BillItemModel bm = new BillItemModel();
     private ProductModel pm = new ProductModel();
     private Bill b = new Bill();
@@ -95,7 +92,6 @@ public class BillController implements Initializable {
             }
         });
         quantity.textProperty().addListener(new ChangeListener< String>() {
-
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if (!newValue.isEmpty()) {
@@ -105,14 +101,9 @@ public class BillController implements Initializable {
                 }
             }
         });
-        
     }
 
-    /**
-     *
-     */
     public void itemTotal() {
-
         if (isNumeric(unitPrice.getText()) && isNumeric(quantity.getText())) {
             Double unit = Double.parseDouble(unitPrice.getText());
             Double qu = Double.parseDouble(quantity.getText());
@@ -130,27 +121,19 @@ public class BillController implements Initializable {
         return true;
     }
 
-    /**
-     *
-     * @return
-     */
     public ObservableList< String> getProductID() {
         ObservableList< String> products = bm.getProductsID();
         return products;
     }
 
-    public void total(){
-     
+    public void total() {
         totalAmount = 0;
         for (BillItem bi : itemsTable.getItems()) {
             totalAmount += bi.getTotal();
         }
         billAmount.setText(Double.toString(totalAmount));
     }
-    
-    /**
-     *
-     */
+
     public void autoFillById() {
         BillItem bi = bm.getBillItem(productID.getSelectionModel().getSelectedItem());
         if (bi != null) {
@@ -161,9 +144,6 @@ public class BillController implements Initializable {
         }
     }
 
-    /**
-     *
-     */
     public void autoFillByName() {
         BillItem bi = bm.getBillItemByName(productName.getText());
         if (bi != null) {
@@ -175,9 +155,6 @@ public class BillController implements Initializable {
         }
     }
 
-    /**
-     *
-     */
     @FXML
     public void add() {
         BillItem bi = new BillItem();
@@ -189,13 +166,9 @@ public class BillController implements Initializable {
         total();
         clear();
     }
-    
-    /**
-     *
-     */
+
     @FXML
     public void save() {
-
         b.setBillNote(billNote.getText());
         b.setBillAmount(Double.parseDouble(billAmount.getText()));
         ObservableList< BillItem> items = itemsTable.getItems();
@@ -211,9 +184,6 @@ public class BillController implements Initializable {
         }
     }
 
-    /**
-     *
-     */
     @FXML
     public void edit() {
         index = itemsTable.getSelectionModel().getSelectedIndex();
@@ -224,9 +194,6 @@ public class BillController implements Initializable {
         total.setText(String.valueOf(bi.getTotal()));
     }
 
-    /**
-     *
-     */
     @FXML
     public void update() {
         BillItem bi = new BillItem();
@@ -240,9 +207,6 @@ public class BillController implements Initializable {
         clear();
     }
 
-    /**
-     *
-     */
     @FXML
     public void delete() {
         index = itemsTable.getSelectionModel().getSelectedIndex();
@@ -251,9 +215,6 @@ public class BillController implements Initializable {
         clear();
     }
 
-    /**
-     *
-     */
     @FXML
     public void clear() {
         productID.setValue(null);
@@ -264,12 +225,9 @@ public class BillController implements Initializable {
         billNote.clear();
     }
 
-    /**
-     *
-     */
     @FXML
     public void cancel() {
-       
+
     }
 
 }

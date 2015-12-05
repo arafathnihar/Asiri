@@ -8,12 +8,12 @@ import javafx.collections.*;
 public class InvoiceItemModel {
 
     DataSource ds = DatabaseSource.getMySQLDataSource();
-    
-    public Date getSqlDate(LocalDate localDate){
+
+    public Date getSqlDate(LocalDate localDate) {
         Date date = Date.valueOf(localDate);
         return date;
     }
-   
+
     public void addInvoice(Invoice i) {
         try (Connection con = ds.getConnection()) {
             String query = "INSERT INTO invoiceitem" + " VALUES (?,?,?,?,?,?,?,?,?,?,?)";
@@ -33,7 +33,6 @@ public class InvoiceItemModel {
                 pStmt.addBatch();
             }
             pStmt.executeBatch();
-
             String query1 = "INSERT INTO invoice" + " VALUES (?,?,?,?,?,?)";
             PreparedStatement pStmt1 = con.prepareStatement(query1);
             pStmt1.setString(1, i.getInvoiceID());
@@ -43,7 +42,6 @@ public class InvoiceItemModel {
             pStmt1.setString(5, i.getInvoicePayMode());
             pStmt1.setDouble(6, i.getInvoiceTotal());
             pStmt1.executeUpdate();
-
             String query3 = "UPDATE product SET productStock = productStock + ? WHERE productID = ? ";
             PreparedStatement pStmt3 = con.prepareStatement(query3);
             for (InvoiceItem record : i.getItems()) {
@@ -52,7 +50,6 @@ public class InvoiceItemModel {
                 pStmt3.addBatch();
             }
             pStmt3.executeBatch();
-
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

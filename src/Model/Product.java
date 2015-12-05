@@ -1,7 +1,7 @@
 package Model;
 
 public class Product {
-    
+
     private String productID;
     private String productName;
     private String productDescription;
@@ -11,7 +11,7 @@ public class Product {
     private int productStock;
     private int productMinStock;
 
-    public Product(String productID, String productName, String productDescription, String productBrand, 
+    public Product(String productID, String productName, String productDescription, String productBrand,
             int productStrength, String productType, int productStock, int productMinStock) {
         this.productID = productID;
         this.productName = productName;
@@ -22,7 +22,7 @@ public class Product {
         this.productStock = productStock;
         this.productMinStock = productMinStock;
     }
-    
+
     public Product(String productID, String productName, int productStock, int productMinStock) {
         this.productID = productID;
         this.productName = productName;
@@ -104,5 +104,5 @@ public class Product {
     public void setProductMinStock(int productMinStock) {
         this.productMinStock = productMinStock;
     }
-    
+
 }

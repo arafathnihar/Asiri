@@ -1,7 +1,6 @@
 package Model;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Bill {
 
@@ -16,19 +15,19 @@ public class Bill {
         this.billNote = billNote;
         this.billAmount = billAmount;
     }
-    
+
     public Bill(LocalDate billDate, double billAmount) {
         this.billDate = billDate;
         this.billAmount = billAmount;
     }
-   
-    public Bill(){
+
+    public Bill() {
         this.billNo = 0;
         this.billDate = null;
         this.billNote = "";
         this.billAmount = 0.00;
     }
-    
+
     public int getBillNo() {
         return billNo;
     }

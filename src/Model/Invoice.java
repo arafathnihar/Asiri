@@ -8,14 +8,11 @@ public class Invoice {
     private String invoiceID;
     private String distibutorCode;
     private LocalDate invoiceDate;
-
-    
     private String invoiceNote;
     private String invoicePayMode;
     private double invoiceTotal;
+
     private ObservableList<InvoiceItem> items;
-    
-   
 
     public Invoice(String invoiceID, String distibutorCode, LocalDate invoiceDate, String invoiceNote,
             String invoicePayMode, double invoiceTotal) {
@@ -83,7 +80,7 @@ public class Invoice {
     public void setItems(ObservableList<InvoiceItem> items) {
         this.items = items;
     }
-    
+
     public LocalDate getInvoiceDate() {
         return invoiceDate;
     }

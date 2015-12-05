@@ -14,10 +14,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
-/**
- *
- * @author testing
- */
 public class ProductController implements Initializable {
 
     @FXML
@@ -69,19 +65,19 @@ public class ProductController implements Initializable {
     @FXML
     private TableView<Product> productTable;
     @FXML
-    private TableColumn<Product,String> idC;
+    private TableColumn<Product, String> idC;
     @FXML
-    private TableColumn<Product,String> nameC;
+    private TableColumn<Product, String> nameC;
     @FXML
-    private TableColumn<Product,String> brandC;
+    private TableColumn<Product, String> brandC;
     @FXML
-    private TableColumn<Product,Integer> strengthC;
+    private TableColumn<Product, Integer> strengthC;
     @FXML
-    private TableColumn<Product,String> typeC;
+    private TableColumn<Product, String> typeC;
     @FXML
-    private TableColumn<Product,Integer> minStockC;
+    private TableColumn<Product, Integer> minStockC;
     @FXML
-    private TableColumn<Product,String> discriptionC;
+    private TableColumn<Product, String> discriptionC;
     @FXML
     private ImageView icon;
     @FXML
@@ -106,14 +102,11 @@ public class ProductController implements Initializable {
         typeC.setCellValueFactory(new PropertyValueFactory<>("productType"));
         minStockC.setCellValueFactory(new PropertyValueFactory<>("productMinStock"));
         discriptionC.setCellValueFactory(new PropertyValueFactory<>("productDescription"));
-        type.getItems().addAll("cash","cheque","credit","paid");
-        searchType.getItems().addAll("cash","cheque","credit","paid");
+        type.getItems().addAll("cash", "cheque", "credit", "paid");
+        searchType.getItems().addAll("cash", "cheque", "credit", "paid");
         refreshProducts();
     }
 
-    /**
-     *
-     */
     public void refreshProducts() {
         // 1. Wrap the ObservableList in a FilteredList (initially display all data).
         FilteredList< Product> filteredData = new FilteredList<>(getProducts(), p -> true);
@@ -132,7 +125,7 @@ public class ProductController implements Initializable {
                 return false; // Does not match.
             });
         });
-        // 2. Set the filter Predicate whenever the filter changes.
+        // 3. Set the filter Predicate whenever the filter changes.
         searchName.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(product -> {
                 // If filter text is empty, display all items.
@@ -147,7 +140,7 @@ public class ProductController implements Initializable {
                 return false; // Does not match.
             });
         });
-        // 2. Set the filter Predicate whenever the filter changes.
+        // 3. Set the filter Predicate whenever the filter changes.
         searchBrand.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(product -> {
                 // If filter text is empty, display all items.
@@ -162,7 +155,7 @@ public class ProductController implements Initializable {
                 return false; // Does not match.
             });
         });
-        // 2. Set the filter Predicate whenever the filter changes.
+        // 4. Set the filter Predicate whenever the filter changes.
         searchStrength.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(product -> {
                 // If filter text is empty, display all items.
@@ -177,7 +170,7 @@ public class ProductController implements Initializable {
                 return false; // Does not match.
             });
         });
-        // 2. Set the filter Predicate whenever the filter changes.
+        // 5. Set the filter Predicate whenever the filter changes.
         searchType.valueProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(product -> {
                 // If filter text is empty, display all items.
@@ -192,7 +185,7 @@ public class ProductController implements Initializable {
                 return false; // Does not match.
             });
         });
-        // 2. Set the filter Predicate whenever the filter changes.
+        // 6. Set the filter Predicate whenever the filter changes.
         searchMinStock.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(product -> {
                 // If filter text is empty, display all items.
@@ -207,7 +200,7 @@ public class ProductController implements Initializable {
                 return false; // Does not match.
             });
         });
-        // 2. Set the filter Predicate whenever the filter changes.
+        // 7. Set the filter Predicate whenever the filter changes.
         searchDescription.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(product -> {
                 // If filter text is empty, display all items.
@@ -222,30 +215,22 @@ public class ProductController implements Initializable {
                 return false; // Does not match.
             });
         });
-        // 3. Wrap the FilteredList in a SortedList. 
+        // 8. Wrap the FilteredList in a SortedList. 
         SortedList< Product> sortedData = new SortedList<>(filteredData);
-        // 4. Bind the SortedList comparator to the TableView comparator.
+        // 9. Bind the SortedList comparator to the TableView comparator.
         sortedData.comparatorProperty().bind(productTable.comparatorProperty());
-        // 5. Add sorted (and filtered) data to the table.
+        // 10. Add sorted (and filtered) data to the table.
         productTable.setItems(sortedData);
         // bind the sortedList comparator to the TableView comparator
         sortedData.comparatorProperty().bind(productTable.comparatorProperty());
     }
 
-    /**
-     *
-     * @return
-     */
     public ObservableList< Product> getProducts() {
         ObservableList< Product> products = pm.getDistributors();
         Collections.reverse(products);
         return products;
     }
 
-    /**
-     *
-     * @return
-     */
     public boolean isValid() {
         if (id.getText().isEmpty()) {
             idLabel.setText("Requird !");
@@ -270,11 +255,6 @@ public class ProductController implements Initializable {
         }
     }
 
-    /**
-     *
-     * @param s
-     * @return
-     */
     public boolean isInteger(String s) {
         try {
             Integer.parseInt(s);
@@ -283,13 +263,9 @@ public class ProductController implements Initializable {
         } catch (NullPointerException e) {
             return false;
         }
-        // only got here if we didn't return false
         return true;
     }
 
-    /**
-     *
-     */
     @FXML
     public void add() {
         if (id.isDisable()) {
@@ -299,9 +275,6 @@ public class ProductController implements Initializable {
         }
     }
 
-    /**
-     *
-     */
     @FXML
     public void addNew() {
         if (isValid()) {
@@ -346,9 +319,6 @@ public class ProductController implements Initializable {
         }
     }
 
-    /**
-     *
-     */
     @FXML
     public void update() {
         if (isValid()) {
@@ -387,9 +357,6 @@ public class ProductController implements Initializable {
         }
     }
 
-    /**
-     *
-     */
     @FXML
     public void edit() {
         index = productTable.getSelectionModel().getSelectedIndex();
@@ -413,9 +380,6 @@ public class ProductController implements Initializable {
         }
     }
 
-    /**
-     *
-     */
     @FXML
     public void delete() {
         index = productTable.getSelectionModel().getSelectedIndex();
@@ -432,9 +396,6 @@ public class ProductController implements Initializable {
         }
     }
 
-    /**
-     *
-     */
     @FXML
     public void clearSearch() {
         if (!searchId.isFocused()) {
@@ -460,9 +421,6 @@ public class ProductController implements Initializable {
         }
     }
 
-    /**
-     *
-     */
     public void clear() {
         id.clear();
         name.clear();
@@ -494,81 +452,54 @@ public class ProductController implements Initializable {
         refreshProducts();
     }
 
-    /**
-     *
-     */
     @FXML
     public void clearAll() {
         clear();
         onPressAnything();
     }
 
-    /**
-     *
-     */
     @FXML
     public void idOnPress() {
         idLabel.setText("");
         onPressAnything();
     }
 
-    /**
-     *
-     */
     @FXML
     public void nameOnPress() {
         nameLabel.setText("");
         onPressAnything();
     }
 
-    /**
-     *
-     */
     @FXML
     public void brandOnPress() {
         brandLabel.setText("");
         onPressAnything();
     }
 
-    /**
-     *
-     */
     @FXML
     public void strenthOnPress() {
         strengthLabel.setText("");
         onPressAnything();
     }
 
-    /**
-     *
-     */
     @FXML
     public void typeOnPress() {
         typeLabel.setText("");
         onPressAnything();
     }
 
-    /**
-     *
-     */
     @FXML
     public void minStockOnPress() {
         minStockLabel.setText("");
         onPressAnything();
     }
 
-    /**
-     *
-     */
     @FXML
     public void onPressAnything() {
         icon.setImage(imageProduct);
         messageLabel.setText("");
     }
 
-    /**
-     *
-     */
     @FXML
     public void expandDiscription() {
         discriptionPane.expandedProperty().set(true);

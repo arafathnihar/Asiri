@@ -17,11 +17,11 @@ public class NotificationModel {
 
     DataSource ds = DatabaseSource.getMySQLDataSource();
 
-    public LocalDate getLocalDate(Date date){
+    public LocalDate getLocalDate(Date date) {
         LocalDate localD = date.toLocalDate();
         return localD;
     }
-    
+
     public ObservableList minStockNotification() {
         try (Connection con = ds.getConnection()) {
             ObservableList<Product> ol = FXCollections.observableArrayList();
@@ -48,7 +48,7 @@ public class NotificationModel {
             java.sql.Date sqlDate = new Date(date.getTime());
             ObservableList<InvoiceItem> ol = FXCollections.observableArrayList();
             String query = "SELECT productID, (SELECT productName FROM product WHERE productID = invoiceitem.productID) AS productName, "
-                           + "quantity, expireDate FROM invoiceitem WHERE quantity > 0 and expireDate ='" + sqlDate + "'";
+                    + "quantity, expireDate FROM invoiceitem WHERE quantity > 0 and expireDate ='" + sqlDate + "'";
             PreparedStatement pStmt = con.prepareStatement(query);
             ResultSet rs = pStmt.executeQuery();
             while (rs.next()) {
