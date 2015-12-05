@@ -9,13 +9,13 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -54,6 +54,23 @@ public class BillController implements Initializable {
     private TableColumn< BillItem, Integer> quantityC;
     @FXML
     private TableColumn< BillItem, Double> totalC;
+    @FXML
+    private Label LabeldateLbl;
+    @FXML
+    private Label discountLbl;
+    @FXML
+    private Label totalLbl;
+    @FXML
+    private Label productIDLbl;
+    @FXML
+    private Label unitPriceLbl;
+    @FXML
+    private Label nameLbl;
+    @FXML
+    private Label quantityLbl;
+    @FXML
+    private Label priceLbl;
+    
     private BillItemModel bm = new BillItemModel();
     private ProductModel pm = new ProductModel();
     private Bill b = new Bill();
@@ -172,7 +189,7 @@ public class BillController implements Initializable {
         total();
         clear();
     }
-
+    
     /**
      *
      */

@@ -106,8 +106,8 @@ public class ProductController implements Initializable {
         typeC.setCellValueFactory(new PropertyValueFactory<>("productType"));
         minStockC.setCellValueFactory(new PropertyValueFactory<>("productMinStock"));
         discriptionC.setCellValueFactory(new PropertyValueFactory<>("productDescription"));
-        type.getItems().addAll("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten");
-        searchType.getItems().addAll("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten");
+        type.getItems().addAll("cash","cheque","credit","paid");
+        searchType.getItems().addAll("cash","cheque","credit","paid");
         refreshProducts();
     }
 

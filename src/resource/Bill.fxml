@@ -25,21 +25,21 @@
                                  <children>
                                     <Label text="Date" />
                                     <DatePicker fx:id="billDate" prefHeight="30.0" prefWidth="200.0" />
-                                    <Label />
+                                    <Label fx:id="dateLbl" />
                                  </children>
                               </VBox>
                               <VBox alignment="CENTER">
                                  <children>
                                     <Label text="Discount" />
                                     <TextField fx:id="discount" prefHeight="30.0" prefWidth="200.0" />
-                                    <Label />
+                                    <Label fx:id="discountLbl" />
                                  </children>
                               </VBox>
                               <VBox alignment="CENTER" prefWidth="300.0">
                                  <children>
                                     <Label text="Total" />
                                     <TextField fx:id="billAmount" alignment="CENTER" prefHeight="30.0" prefWidth="160.0" />
-                                    <Label />
+                                    <Label fx:id="totalLbl" />
                                  </children>
                               </VBox>
                            </children>
@@ -52,35 +52,35 @@
                                        <children>
                                           <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Product ID" />
                                           <ComboBox fx:id="productID" editable="true" onAction="#autoFillById" prefWidth="102.5" />
-                                          <Label />
+                                          <Label fx:id="productIDLbl" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" spacing="5.0">
                                        <children>
                                           <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Unit Price" />
                                           <TextField fx:id="unitPrice" prefWidth="105.0" />
-                                          <Label />
+                                          <Label fx:id="unitPriceLbl" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="138.0" layoutY="10.0" spacing="5.0">
                                        <children>
                                           <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Name" />
                                           <TextField fx:id="productName" prefWidth="305.0" />
-                                          <Label />
+                                          <Label fx:id="nameLbl" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" spacing="5.0">
                                        <children>
                                           <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Quantity" />
                                           <TextField fx:id="quantity" prefWidth="105.0" />
-                                          <Label />
+                                          <Label fx:id="quantityLbl" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" spacing="5.0">
                                        <children>
                                           <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Price" />
                                           <TextField fx:id="total" editable="true" prefWidth="102.5" />
-                                          <Label />
+                                          <Label fx:id="priceLbl" />
                                        </children>
                                     </VBox>
                                  </children>
