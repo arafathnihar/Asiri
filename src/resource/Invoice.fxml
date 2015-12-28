@@ -26,28 +26,28 @@
                               <VBox spacing="5.0">
                                  <children>
                                     <Label alignment="CENTER" prefWidth="150.0" text="Invoice ID" />
-                                    <TextField fx:id="invoiceID" prefWidth="150.0" />
+                                    <TextField fx:id="invoiceID" onKeyPressed="#invoiceIDOnPress" prefWidth="150.0" />
                                     <Label fx:id="invoiceIdLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefWidth="150.0" textFill="RED" />
                                  </children>
                               </VBox>
                               <VBox spacing="5.0">
                                  <children>
                                     <Label alignment="CENTER" prefWidth="100.0" text="Distributre Code" />
-                                    <ComboBox fx:id="distributerCode" prefWidth="100.0" />
+                                    <ComboBox fx:id="distributerCode" onMouseClicked="#distributorOnPress" prefWidth="100.0" />
                                     <Label fx:id="distriCodeLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefWidth="100.0" textFill="RED" />
                                  </children>
                               </VBox>
                               <VBox spacing="5.0">
                                  <children>
                                     <Label alignment="CENTER" prefWidth="150.0" text="Date" />
-                                    <DatePicker fx:id="date" prefWidth="150.0" />
+                                    <DatePicker fx:id="date" onMouseClicked="#dateOnPress" prefWidth="150.0" />
                                     <Label fx:id="dateLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefWidth="150.0" textFill="RED" />
                                  </children>
                               </VBox>
                               <VBox alignment="CENTER" spacing="5.0">
                                  <children>
                                     <Label text="Inovice Note" />
-                                    <TextField fx:id="invoiceNote" prefHeight="25.0" prefWidth="442.0" />
+                                    <TextField fx:id="invoiceNote" onKeyPressed="#noteOnPress" prefHeight="25.0" prefWidth="442.0" />
                                     <Label fx:id="noteLabel" layoutX="141.0" layoutY="19.0" textFill="RED" />
                                  </children>
                               </VBox>
@@ -58,56 +58,56 @@
                               <VBox alignment="CENTER" layoutX="75.0" layoutY="10.0" spacing="5.0">
                                  <children>
                                     <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Product ID" />
-                                    <ComboBox fx:id="productID" prefWidth="100.0" />
+                                    <ComboBox fx:id="productID" onMouseClicked="#idOnPress" prefWidth="100.0" />
                                     <Label fx:id="productIdLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="10.0" prefWidth="90.0" textFill="RED" />
                                  </children>
                               </VBox>
                               <VBox alignment="CENTER" layoutX="242.0" layoutY="10.0" spacing="5.0">
                                  <children>
                                     <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Pack Size" />
-                                    <TextField fx:id="packSize" prefWidth="100.0" />
+                                    <TextField fx:id="packSize" onKeyPressed="#packSizeOnPress" prefWidth="100.0" />
                                     <Label fx:id="packSizeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="21.0" prefWidth="90.0" textFill="RED" />
                                  </children>
                               </VBox>
                               <VBox alignment="CENTER" layoutX="275.0" layoutY="10.0" spacing="5.0">
                                  <children>
                                     <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Quantity" />
-                                    <TextField fx:id="quantity" prefWidth="100.0" />
+                                    <TextField fx:id="quantity" onKeyPressed="#quantityOnPress" prefWidth="100.0" />
                                     <Label fx:id="quantityLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="21.0" prefWidth="90.0" textFill="RED" />
                                  </children>
                               </VBox>
                               <VBox alignment="CENTER" layoutX="354.0" layoutY="10.0" spacing="5.0">
                                  <children>
                                     <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Price" />
-                                    <TextField fx:id="price" prefWidth="100.0" />
+                                    <TextField fx:id="price" onKeyPressed="#priceOnPress" prefWidth="100.0" />
                                     <Label fx:id="priceLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="21.0" prefWidth="90.0" textFill="RED" />
                                  </children>
                               </VBox>
                               <VBox alignment="CENTER" layoutX="310.0" layoutY="10.0" spacing="5.0">
                                  <children>
                                     <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Discount" />
-                                    <TextField fx:id="discount" prefWidth="100.0" />
+                                    <TextField fx:id="discount" onKeyPressed="#discountOnPress" prefWidth="100.0" />
                                     <Label fx:id="discountLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="21.0" prefWidth="90.0" textFill="RED" />
                                  </children>
                               </VBox>
                               <VBox alignment="CENTER" layoutX="525.0" layoutY="10.0" spacing="5.0">
                                  <children>
                                     <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Free" />
-                                    <TextField fx:id="free" prefWidth="100.0" />
+                                    <TextField fx:id="free" onKeyPressed="#freeOnPress" prefWidth="100.0" />
                                     <Label fx:id="freeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="21.0" prefWidth="90.0" textFill="RED" />
                                  </children>
                               </VBox>
                               <VBox alignment="CENTER" layoutX="425.0" layoutY="10.0" spacing="5.0">
                                  <children>
                                     <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Margin" />
-                                    <TextField fx:id="margin" prefWidth="100.0" />
+                                    <TextField fx:id="margin" onKeyPressed="#marginOnPress" prefWidth="100.0" />
                                     <Label fx:id="marginLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="21.0" prefWidth="90.0" textFill="RED" />
                                  </children>
                               </VBox>
                               <VBox alignment="CENTER" layoutX="310.0" layoutY="10.0" spacing="5.0">
                                  <children>
                                     <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Expire Date" />
-                                    <DatePicker fx:id="expireDate" prefWidth="100.0" />
+                                    <DatePicker fx:id="expireDate" onMouseClicked="#expireOnPress" prefWidth="100.0" />
                                     <Label fx:id="expireDateLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="21.0" prefWidth="90.0" textFill="RED" />
                                  </children>
                               </VBox>
