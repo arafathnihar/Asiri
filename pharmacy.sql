@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 01, 2016 at 04:03 PM
+-- Generation Time: Jan 01, 2016 at 07:39 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -27,9 +27,9 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getcurrentstock`(IN productidparam VARCHAR(255), 
                               OUT stockreturn  INT)
 BEGIN
-	SELECT Sum(stock) 
+  SELECT Sum(stock) 
     INTO stockreturn
-	FROM   (SELECT quantity - sold AS stock 
+  FROM   (SELECT quantity - sold AS stock 
         FROM   pharmacy.invoiceitem 
         WHERE  productid = productidparam ) stock; 
   END$$
@@ -37,7 +37,7 @@ BEGIN
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getunitprice`(IN productidparam VARCHAR(255), 
                               OUT pricereturn   DOUBLE)
 BEGIN 
-	SELECT price
+  SELECT price
     INTO   pricereturn
     FROM invoiceitem
     WHERE invoiceitemid = (
@@ -45,6 +45,11 @@ BEGIN
     FROM   invoiceitem 
     WHERE  productid = productidparam); 
   END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Get_All_Products`()
+BEGIN
+SELECT * FROM product;
+END$$
 
 DELIMITER ;
 
@@ -60,7 +65,14 @@ CREATE TABLE IF NOT EXISTS `bill` (
   `billNote` varchar(255) DEFAULT NULL,
   `billAmount` double NOT NULL,
   PRIMARY KEY (`billNo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `bill`
+--
+
+INSERT INTO `bill` (`billNo`, `billDate`, `billNote`, `billAmount`) VALUES
+(1, '0000-00-00', NULL, 0);
 
 -- --------------------------------------------------------
 
