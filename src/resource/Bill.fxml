@@ -24,7 +24,7 @@
                               <VBox alignment="CENTER">
                                  <children>
                                     <Label text="Date" />
-                                    <DatePicker fx:id="billDate" prefHeight="30.0" prefWidth="200.0" />
+                                    <DatePicker fx:id="billDate" onMouseClicked="#dateonPress" prefHeight="30.0" prefWidth="200.0" />
                                     <Label fx:id="dateLbl" />
                                  </children>
                               </VBox>
@@ -38,8 +38,15 @@
                               <VBox alignment="CENTER" prefWidth="300.0">
                                  <children>
                                     <Label text="Total" />
-                                    <TextField fx:id="billAmount" alignment="CENTER" prefHeight="30.0" prefWidth="160.0" />
+                                    <TextField fx:id="billAmount" alignment="CENTER" prefHeight="30.0" prefWidth="255.0" />
                                     <Label fx:id="totalLbl" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="75.0" prefWidth="188.0">
+                                 <children>
+                                    <Label text="Bill ID" />
+                                    <TextField fx:id="billID" onKeyPressed="#billIDonPress" prefHeight="6.0" prefWidth="146.0" />
+                                    <Label fx:id="BillIDLbl" />
                                  </children>
                               </VBox>
                            </children>
@@ -51,7 +58,7 @@
                                     <VBox alignment="CENTER" spacing="5.0">
                                        <children>
                                           <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Product ID" />
-                                          <ComboBox fx:id="productID" editable="true" onAction="#autoFillById" prefWidth="102.5" />
+                                          <ComboBox fx:id="productID" editable="true" onAction="#autoFillById" onMouseClicked="#ProductIDonPress" prefWidth="102.5" />
                                           <Label fx:id="productIDLbl" />
                                        </children>
                                     </VBox>
@@ -69,10 +76,10 @@
                                           <Label fx:id="nameLbl" />
                                        </children>
                                     </VBox>
-                                    <VBox alignment="CENTER" spacing="5.0">
+                                    <VBox alignment="CENTER" prefHeight="58.0" prefWidth="105.0" spacing="5.0">
                                        <children>
                                           <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Quantity" />
-                                          <TextField fx:id="quantity" prefWidth="105.0" />
+                                          <TextField fx:id="quantity" onKeyPressed="#quantityonPress" prefWidth="105.0" />
                                           <Label fx:id="quantityLbl" />
                                        </children>
                                     </VBox>
