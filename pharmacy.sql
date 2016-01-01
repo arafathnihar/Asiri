@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2015 at 09:46 PM
+-- Generation Time: Jan 01, 2016 at 04:03 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -19,6 +19,34 @@ SET time_zone = "+00:00";
 --
 -- Database: `pharmacy`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getcurrentstock`(IN productidparam VARCHAR(255), 
+                              OUT stockreturn  INT)
+BEGIN
+	SELECT Sum(stock) 
+    INTO stockreturn
+	FROM   (SELECT quantity - sold AS stock 
+        FROM   pharmacy.invoiceitem 
+        WHERE  productid = productidparam ) stock; 
+  END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getunitprice`(IN productidparam VARCHAR(255), 
+                              OUT pricereturn   DOUBLE)
+BEGIN 
+	SELECT price
+    INTO   pricereturn
+    FROM invoiceitem
+    WHERE invoiceitemid = (
+    SELECT Max(invoiceitemid)
+    FROM   invoiceitem 
+    WHERE  productid = productidparam); 
+  END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
