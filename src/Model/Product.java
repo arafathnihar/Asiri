@@ -8,25 +8,26 @@ public class Product {
     private String productBrand;
     private int productStrength;
     private String productType;
-    private int productStock;
     private int productMinStock;
+    private double customPrice;
+    private int currentStock;
 
     public Product(String productID, String productName, String productDescription, String productBrand,
-            int productStrength, String productType, int productStock, int productMinStock) {
+            int productStrength, String productType, int productMinStock, double customPrice) {
         this.productID = productID;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productBrand = productBrand;
         this.productStrength = productStrength;
         this.productType = productType;
-        this.productStock = productStock;
         this.productMinStock = productMinStock;
+        this.customPrice = customPrice;
     }
 
-    public Product(String productID, String productName, int productStock, int productMinStock) {
+    public Product(String productID, String productName, int currentStock, int productMinStock) {
         this.productID = productID;
         this.productName = productName;
-        this.productStock = productStock;
+        this.currentStock = currentStock;
         this.productMinStock = productMinStock;
     }
 
@@ -37,8 +38,8 @@ public class Product {
         this.productBrand = "";
         this.productStrength = 0;
         this.productType = "";
-        this.productStock = 0;
         this.productMinStock = 0;
+        this.customPrice = 0.0;
     }
 
     public String getProductID() {
@@ -89,20 +90,28 @@ public class Product {
         this.productType = productType;
     }
 
-    public int getProductStock() {
-        return productStock;
-    }
-
-    public void setProductStock(int productStock) {
-        this.productStock = productStock;
-    }
-
     public int getProductMinStock() {
         return productMinStock;
     }
 
     public void setProductMinStock(int productMinStock) {
         this.productMinStock = productMinStock;
+    }
+
+    public double getCustomPrice() {
+        return customPrice;
+    }
+
+    public void setCustomPrice(double customPrice) {
+        this.customPrice = customPrice;
+    }
+
+    public int getCurrentStock() {
+        return currentStock;
+    }
+
+    public void setCurrentStock(int currentStock) {
+        this.currentStock = currentStock;
     }
 
 }

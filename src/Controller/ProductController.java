@@ -331,7 +331,6 @@ public class ProductController implements Initializable {
                     p.setProductDescription(description.getText());
                     p.setProductStrength(Integer.parseInt(strength.getText()));
                     p.setProductType(type.getValue());
-                    p.setProductStock(p.getProductStock());
                     p.setProductMinStock(Integer.parseInt(minStock.getText()));
                     pm.update(p);
                     clear();

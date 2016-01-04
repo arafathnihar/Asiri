@@ -77,7 +77,7 @@ public class BillController implements Initializable {
     private Label priceLbl;
     @FXML
     private Label messageLabel;
-    
+
     //Image imageDistri = new Image(getClass().getResourceAsStream("/resource/images/distributer.png"));
     Image imageError = new Image(getClass().getResourceAsStream("/resource/images/error.png"));
     Image imageSuccess = new Image(getClass().getResourceAsStream("/resource/images/success.png"));
@@ -126,7 +126,8 @@ public class BillController implements Initializable {
             total.setText(Double.toString(tot));
         }
     }
-     public boolean isInteger(String s) {
+
+    public boolean isInteger(String s) {
         try {
             Integer.parseInt(s);
         } catch (NumberFormatException e) {
@@ -136,6 +137,7 @@ public class BillController implements Initializable {
         }
         return true;
     }
+
     public static boolean isNumeric(String str) {
         try {
             double d = Double.parseDouble(str);
@@ -178,9 +180,9 @@ public class BillController implements Initializable {
             productID.getSelectionModel().clearSelection();
         }
     }
-    
+
     public boolean isValidBill() {
-        if (billDate.getValue()==null) {
+        if (billDate.getValue() == null) {
             LabeldateLbl.setText("Required!");
             return false;
         } else if (billID.getText().isEmpty()) {
@@ -190,7 +192,7 @@ public class BillController implements Initializable {
             return true;
         }
     }
-    
+
     public boolean isValidBillItem() {
         if (productID.getSelectionModel().isEmpty()) {
             productIDLbl.setText("Required!");
@@ -204,39 +206,8 @@ public class BillController implements Initializable {
     }
 
     public void add() {
-                    if (isValidBillItem()){
-                            if (isInteger(quantity.getText())) {
-
-                                        BillItem bi = new BillItem();
-                                        bi.setProductID(productID.getValue());
-                                        bi.setUnitPrice(Double.parseDouble(unitPrice.getText()));
-                                        bi.setQuantity(Integer.parseInt(quantity.getText()));
-                                        bi.setTotal(Double.parseDouble(total.getText()));
-                                        itemsTable.getItems().add(bi);
-                                        total();
-                                        clear();
-                                        //icon.setImage(imageSuccess);
-                                        messageLabel.setTextFill(Color.GREEN);
-                                        messageLabel.setText("New Bill item added");
-
-                                    } else {
-                                                //icon.setImage(imageError);
-                                        quantityLbl.setText("It's not a number");
-                                        messageLabel.setTextFill(Color.RED);
-                                        messageLabel.setText(" Quantity should be a numeric value ");
-                                    }
-                            } 
-	else{
-			//icon.setImage(imageError);
-			messageLabel.setTextFill(Color.RED);
-			messageLabel.setText(" Fill all fields ");
-		}
-    }
-
-        /*
-    @FXML
-    public void add() {
         if (isValidBillItem()) {
+            if (isInteger(quantity.getText())) {
                 BillItem bi = new BillItem();
                 bi.setProductID(productID.getValue());
                 bi.setUnitPrice(Double.parseDouble(unitPrice.getText()));
@@ -248,16 +219,45 @@ public class BillController implements Initializable {
                 //icon.setImage(imageSuccess);
                 messageLabel.setTextFill(Color.GREEN);
                 messageLabel.setText("New Bill item added");
+
+            } else {
+                //icon.setImage(imageError);
+                quantityLbl.setText("It's not a number");
+                messageLabel.setTextFill(Color.RED);
+                messageLabel.setText(" Quantity should be a numeric value ");
+            }
         } else {
             //icon.setImage(imageError);
             messageLabel.setTextFill(Color.RED);
             messageLabel.setText(" Fill all fields ");
         }
-    }*/
+    }
 
+    /*
+     @FXML
+     public void add() {
+     if (isValidBillItem()) {
+     BillItem bi = new BillItem();
+     bi.setProductID(productID.getValue());
+     bi.setUnitPrice(Double.parseDouble(unitPrice.getText()));
+     bi.setQuantity(Integer.parseInt(quantity.getText()));
+     bi.setTotal(Double.parseDouble(total.getText()));
+     itemsTable.getItems().add(bi);
+     total();
+     clear();
+     //icon.setImage(imageSuccess);
+     messageLabel.setTextFill(Color.GREEN);
+     messageLabel.setText("New Bill item added");
+     } else {
+     //icon.setImage(imageError);
+     messageLabel.setTextFill(Color.RED);
+     messageLabel.setText(" Fill all fields ");
+     }
+     }*/
+    
     @FXML
     public void save() {
-        if (isValidBill()){
+        if (isValidBill()) {
             b.setBillNote(billNote.getText());
             b.setBillAmount(Double.parseDouble(billAmount.getText()));
             ObservableList< BillItem> items = itemsTable.getItems();
@@ -271,8 +271,7 @@ public class BillController implements Initializable {
             for (int i = 0; i < itemsTable.getItems().size(); i++) {
                 itemsTable.getItems().clear();
             }
-        }
-        else{
+        } else {
             //icon.setImage(imageError);
             messageLabel.setTextFill(Color.RED);
             messageLabel.setText(" Fill all fields ");
@@ -289,7 +288,7 @@ public class BillController implements Initializable {
             quantity.setText(String.valueOf(bi.getQuantity()));
             total.setText(String.valueOf(bi.getTotal()));
         } else {
-           // icon.setImage(imageWarnning);
+            // icon.setImage(imageWarnning);
             messageLabel.setTextFill(Color.ORANGE);
             messageLabel.setText("Please select a distributer to edit");
         }
@@ -297,32 +296,29 @@ public class BillController implements Initializable {
 
     @FXML
     public void update() {
-        if (isValidBillItem()){
-                if (isInteger(quantity.getText())) {
-                        BillItem bi = new BillItem();
-                        bi.setProductID(productID.getValue());
-                        bi.setUnitPrice(Double.parseDouble(unitPrice.getText()));
-                        bi.setQuantity(Integer.parseInt(quantity.getText()));
-                        bi.setTotal(Double.parseDouble(total.getText()));
-                        index = itemsTable.getSelectionModel().getSelectedIndex();
-                        itemsTable.getItems().set(index, bi);
-                        total();
-                        clear();
-                }
-                 else {
-                                                //icon.setImage(imageError);
-                            quantityLbl.setText("It's not a number");
-                            messageLabel.setTextFill(Color.RED);
-                            messageLabel.setText(" Quantity should be a numeric value ");
-                }
-        }
-                             
-	else{
+        if (isValidBillItem()) {
+            if (isInteger(quantity.getText())) {
+                BillItem bi = new BillItem();
+                bi.setProductID(productID.getValue());
+                bi.setUnitPrice(Double.parseDouble(unitPrice.getText()));
+                bi.setQuantity(Integer.parseInt(quantity.getText()));
+                bi.setTotal(Double.parseDouble(total.getText()));
+                index = itemsTable.getSelectionModel().getSelectedIndex();
+                itemsTable.getItems().set(index, bi);
+                total();
+                clear();
+            } else {
                 //icon.setImage(imageError);
+                quantityLbl.setText("It's not a number");
                 messageLabel.setTextFill(Color.RED);
-                messageLabel.setText(" Fill all fields ");
-	}
-                        
+                messageLabel.setText(" Quantity should be a numeric value ");
+            }
+        } else {
+            //icon.setImage(imageError);
+            messageLabel.setTextFill(Color.RED);
+            messageLabel.setText(" Fill all fields ");
+        }
+
     }
 
     @FXML
@@ -332,7 +328,7 @@ public class BillController implements Initializable {
             itemsTable.getItems().remove(index);
             total();
             clear();
-           // icon.setImage(imageSuccess);
+            // icon.setImage(imageSuccess);
             messageLabel.setTextFill(Color.GREEN);
             messageLabel.setText("Bill Item is deleted");
             clear();
@@ -351,52 +347,52 @@ public class BillController implements Initializable {
         quantity.clear();
         total.clear();
         billNote.clear();
-        
+
         productIDLbl.setText("");
         quantityLbl.setText("");
         LabeldateLbl.setText("");
-        
+
         /*codeSearch.clear();
-        nameSearch.clear();
-        addressSearch.clear();
-        phoneNoSearch.clear(); */
+         nameSearch.clear();
+         addressSearch.clear();
+         phoneNoSearch.clear(); */
     }
 
     @FXML
     public void cancel() {
 
     }
-    
+
     @FXML
     public void clearAll() {
         clear();
         onPressAnything();
     }
-    
+
     @FXML
     public void billIDonPress() {
-       BillIDLbl.setText("");
+        BillIDLbl.setText("");
         onPressAnything();
     }
-    
+
     @FXML
     public void dateonPress() {
         LabeldateLbl.setText("");
         onPressAnything();
     }
-    
+
     @FXML
     public void ProductIDonPress() {
         productIDLbl.setText("");
         onPressAnything();
     }
-    
+
     @FXML
     public void quantityonPress() {
         quantityLbl.setText("");
         onPressAnything();
     }
-    
+
     @FXML
     public void onPressAnything() {
         messageLabel.setText("");

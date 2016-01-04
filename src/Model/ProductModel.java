@@ -22,7 +22,7 @@ public class ProductModel {
             ResultSet rs = pStmt.executeQuery();
             while (rs.next()) {
                 ol.add(new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-                        rs.getInt(5), rs.getString(6), rs.getInt(7), rs.getInt(8)));
+                        rs.getInt(5), rs.getString(6), rs.getInt(7), rs.getDouble(8)));
             }
             return ol;
         } catch (SQLException ex) {
@@ -41,8 +41,8 @@ public class ProductModel {
             pStmt.setString(4, p.getProductBrand());
             pStmt.setInt(5, p.getProductStrength());
             pStmt.setString(6, p.getProductType());
-            pStmt.setInt(7, p.getProductStock());
-            pStmt.setInt(8, p.getProductMinStock());
+            pStmt.setInt(7, p.getProductMinStock());
+            pStmt.setDouble(8, p.getCustomPrice());
             pStmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -66,7 +66,7 @@ public class ProductModel {
 
     public void update(Product p) {
         try (Connection con = ds.getConnection()) {
-            String query = "UPDATE product SET " + "productName='" + p.getProductName() + "'," + "productDescription='" + p.getProductDescription() + "'," + "productBrand='" + p.getProductBrand() + "'," + "productStrength=" + p.getProductStrength() + "," + "productType='" + p.getProductType() + "'," + "productStock=" + p.getProductStock() + "," + "productMinStock=" + p.getProductMinStock() + " WHERE productID='" + p.getProductID() + "'";
+            String query = "UPDATE product SET " + "productName='" + p.getProductName() + "'," + "productDescription='" + p.getProductDescription() + "'," + "productBrand='" + p.getProductBrand() + "'," + "productStrength=" + p.getProductStrength() + "," + "productType='" + p.getProductType() + "'," + "productMinStock=" + p.getProductMinStock() + "," + "customPrice=" + p.getCustomPrice() + " WHERE productID='" + p.getProductID() + "'";
             PreparedStatement pStmt = con.prepareStatement(query);
             pStmt.executeUpdate();
         } catch (SQLException ex) {
@@ -99,4 +99,5 @@ public class ProductModel {
             return null;
         }
     }
+    
 }

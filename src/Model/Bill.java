@@ -15,7 +15,7 @@ public class Bill {
         this.billNote = billNote;
         this.billAmount = billAmount;
     }
-
+    
     public Bill(LocalDate billDate, double billAmount) {
         this.billDate = billDate;
         this.billAmount = billAmount;

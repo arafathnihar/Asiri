@@ -42,14 +42,14 @@ public class InvoiceItemModel {
             pStmt1.setString(5, i.getInvoicePayMode());
             pStmt1.setDouble(6, i.getInvoiceTotal());
             pStmt1.executeUpdate();
-            String query3 = "UPDATE product SET productStock = productStock + ? WHERE productID = ? ";
+            /*String query3 = "UPDATE product SET productStock = productStock + ? WHERE productID = ? ";
             PreparedStatement pStmt3 = con.prepareStatement(query3);
             for (InvoiceItem record : i.getItems()) {
                 pStmt3.setInt(1, record.getQuantity());
                 pStmt3.setString(2, record.getProductID());
                 pStmt3.addBatch();
             }
-            pStmt3.executeBatch();
+            pStmt3.executeBatch();*/
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

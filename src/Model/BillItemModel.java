@@ -50,14 +50,14 @@ public class BillItemModel {
                 pStmt.addBatch();
             }
             pStmt.executeBatch();
-            query = "UPDATE product SET productStock = productStock - ? WHERE productID = ? ";
+            /*query = "UPDATE product SET productStock = productStock - ? WHERE productID = ? ";
             pStmt = con.prepareStatement(query);
             for (BillItem record : items) {
                 pStmt.setInt(1, record.getQuantity());
                 pStmt.setString(2, record.getProductID());
                 pStmt.addBatch();
             }
-            pStmt.executeBatch();
+            pStmt.executeBatch();*/
             for (int i = 0; i < items.size(); i++) {
                 updateInvoice(items.get(i));
             }

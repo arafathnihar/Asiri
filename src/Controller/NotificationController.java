@@ -39,7 +39,7 @@ public class NotificationController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         outProductIDC.setCellValueFactory(new PropertyValueFactory<>("productID"));
         outProductNameC.setCellValueFactory(new PropertyValueFactory<>("productName"));
-        outCurrentStockC.setCellValueFactory(new PropertyValueFactory<>("productStock"));
+        outCurrentStockC.setCellValueFactory(new PropertyValueFactory<>("currentStock"));
         outMinStockC.setCellValueFactory(new PropertyValueFactory<>("productMinStock"));
 
         expProductIDC.setCellValueFactory(new PropertyValueFactory<>("productID"));
