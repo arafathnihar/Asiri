@@ -1,5 +1,8 @@
-package Model;
+package Model.Service;
 
+import Model.*;
+import Model.DTO.InvoiceItem;
+import Model.DTO.Product;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -11,7 +14,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -1,7 +1,7 @@
 package Controller;
 
-import Model.Bill;
-import Model.SalesModel;
+import Model.DTO.Bill;
+import Model.Service.SalesModel;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;

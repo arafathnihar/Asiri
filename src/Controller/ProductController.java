@@ -1,7 +1,7 @@
 package Controller;
 
-import Model.Product;
-import Model.ProductModel;
+import Model.DTO.Product;
+import Model.Service.ProductModel;
 import java.net.*;
 import java.util.*;
 import javafx.collections.ObservableList;

@@ -1,5 +1,9 @@
-package Model;
+package Model.Service;
 
+import Model.*;
+import Model.DTO.Bill;
+import Model.DTO.BillItem;
+import Model.DTO.InvoiceItem;
 import java.sql.*;
 import java.time.LocalDate;
 import javax.sql.*;

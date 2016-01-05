@@ -1,5 +1,7 @@
-package Model;
+package Model.Service;
 
+import Model.*;
+import Model.DTO.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

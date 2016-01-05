@@ -1,7 +1,7 @@
 package Controller;
 
-import Model.Distributor;
-import Model.DistributorModel;
+import Model.DTO.Distributor;
+import Model.Service.DistributorModel;
 import java.net.URL;
 import java.util.Collections;
 import java.util.ResourceBundle;

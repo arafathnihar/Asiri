@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.NotificationModel;
+import Model.Service.NotificationModel;
 import java.net.*;
 import java.util.*;
 import javafx.fxml.*;

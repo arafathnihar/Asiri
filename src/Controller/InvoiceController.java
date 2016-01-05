@@ -1,8 +1,8 @@
 package Controller;
 
-import Model.Invoice;
-import Model.InvoiceItem;
-import Model.InvoiceItemModel;
+import Model.DTO.Invoice;
+import Model.DTO.InvoiceItem;
+import Model.Service.InvoiceItemModel;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;

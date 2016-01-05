@@ -1,9 +1,9 @@
 package Controller;
 
-import Model.Bill;
-import Model.BillItem;
-import Model.BillItemModel;
-import Model.ProductModel;
+import Model.DTO.Bill;
+import Model.DTO.BillItem;
+import Model.Service.BillItemModel;
+import Model.Service.ProductModel;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;

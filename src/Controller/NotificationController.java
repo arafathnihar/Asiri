@@ -1,8 +1,8 @@
 package Controller;
 
-import Model.InvoiceItem;
-import Model.NotificationModel;
-import Model.Product;
+import Model.DTO.InvoiceItem;
+import Model.Service.NotificationModel;
+import Model.DTO.Product;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;

@@ -1,5 +1,7 @@
-package Model;
+package Model.Service;
 
+import Model.*;
+import Model.DTO.Bill;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
