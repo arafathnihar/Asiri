@@ -6,13 +6,9 @@ import Model.DTO.Product;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.collections.FXCollections;
@@ -29,16 +25,24 @@ public class NotificationModel {
     }
 
     public ObservableList minStockNotification() {
+        CallableStatement stmt = null;
         try (Connection con = ds.getConnection()) {
             ObservableList<Product> ol = FXCollections.observableArrayList();
-            ProductModel pm = new ProductModel();
-            Map<String, Integer> map = getProductsCurrentStock();
+            String sql = "{call getproductscurrentstock}";
+            stmt = con.prepareCall(sql);
+            ResultSet rs = stmt.executeQuery();
+            Map<String, Integer> map = new HashMap<>();
+            while(rs.next()){
+                map.put(rs.getString(1), rs.getInt(2));
+            }
             for (Map.Entry<String, Integer> entry : map.entrySet()){
-                String query = "SELECT  productID, productName, productMinStock FROM product WHERE productID = '"+entry.getKey()+"' AND productMinStock <= '"+ entry.getValue() +"'";
-                PreparedStatement pStmt = con.prepareStatement(query);
-                ResultSet rs = pStmt.executeQuery();
-                while (rs.next()) {
-                    ol.add(new Product(rs.getString(1), rs.getString(2), entry.getValue(), rs.getInt(3)));
+                String sql1 = "{call minstocknotification(?,?)}";
+                stmt = con.prepareCall(sql1);
+                stmt.setString(1, entry.getKey());
+                stmt.setInt(2, entry.getValue());
+                ResultSet rs1 = stmt.executeQuery();
+                while (rs1.next()) {
+                    ol.add(new Product(rs1.getString(1), rs1.getString(2), entry.getValue(), rs1.getInt(3)));
                 }
             }
             return ol;
@@ -49,18 +53,12 @@ public class NotificationModel {
     }
 
     public ObservableList expireNotification() {
+        CallableStatement stmt = null;
         try (Connection con = ds.getConnection()) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.DAY_OF_MONTH, +30);
-            String timeStamp = sdf.format(calendar.getTime());
-            java.util.Date date = sdf.parse(timeStamp);
-            java.sql.Date sqlDate = new Date(date.getTime());
             ObservableList<InvoiceItem> ol = FXCollections.observableArrayList();
-            String query = "SELECT productID, (SELECT productName FROM product WHERE productID = invoiceitem.productID) AS productName, "
-                    + "quantity, expireDate FROM invoiceitem WHERE quantity > 0 and expireDate ='" + sqlDate + "'";
-            PreparedStatement pStmt = con.prepareStatement(query);
-            ResultSet rs = pStmt.executeQuery();
+            String sql = "{call expirenotification}";
+            stmt = con.prepareCall(sql);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 ol.add(new InvoiceItem(rs.getString(1), rs.getString(2), rs.getInt(3), getLocalDate(rs.getDate(4))));
             }
@@ -68,27 +66,7 @@ public class NotificationModel {
         } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-            return null;
         }
     }
-    
-    public Map<String, Integer> getProductsCurrentStock() {
-        CallableStatement stmt = null;
-        try (Connection con = ds.getConnection()) {
-            String sql = "{call getproductscurrentstock}";
-            stmt = con.prepareCall(sql);
-            ResultSet rs = stmt.executeQuery();
-            Map<String, Integer> map = new HashMap<String, Integer>();
-            while(rs.next()){
-                map.put(rs.getString(1), rs.getInt(2));
-            }
-            return map;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-    }
-
+      
 }
