@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2016 at 03:43 PM
+-- Generation Time: Jan 05, 2016 at 04:44 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -24,6 +24,15 @@ DELIMITER $$
 --
 -- Procedures
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `expirenotification`()
+BEGIN
+SELECT productID, (SELECT productName FROM product WHERE productID = invoiceitem.productID) AS productName, quantity, expireDate 
+FROM invoiceitem 
+WHERE quantity > 0 and 
+expireDate between CURDATE() and DATE_ADD(CURDATE(), INTERVAL 1 MONTH)
+ORDER BY expireDate;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getallproducts`()
 BEGIN
 SELECT * FROM product;
@@ -39,15 +48,16 @@ BEGIN
  END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getproductscurrentstock`()
-    NO SQL
-SELECT oc.productID,
-	SUM(oc.quantity) Amount
-      FROM (
-           SELECT productID,COALESCE(quantity,0) quantity FROM invoiceitem
-           UNION ALL
-           SELECT productID,COALESCE(-quantity,0) quantity FROM billitem
-           ) oc
-      GROUP BY oc.productID$$
+BEGIN
+SELECT 
+oc.productID, SUM(oc.quantity) Amount
+FROM (
+	SELECT productID,COALESCE(quantity,0) quantity FROM invoiceitem
+		UNION ALL
+    SELECT productID,COALESCE(-quantity,0) quantity FROM billitem
+) oc
+GROUP BY oc.productID;
+END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getunitprice`(IN `productidparam` VARCHAR(255), OUT `pricereturn` DOUBLE)
 BEGIN 
@@ -58,6 +68,13 @@ BEGIN
   SELECT Max(invoiceitemid)
   FROM invoiceitem 
   WHERE productid = productidparam); 
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `minstocknotification`(IN `productidparam` VARCHAR(255), IN `currentstockparam` INT)
+BEGIN
+SELECT productID, productName, productMinStock 
+FROM product 
+WHERE productID = productidparam AND productMinStock >= currentstockparam;
 END$$
 
 DELIMITER ;
@@ -3493,7 +3510,7 @@ INSERT INTO `product` (`productID`, `productName`, `productDescription`, `produc
 ('98876', 'Metformin HCl', 'montes, nascetur', 'Natoque Penatibus Et Corporation', 131, 'kg', 49, 0),
 ('98938', 'Sulfamethoxazole/Trimethoprim', 'dolor', 'Natoque Penatibus Et Foundation', 687, 'mg', 30, 0),
 ('99055', 'Losartan Potassium', 'facilisis,', 'Nisl Arcu LLP', 366, 'kg', 12, 0),
-('99381', 'Carvedilol', 'urna. Nunc', 'Tellus LLC', 175, 'mg', 34, 0);
+('99381', 'Carvedilol', 'urna. Nunc', 'Tellus LLC', 175, 'cash', 35, 0);
 
 --
 -- Constraints for dumped tables
