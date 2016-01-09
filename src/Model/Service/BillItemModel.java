@@ -6,6 +6,8 @@ import Model.DTO.BillItem;
 import Model.DTO.InvoiceItem;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sql.*;
 import javafx.collections.*;
 
@@ -139,37 +141,51 @@ public class BillItemModel {
 
     public BillItem getBillItem(String productID) {
         if (productID != null) {
+
             try (Connection con = ds.getConnection()) {
                 String query = "SELECT * FROM product WHERE productID='" + productID + "'";
+                String getUnitPriceSql = "{call getunitprice(?,?)}";
                 PreparedStatement pStmt = con.prepareStatement(query);
                 ResultSet rs = pStmt.executeQuery();
                 BillItem bi = new BillItem();
                 if (rs.next()) {
-                    bi.setProductID(rs.getString(1));
+                    //bi.setProductID(rs.getString(1));
                     bi.setProductName(rs.getString(2));
-                    bi.setUnitPrice(Double.parseDouble(rs.getString(9)));
+                    CallableStatement callableStatement = con.prepareCall(getUnitPriceSql);
+                    callableStatement.setString(1, productID);
+                    callableStatement.registerOutParameter(2, java.sql.Types.DOUBLE);
+                    callableStatement.executeUpdate();
+                    bi.setUnitPrice(Double.parseDouble(callableStatement.getString(2)));
+                    
                 }
                 return bi;
             } catch (SQLException ex) {
-                ex.printStackTrace();
+                Logger.getLogger(BillItemModel.class.getName()).log(Level.SEVERE, null, ex);
                 return null;
             }
         } else {
             return null;
         }
     }
-
+    
     public BillItem getBillItemByName(String productName) {
         if (productName != null) {
             try (Connection con = ds.getConnection()) {
                 String query = "SELECT * FROM product WHERE productName='" + productName + "'";
+                String getUnitPriceSql = "{call getunitprice(?,?)}";
                 PreparedStatement pStmt = con.prepareStatement(query);
                 ResultSet rs = pStmt.executeQuery();
                 BillItem bi = new BillItem();
                 if (rs.next()) {
                     bi.setProductID(rs.getString(1));
-                    bi.setProductName(rs.getString(2));
-                    bi.setUnitPrice(Double.parseDouble(rs.getString(9)));
+                    //bi.setProductName(rs.getString(2));
+                    CallableStatement callableStatement = con.prepareCall(getUnitPriceSql);
+                    callableStatement.setString(1, rs.getString(1));
+                    callableStatement.registerOutParameter(2, java.sql.Types.DOUBLE);
+                    callableStatement.executeUpdate();
+                    System.out.println("XXXXXXXXXXXXXXXXXXXXXXX"+callableStatement.getString(2));
+                    bi.setUnitPrice(Double.parseDouble(callableStatement.getString(2)));
+                    
                     return bi;
                 }
             } catch (SQLException ex) {
