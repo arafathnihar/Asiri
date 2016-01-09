@@ -2,6 +2,7 @@ package Model.Service;
 
 import Model.*;
 import Model.DTO.Bill;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -25,21 +26,12 @@ public class SalesModel {
     }
 
     public ObservableList monthlyBillSum() {
+        CallableStatement stmt = null;
         try (Connection con = ds.getConnection()) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Calendar calendar = Calendar.getInstance();
-            String todayDate = sdf.format(calendar.getTime());
-            java.util.Date tDate = sdf.parse(todayDate);
-            java.sql.Date sqlTDate = new Date(tDate.getTime());
-            calendar.add(Calendar.DAY_OF_MONTH, -30);
-            String beforeDate = sdf.format(calendar.getTime());
-            java.util.Date bDate = sdf.parse(beforeDate);
-            java.sql.Date sqlBDate = new Date(bDate.getTime());
             ObservableList<Bill> ol = FXCollections.observableArrayList();
-            String query = "SELECT billDate, SUM(billAmount) AS total FROM bill WHERE billDate between '" + sqlBDate + "' and '" + sqlTDate + "' "
-                    + "GROUP BY billDate";
-            PreparedStatement pStmt = con.prepareStatement(query);
-            ResultSet rs = pStmt.executeQuery();
+            String sql = "{call monthlybillsum}";
+            stmt = con.prepareCall(sql);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 ol.add(new Bill(getLocalDate(rs.getDate(1)), rs.getDouble(2)));
             }
@@ -47,10 +39,7 @@ public class SalesModel {
         } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-            return null;
-        }
+        } 
     }
 
 }

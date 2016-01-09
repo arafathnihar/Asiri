@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2016 at 04:44 PM
+-- Generation Time: Jan 07, 2016 at 02:52 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -24,6 +24,22 @@ DELIMITER $$
 --
 -- Procedures
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `daysrangebillreport`(IN `date1` DATE, IN `date2` DATE)
+BEGIN
+SELECT *
+FROM bill
+WHERE billDate between date1 and date2
+ORDER BY billNo;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `daysrangeinvoicereport`(IN `date1` DATE, IN `date2` DATE)
+BEGIN
+SELECT *
+FROM invoice
+WHERE invoiceDate between date1 and date2
+ORDER BY invoiceID;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `expirenotification`()
 BEGIN
 SELECT productID, (SELECT productName FROM product WHERE productID = invoiceitem.productID) AS productName, quantity, expireDate 
@@ -70,11 +86,35 @@ BEGIN
   WHERE productid = productidparam); 
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `givendaybillreport`(IN `date1` DATE)
+BEGIN
+SELECT *
+FROM bill
+WHERE billDate = date1
+ORDER BY billNo;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `givendayinvoicereport`(IN `date1` DATE)
+BEGIN
+SELECT *
+FROM invoice
+WHERE invoiceDate = date1
+ORDER BY invoiceID;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `minstocknotification`(IN `productidparam` VARCHAR(255), IN `currentstockparam` INT)
 BEGIN
 SELECT productID, productName, productMinStock 
 FROM product 
 WHERE productID = productidparam AND productMinStock >= currentstockparam;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `monthlybillsum`()
+BEGIN
+SELECT billDate, SUM(billAmount) AS total
+FROM bill
+WHERE billDate between DATE_SUB(CURDATE(), INTERVAL 1 MONTH) and CURDATE()
+GROUP BY billDate;
 END$$
 
 DELIMITER ;
@@ -91,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `bill` (
   `billNote` varchar(255) DEFAULT NULL,
   `billAmount` double NOT NULL,
   PRIMARY KEY (`billNo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 -- --------------------------------------------------------
 
