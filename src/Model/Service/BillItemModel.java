@@ -155,7 +155,11 @@ public class BillItemModel {
                     callableStatement.setString(1, productID);
                     callableStatement.registerOutParameter(2, java.sql.Types.DOUBLE);
                     callableStatement.executeUpdate();
-                    bi.setUnitPrice(Double.parseDouble(callableStatement.getString(2)));
+                    String s = callableStatement.getString(2);
+                    System.out.print(s);
+                    Double d = Double.parseDouble(s);
+                    
+                    bi.setUnitPrice(d);
                     
                 }
                 return bi;
@@ -167,33 +171,35 @@ public class BillItemModel {
             return null;
         }
     }
-    
-    public BillItem getBillItemByName(String productName) {
-        if (productName != null) {
-            try (Connection con = ds.getConnection()) {
-                String query = "SELECT * FROM product WHERE productName='" + productName + "'";
-                String getUnitPriceSql = "{call getunitprice(?,?)}";
-                PreparedStatement pStmt = con.prepareStatement(query);
-                ResultSet rs = pStmt.executeQuery();
-                BillItem bi = new BillItem();
-                if (rs.next()) {
-                    bi.setProductID(rs.getString(1));
-                    //bi.setProductName(rs.getString(2));
-                    CallableStatement callableStatement = con.prepareCall(getUnitPriceSql);
-                    callableStatement.setString(1, rs.getString(1));
-                    callableStatement.registerOutParameter(2, java.sql.Types.DOUBLE);
-                    callableStatement.executeUpdate();
-                    System.out.println("XXXXXXXXXXXXXXXXXXXXXXX"+callableStatement.getString(2));
-                    bi.setUnitPrice(Double.parseDouble(callableStatement.getString(2)));
-                    
-                    return bi;
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-                return null;
-            }
-        }
-        return null;
-    }
+//    
+//    public String getBillItemByName(String productName) {
+//        if (productName != null) {
+//            try (Connection con = ds.getConnection()) {
+//                String query = "SELECT productID FROM product WHERE productName='" + productName + "'";
+//               // String getUnitPriceSql = "{call getunitprice(?,?)}";
+//                PreparedStatement pStmt = con.prepareStatement(query);
+//                ResultSet rs = pStmt.executeQuery();
+//                //BillItem bi = new BillItem();
+//                if (rs.next()) {
+//                 //   bi.setProductID(rs.getString(1));
+//                    //bi.setProductName(rs.getString(2));
+////                    CallableStatement callableStatement = con.prepareCall(getUnitPriceSql);
+////                    callableStatement.setString(1, rs.getString(1));
+////                    callableStatement.registerOutParameter(2, java.sql.Types.DOUBLE);
+////                    callableStatement.executeUpdate();
+////                    String s = callableStatement.getString(2);
+////                    System.out.println(s);
+////                    Double d = Double.parseDouble(s);
+////                    bi.setUnitPrice(d);
+////                    
+//                    return rs.getString(1);
+//                }
+//            } catch (SQLException ex) {
+//                ex.printStackTrace();
+//                return null;
+//            }
+//        }
+//        return null;
+//    }
 
 }

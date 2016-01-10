@@ -88,7 +88,7 @@ public class BillController implements Initializable {
     private Bill b = new Bill();
     private int index;
     private double totalAmount;
-
+    private boolean bool = true;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         productIDC.setCellValueFactory(new PropertyValueFactory<>("productID"));
@@ -98,14 +98,14 @@ public class BillController implements Initializable {
         productID.setItems(getProductID());
         billDate.setValue(LocalDate.now());
         TextFields.bindAutoCompletion(productName, pm.getProductNames());
-        productName.textProperty().addListener(new ChangeListener< String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.isEmpty()) {
-                    autoFillByName();
-                }
-            }
-        });
+//        productName.textProperty().addListener(new ChangeListener< String>() {
+//            @Override
+//            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+//                if (!newValue.isEmpty()) {
+//                    autoFillByName();
+//                }
+//            }
+//        });
         quantity.textProperty().addListener(new ChangeListener< String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -159,22 +159,23 @@ public class BillController implements Initializable {
         }
         billAmount.setText(Double.toString(totalAmount));
     }
-
+        
     public void autoFillById() {
         BillItem bi = bm.getBillItem(productID.getSelectionModel().getSelectedItem());
-        if (bi != null) {
+            if (bi != null) {
             unitPrice.setText(Double.toString(bi.getUnitPrice()));
             if (!productName.getText().equalsIgnoreCase(bi.getProductName())) {
                 productName.setText(bi.getProductName());
+                bool = false;
             }
         }
     }
 
     public void autoFillByName() {
-        BillItem bi = bm.getBillItemByName(productName.getText());
-        if (bi != null) {
-            unitPrice.setText(Double.toString(bi.getUnitPrice()));
-            productID.getSelectionModel().select(bi.getProductID());
+        String id = bm.getBillItemByName(productName.getText());
+        if (id != null) {
+            productID.getSelectionModel().select(id);
+            //autoFillById(id);
         } else {
             unitPrice.clear();
             productID.getSelectionModel().clearSelection();
@@ -350,7 +351,7 @@ public class BillController implements Initializable {
 
         productIDLbl.setText("");
         quantityLbl.setText("");
-        LabeldateLbl.setText("");
+//        LabeldateLbl.setText("");
 
         /*codeSearch.clear();
          nameSearch.clear();

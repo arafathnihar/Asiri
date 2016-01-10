@@ -72,7 +72,7 @@
                                     <VBox alignment="CENTER" layoutX="138.0" layoutY="10.0" spacing="5.0">
                                        <children>
                                           <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="90.0" text="Name" />
-                                          <TextField fx:id="productName" prefWidth="271.0" />
+                                          <TextField fx:id="productName" onAction="#autoFillByName" prefWidth="271.0" />
                                           <Label fx:id="nameLbl" />
                                        </children>
                                     </VBox>
