@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2016 at 07:43 AM
+-- Generation Time: Jan 16, 2016 at 05:13 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -84,11 +84,6 @@ BEGIN
   SELECT Max(invoiceitemid)
   FROM invoiceitem 
   WHERE productid = productidparam); 
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Get_All_Products`()
-BEGIN
-SELECT * FROM product;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `givendaybillreport`(IN `date1` DATE)
