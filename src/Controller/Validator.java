@@ -1,5 +1,7 @@
 package Controller;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -11,6 +13,7 @@ public class Validator {
         try {
             Integer.parseInt(s);
         } catch (NumberFormatException | NullPointerException e) {
+            Logger.getLogger(Asiri.class.getName()).log(Level.INFO, null, e);
             return false;
         }
         return true;
@@ -20,6 +23,7 @@ public class Validator {
         try {
             Double.parseDouble(s);
         } catch (NumberFormatException | NullPointerException e) {
+            Logger.getLogger(Asiri.class.getName()).log(Level.INFO, null, e);
             return false;
         }
         return true;

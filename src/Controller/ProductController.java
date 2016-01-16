@@ -4,6 +4,8 @@ import Model.DTO.Product;
 import Model.Service.ProductModel;
 import java.net.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -258,9 +260,8 @@ public class ProductController implements Initializable {
     public boolean isInteger(String s) {
         try {
             Integer.parseInt(s);
-        } catch (NumberFormatException e) {
-            return false;
-        } catch (NullPointerException e) {
+        } catch (NumberFormatException | NullPointerException e) {
+            Logger.getLogger(Asiri.class.getName()).log(Level.INFO, null, e);
             return false;
         }
         return true;

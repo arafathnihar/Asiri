@@ -7,28 +7,28 @@ import Model.Service.ProductModel;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
-import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import org.controlsfx.control.textfield.TextFields;
 
 public class BillController implements Initializable {
 
     @FXML
-    private TextField billID;
+    private TextField billIDTxt;
     @FXML
     private TextField billAmount;
     @FXML
@@ -91,6 +91,10 @@ public class BillController implements Initializable {
     private boolean bool = true;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+       String x = bm.getNextbillId();
+        if(x == null)
+            x="00";
+        billIDTxt.setText(x);
         productIDC.setCellValueFactory(new PropertyValueFactory<>("productID"));
         unitPriceC.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         quantityC.setCellValueFactory(new PropertyValueFactory<>("quantity"));
@@ -130,9 +134,8 @@ public class BillController implements Initializable {
     public boolean isInteger(String s) {
         try {
             Integer.parseInt(s);
-        } catch (NumberFormatException e) {
-            return false;
-        } catch (NullPointerException e) {
+        } catch (NumberFormatException | NullPointerException e) {
+            Logger.getLogger(Asiri.class.getName()).log(Level.INFO, null, e);
             return false;
         }
         return true;
@@ -141,7 +144,8 @@ public class BillController implements Initializable {
     public static boolean isNumeric(String str) {
         try {
             double d = Double.parseDouble(str);
-        } catch (NumberFormatException nfe) {
+        } catch (NumberFormatException e) {
+            Logger.getLogger(Asiri.class.getName()).log(Level.INFO, null, e);
             return false;
         }
         return true;
@@ -149,6 +153,8 @@ public class BillController implements Initializable {
 
     public ObservableList< String> getProductID() {
         ObservableList< String> products = bm.getProductsID();
+        if(products.isEmpty())
+            productID.setPromptText("No products");
         return products;
     }
 
@@ -186,7 +192,7 @@ public class BillController implements Initializable {
         if (billDate.getValue() == null) {
             LabeldateLbl.setText("Required!");
             return false;
-        } else if (billID.getText().isEmpty()) {
+        } else if (billIDTxt.getText().isEmpty()) {
             BillIDLbl.setText("Required!");
             return false;
         } else {

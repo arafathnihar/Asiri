@@ -88,7 +88,7 @@ public class DashboardController implements Initializable {
             }
             notificationTabVbx.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Notification.fxml")));
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

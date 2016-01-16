@@ -6,6 +6,8 @@ import Model.Service.InvoiceItemModel;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -139,9 +141,8 @@ public class InvoiceController implements Initializable {
     public boolean isInteger(String s) {
         try {
             Integer.parseInt(s);
-        } catch (NumberFormatException e) {
-            return false;
-        } catch (NullPointerException e) {
+        } catch (NumberFormatException | NullPointerException e) {
+            Logger.getLogger(Asiri.class.getName()).log(Level.INFO, null, e);
             return false;
         }
         // only got here if we didn't return false
@@ -152,6 +153,7 @@ public class InvoiceController implements Initializable {
         try {
             Float.parseFloat(s);
         } catch (NumberFormatException e) {
+            Logger.getLogger(Asiri.class.getName()).log(Level.INFO, null, e);
             return false;
         }
         return true;

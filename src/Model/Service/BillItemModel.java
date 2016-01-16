@@ -56,14 +56,6 @@ public class BillItemModel {
                 pStmt.addBatch();
             }
             pStmt.executeBatch();
-            /*query = "UPDATE product SET productStock = productStock - ? WHERE productID = ? ";
-            pStmt = con.prepareStatement(query);
-            for (BillItem record : items) {
-                pStmt.setInt(1, record.getQuantity());
-                pStmt.setString(2, record.getProductID());
-                pStmt.addBatch();
-            }
-            pStmt.executeBatch();*/
             for (int i = 0; i < items.size(); i++) {
                 updateInvoice(items.get(i));
             }
@@ -156,11 +148,10 @@ public class BillItemModel {
                     callableStatement.registerOutParameter(2, java.sql.Types.DOUBLE);
                     callableStatement.executeUpdate();
                     String s = callableStatement.getString(2);
-                    System.out.print(s);
+                    //if(s){
                     Double d = Double.parseDouble(s);
-                    
-                    bi.setUnitPrice(d);
-                    
+                        bi.setUnitPrice(d);
+                    //}
                 }
                 return bi;
             } catch (SQLException ex) {
@@ -188,5 +179,19 @@ public class BillItemModel {
         }
         return null;
     }
-
+    public String getNextbillId(){
+           try (Connection con = ds.getConnection()) {
+                String query = "SELECT LAST_INSERT_ID() FROM bill";
+                PreparedStatement pStmt = con.prepareStatement(query);
+                ResultSet rs = pStmt.executeQuery();
+                if (rs.next()) {
+                    return rs.getString(1);
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                return null;
+            }
+        return null;
+        
+    }
 }
