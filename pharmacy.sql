@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2016 at 03:37 AM
+-- Generation Time: Jan 16, 2016 at 07:43 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -132,10 +132,10 @@ DELIMITER ;
 
 CREATE TABLE IF NOT EXISTS `bill` (
   `billNo` int(11) NOT NULL AUTO_INCREMENT,
-  `billDate` date NOT NULL,
+  `billDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `billNote` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`billNo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `billitem` (
   PRIMARY KEY (`billItemNo`),
   KEY `fk_billitem_bill1_idx` (`billNo`),
   KEY `fk_billitem_product1_idx` (`productID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -178,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `distributor` (
 CREATE TABLE IF NOT EXISTS `invoice` (
   `invoiceID` int(11) NOT NULL AUTO_INCREMENT,
   `dCode` varchar(255) NOT NULL,
-  `invoiceDate` date NOT NULL,
+  `invoiceDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `invoiceNote` varchar(255) DEFAULT NULL,
   `invoicePayMode` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`invoiceID`),
@@ -202,7 +202,6 @@ CREATE TABLE IF NOT EXISTS `invoiceitem` (
   `margin` int(11) NOT NULL,
   `expireDate` date NOT NULL,
   `discount` double DEFAULT NULL,
-  `sold` int(11) NOT NULL,
   PRIMARY KEY (`invoiceItemID`),
   KEY `fk_invoiceitem_invoice1_idx` (`invoiceID`),
   KEY `fk_invoiceitem_product1_idx` (`productID`)
