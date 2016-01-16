@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2016 at 02:59 PM
+-- Generation Time: Jan 16, 2016 at 03:37 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `bill` (
 CREATE TABLE IF NOT EXISTS `billitem` (
   `billItemNo` int(11) NOT NULL AUTO_INCREMENT,
   `billNo` int(11) NOT NULL,
-  `productID` varchar(10) NOT NULL,
+  `productID` varchar(255) NOT NULL,
   `unitPrice` double NOT NULL,
   `quantity` int(11) NOT NULL,
   `amount` double NOT NULL,
@@ -219,9 +219,9 @@ CREATE TABLE IF NOT EXISTS `product` (
   `productName` varchar(255) NOT NULL,
   `productDescription` varchar(255) DEFAULT NULL,
   `productBrand` varchar(255) DEFAULT NULL,
-  `productStrength` int(10) DEFAULT NULL,
+  `productStrength` int(11) DEFAULT NULL,
   `productType` varchar(255) DEFAULT NULL,
-  `productMinStock` int(10) NOT NULL,
+  `productMinStock` int(11) NOT NULL,
   `customPrice` double NOT NULL,
   PRIMARY KEY (`productID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
