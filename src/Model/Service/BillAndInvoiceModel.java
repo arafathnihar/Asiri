@@ -70,7 +70,7 @@ public class BillAndInvoiceModel {
             stmt.setDate(1, invDate1);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
-                ol.add(new Invoice(rs.getString(1),rs.getString(2),getLocalDate(rs.getDate(3)),
+                ol.add(new Invoice(rs.getInt(1),rs.getString(2),getLocalDate(rs.getDate(3)),
                         rs.getString(4),rs.getString(5),rs.getDouble(6)));
             }
             return ol;
@@ -90,7 +90,7 @@ public class BillAndInvoiceModel {
             stmt.setDate(2, invDate2);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
-                ol.add(new Invoice(rs.getString(1),rs.getString(2),getLocalDate(rs.getDate(3)),
+                ol.add(new Invoice(rs.getInt(1),rs.getString(2),getLocalDate(rs.getDate(3)),
                         rs.getString(4),rs.getString(5),rs.getDouble(6)));
             }
             return ol;

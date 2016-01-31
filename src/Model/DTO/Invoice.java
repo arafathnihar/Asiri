@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 
 public class Invoice {
 
-    private String invoiceID;
+    private int invoiceID;
     private String distibutorCode;
     private LocalDate invoiceDate;
     private String invoiceNote;
@@ -14,7 +14,7 @@ public class Invoice {
 
     private ObservableList<InvoiceItem> items;
 
-    public Invoice(String invoiceID, String distibutorCode, LocalDate invoiceDate, String invoiceNote,
+    public Invoice(int invoiceID, String distibutorCode, LocalDate invoiceDate, String invoiceNote,
             String invoicePayMode, double invoiceTotal) {
         this.invoiceID = invoiceID;
         this.distibutorCode = distibutorCode;
@@ -25,7 +25,7 @@ public class Invoice {
     }
 
     public Invoice() {
-        this.invoiceID = "";
+        this.invoiceID = 0;
         this.distibutorCode = "";
         this.invoiceDate = null;
         this.invoiceNote = "";
@@ -33,11 +33,11 @@ public class Invoice {
         this.invoiceTotal = 0.0;
     }
 
-    public String getInvoiceID() {
+    public int getInvoiceID() {
         return invoiceID;
     }
 
-    public void setInvoiceID(String invoiceID) {
+    public void setInvoiceID(int invoiceID) {
         this.invoiceID = invoiceID;
     }
 

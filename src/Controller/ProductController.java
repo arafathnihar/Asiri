@@ -227,8 +227,8 @@ public class ProductController implements Initializable {
         sortedData.comparatorProperty().bind(productTable.comparatorProperty());
     }
 
-    public ObservableList< Product> getProducts() {
-        ObservableList< Product> products = pm.getDistributors();
+    public ObservableList<Product> getProducts() {
+        ObservableList<Product> products = pm.getProducts();
         Collections.reverse(products);
         return products;
     }
