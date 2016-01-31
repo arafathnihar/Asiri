@@ -14,6 +14,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -22,6 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -77,8 +79,12 @@ public class BillController implements Initializable {
     private Label priceLbl;
     @FXML
     private Label messageLabel;
+    @FXML
+    private ImageView icon;
+    @FXML
+    private Button addBtn;
 
-    //Image imageDistri = new Image(getClass().getResourceAsStream("/resource/images/distributer.png"));
+    Image imageBill = new Image(getClass().getResourceAsStream("/resource/images/billTab.png"));
     Image imageError = new Image(getClass().getResourceAsStream("/resource/images/error.png"));
     Image imageSuccess = new Image(getClass().getResourceAsStream("/resource/images/success.png"));
     Image imageWarnning = new Image(getClass().getResourceAsStream("/resource/images/warnning.png"));
@@ -223,18 +229,18 @@ public class BillController implements Initializable {
                 itemsTable.getItems().add(bi);
                 total();
                 clear();
-                //icon.setImage(imageSuccess);
+                icon.setImage(imageSuccess);
                 messageLabel.setTextFill(Color.GREEN);
                 messageLabel.setText("New Bill item added");
 
             } else {
-                //icon.setImage(imageError);
+                icon.setImage(imageError);
                 quantityLbl.setText("It's not a number");
                 messageLabel.setTextFill(Color.RED);
                 messageLabel.setText(" Quantity should be a numeric value ");
             }
         } else {
-            //icon.setImage(imageError);
+            icon.setImage(imageError);
             messageLabel.setTextFill(Color.RED);
             messageLabel.setText(" Fill all fields ");
         }
@@ -279,7 +285,7 @@ public class BillController implements Initializable {
                 itemsTable.getItems().clear();
             }
         } else {
-            //icon.setImage(imageError);
+            icon.setImage(imageError);
             messageLabel.setTextFill(Color.RED);
             messageLabel.setText(" Fill all fields ");
         }
@@ -294,8 +300,9 @@ public class BillController implements Initializable {
             unitPrice.setText(String.valueOf(bi.getUnitPrice()));
             quantity.setText(String.valueOf(bi.getQuantity()));
             total.setText(String.valueOf(bi.getTotal()));
+            addBtn.setText("Update");
         } else {
-            // icon.setImage(imageWarnning);
+             icon.setImage(imageWarnning);
             messageLabel.setTextFill(Color.ORANGE);
             messageLabel.setText("Please select a distributer to edit");
         }
@@ -315,13 +322,13 @@ public class BillController implements Initializable {
                 total();
                 clear();
             } else {
-                //icon.setImage(imageError);
+                icon.setImage(imageError);
                 quantityLbl.setText("It's not a number");
                 messageLabel.setTextFill(Color.RED);
                 messageLabel.setText(" Quantity should be a numeric value ");
             }
         } else {
-            //icon.setImage(imageError);
+            icon.setImage(imageError);
             messageLabel.setTextFill(Color.RED);
             messageLabel.setText(" Fill all fields ");
         }
@@ -335,12 +342,12 @@ public class BillController implements Initializable {
             itemsTable.getItems().remove(index);
             total();
             clear();
-            // icon.setImage(imageSuccess);
+             icon.setImage(imageSuccess);
             messageLabel.setTextFill(Color.GREEN);
             messageLabel.setText("Bill Item is deleted");
             clear();
         } else {
-            //icon.setImage(imageWarnning);
+            icon.setImage(imageWarnning);
             messageLabel.setTextFill(Color.ORANGE);
             messageLabel.setText(" Please select a BillItem to Delete ");
         }
@@ -363,6 +370,7 @@ public class BillController implements Initializable {
          nameSearch.clear();
          addressSearch.clear();
          phoneNoSearch.clear(); */
+        addBtn.setText("Add");
     }
 
     @FXML
@@ -403,7 +411,7 @@ public class BillController implements Initializable {
     @FXML
     public void onPressAnything() {
         messageLabel.setText("");
-        //icon.setImage(imageDistri);
+        icon.setImage(imageBill);
     }
 
 }

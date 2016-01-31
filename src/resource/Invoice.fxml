@@ -155,7 +155,7 @@
                            <children>
                               <ImageView fx:id="icon" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@images/distributer.png" />
+                                    <Image url="@images/invoiceTab.png" />
                                  </image>
                                  <VBox.margin>
                                     <Insets />
