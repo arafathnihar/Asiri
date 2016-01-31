@@ -4,13 +4,17 @@ import Model.DTO.Invoice;
 import Model.DTO.InvoiceItem;
 import Model.Service.InvoiceItemModel;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -25,11 +29,13 @@ public class InvoiceController implements Initializable {
     @FXML
     private TextField invoiceID;
     @FXML
-    private ComboBox< String> distributerCode;
+    private ComboBox<String> distributerCode;
     @FXML
     private DatePicker date;
     @FXML
     private TextField invoiceNote;
+    @FXML
+    private TextField invoiceTotal;
     @FXML
     private ComboBox<String> productID;
     @FXML
@@ -65,15 +71,13 @@ public class InvoiceController implements Initializable {
     @FXML
     private TableColumn<InvoiceItem, Date> expireDateC;
     @FXML
-    private Label invoiceIdLabel;
-    @FXML
     private Label distriCodeLabel;
     @FXML
     private Label dateLabel;
     @FXML
     private Label noteLabel;
     @FXML
-    private Label productIdLabel;
+    private Label productIDLabel;
     @FXML
     private Label packSizeLabel;
     @FXML
@@ -90,12 +94,19 @@ public class InvoiceController implements Initializable {
     private Label expireDateLabel;
     @FXML
     private Label messageLabel;
+    @FXML
+    private Button addBtn;
+    
+    Alert alert;
 
     InvoiceItemModel iim = new InvoiceItemModel();
     int index;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        invoiceID.setText(String.valueOf(getInvoiceId()));
+        invoiceID.setDisable(true);
+        invoiceTotal.setDisable(true);
         productIDC.setCellValueFactory(new PropertyValueFactory<>("productID"));
         packSizeC.setCellValueFactory(new PropertyValueFactory<>("packSize"));
         quantityC.setCellValueFactory(new PropertyValueFactory<>("quantity"));
@@ -104,13 +115,18 @@ public class InvoiceController implements Initializable {
         freeC.setCellValueFactory(new PropertyValueFactory<>("free"));
         marginC.setCellValueFactory(new PropertyValueFactory<>("margin"));
         expireDateC.setCellValueFactory(new PropertyValueFactory<>("expireDate"));
+        date.setValue(LocalDate.now());
         distributerCode.setItems(getDistributerCode());
         productID.setItems(getProductsID());
     }
 
+    public int getInvoiceId(){
+        return iim.getInvoiceId();
+    }
+    
     public boolean isValid() {
         if (productID.getSelectionModel().isEmpty()) {
-            productIdLabel.setText("Required !");
+            productIDLabel.setText("Required !");
             return false;
         } else if (quantity.getText().isEmpty()) {
             quantityLabel.setText("Required !");
@@ -118,16 +134,18 @@ public class InvoiceController implements Initializable {
         } else if (price.getText().isEmpty()) {
             priceLabel.setText("Required !");
             return false;
-        } else {
+        }
+        else if(expireDate.getValue() == null){
+            expireDateLabel.setText("Required !");
+            return false;
+        }
+        else {
             return true;
         }
     }
 
     public boolean isValidinvoice() {
-        if (invoiceID.getText().isEmpty()) {
-            invoiceIdLabel.setText("Required!");
-            return false;
-        } else if (distributerCode.getSelectionModel().isEmpty()) {
+        if (distributerCode.getSelectionModel().isEmpty()) {
             distriCodeLabel.setText("Required!");
             return false;
         } else if (date.getValue() == null) {
@@ -142,18 +160,15 @@ public class InvoiceController implements Initializable {
         try {
             Integer.parseInt(s);
         } catch (NumberFormatException | NullPointerException e) {
-            Logger.getLogger(Asiri.class.getName()).log(Level.INFO, null, e);
             return false;
         }
-        // only got here if we didn't return false
         return true;
     }
 
-    public boolean isFloat(String s) {
+    public boolean isDouble(String s) {
         try {
-            Float.parseFloat(s);
+            Double.parseDouble(s);
         } catch (NumberFormatException e) {
-            Logger.getLogger(Asiri.class.getName()).log(Level.INFO, null, e);
             return false;
         }
         return true;
@@ -167,78 +182,6 @@ public class InvoiceController implements Initializable {
             addNew();
         }
     }
-
-    @FXML
-    public void addNew() {
-        if (isValid()) {
-            if (isValidinvoice()) {
-                if (isInteger(quantity.getText())) {
-                    if (isFloat(price.getText())) {
-                        InvoiceItem ii = new InvoiceItem();
-                        ii.setProductID(productID.getValue());
-                        ii.setPackSize(Integer.parseInt(packSize.getText()));
-                        ii.setQuantity(Integer.parseInt(quantity.getText()));
-                        ii.setFree(Integer.parseInt(free.getText()));
-                        ii.setPrice(Double.parseDouble(price.getText()));
-                        ii.setMargin(Integer.parseInt(margin.getText()));
-                        ii.setExpireDate(expireDate.getValue());
-                        ii.setDiscount(Double.parseDouble(discount.getText()));
-                        invoiceItemTable.getItems().add(ii);
-                        clear();
-                        //icon.setImage(imageSuccess);
-                        messageLabel.setTextFill(Color.GREEN);
-                        messageLabel.setText(" New product added ");
-                    } else {
-                        //icon.setImage(imageError);
-                        priceLabel.setText("It's not a valid number");
-                        messageLabel.setTextFill(Color.RED);
-                        messageLabel.setText(" Price should be a decimal value ");
-                    }
-                } else {
-                    //icon.setImage(imageError);
-                    quantityLabel.setText("It's not a number");
-                    messageLabel.setTextFill(Color.RED);
-                    messageLabel.setText(" Quantity should be a numeric value ");
-                }
-            } else {
-                //icon.setImage(imageError);
-                messageLabel.setTextFill(Color.RED);
-                messageLabel.setText(" Invalid Invoice ");
-            }
-        } else {
-            //icon.setImage(imageError);
-            messageLabel.setTextFill(Color.RED);
-            messageLabel.setText(" Fill all fields ");
-        }
-    }
-
-    /*public boolean isValid() {
-     if (productID.getSelectionModel().isEmpty()) {
-     productIdLabel.setText("Requird !");
-     return false;
-     } else if (packSize.getText().isEmpty()) {
-     packSizeLabel.setText("Requird !");
-     return false;
-     } else if (quantity.getText().isEmpty()) {
-     quantityLabel.setText("Requird !");
-     return false;
-     } else if (price.getText().isEmpty()) {
-     priceLabel.setText("Requird !");
-     return false;
-     } else if (discount.getText().isEmpty()) {
-     discountLabel.setText("Requird !");
-     return false;
-     } else if (free.getText().isEmpty()) {
-     freeLabel.setText("Requird !");
-     return false;
-     } else if (margin.getText().isEmpty()) {
-     marginLabel.setText("Requird !");
-     return false;
-     } else {
-     return true;
-     }
-     }
-     */
     
     public ObservableList< String> getProductsID() {
         ObservableList< String> products = iim.getProductID();
@@ -249,76 +192,104 @@ public class InvoiceController implements Initializable {
         ObservableList< String> distributers = iim.getDistributerCode();
         return distributers;
     }
-
-    /* @FXML
-     public void add() {
-     if (productID.isDisable()) {
-     update();
-     } else {
-     addNew();
-     }
-     }
-
-     @FXML
-     public void addNew() {
-     InvoiceItem ii = new InvoiceItem();
-     ii.setProductID(productID.getValue());
-     ii.setPackSize(Integer.parseInt(packSize.getText()));
-     ii.setQuantity(Integer.parseInt(quantity.getText()));
-     ii.setFree(Integer.parseInt(free.getText()));
-     ii.setPrice(Double.parseDouble(price.getText()));
-     ii.setMargin(Double.parseDouble(margin.getText()));
-     ii.setExpireDate(expireDate.getValue());
-     ii.setDiscount(Double.parseDouble(discount.getText()));
-     invoiceItemTable.getItems().add(ii);
-     clear();
-     }
-     */
+    
+    @FXML
+    public void addNew() {
+        if (isValid()) {
+            if (isInteger(quantity.getText())) {
+                if (isDouble(price.getText())) {
+                    InvoiceItem ii = new InvoiceItem();
+                    ii.setProductID(productID.getValue());
+                    if(!packSize.getText().equals("")){
+                        if(isInteger(packSize.getText()))
+                            ii.setPackSize(Integer.parseInt(packSize.getText()));
+                        else{
+                            messageLabel.setTextFill(Color.RED);
+                            messageLabel.setText("Pack Size should be a numeric value ");
+                            return;
+                        }
+                    }
+                    ii.setQuantity(Integer.parseInt(quantity.getText()));
+                    if(!free.getText().equals("")){
+                        if(isInteger(free.getText()))
+                            ii.setFree(Integer.parseInt(free.getText()));
+                        else{
+                            messageLabel.setTextFill(Color.RED);
+                            messageLabel.setText("Free should be a numeric value ");
+                            return;
+                        }
+                    }
+                    ii.setPrice(Double.parseDouble(price.getText()));
+                    if(!margin.getText().equals("")){
+                        if(isDouble(margin.getText()))
+                            ii.setMargin(Double.parseDouble(margin.getText()));
+                        else{
+                            messageLabel.setTextFill(Color.RED);
+                            messageLabel.setText("Margin should be a decimal value ");
+                            return;
+                        }
+                    }
+                    ii.setExpireDate(expireDate.getValue());
+                    if(!discount.getText().equals("")){
+                        if(isDouble(discount.getText()))
+                            ii.setDiscount(Double.parseDouble(discount.getText()));
+                        else{
+                            messageLabel.setTextFill(Color.RED);
+                            messageLabel.setText("Discount should be a decimal value ");
+                            return;
+                        }
+                    }
+                    invoiceItemTable.getItems().add(ii);
+                    clearInvoiceItemItemFields();
+                    messageLabel.setTextFill(Color.GREEN);
+                    messageLabel.setText(" New product added to the invoice ");
+                } else {
+                    priceLabel.setText("It's not a decimal");
+                    messageLabel.setTextFill(Color.RED);
+                    messageLabel.setText(" Price should be a decimal value ");
+                }
+            } else {
+                quantityLabel.setText("It's not a number");
+                messageLabel.setTextFill(Color.RED);
+                messageLabel.setText(" Quantity should be a numeric value ");
+             }
+        } 
+        else {
+            messageLabel.setTextFill(Color.RED);
+            messageLabel.setText(" Fill all fields ");
+        }
+    }
     
     @FXML
     public void save() {
-        if (isValidinvoice()) {
-            Invoice i = new Invoice();
-            i.setInvoiceID(invoiceID.getText());
-            i.setDistibutorCode(distributerCode.getValue());
-            i.setInvoiceDate(date.getValue());
-            i.setInvoiceNote(invoiceNote.getText());
-            ObservableList< InvoiceItem> items = invoiceItemTable.getItems();
-            int j = 1;
-            for (int k = 0; k < items.size(); k++) {
-                items.get(k).setInvoiceID(invoiceID.getText());
-                items.get(k).setItemID("Item-" + j);
-                j++;
+        if(invoiceItemTable.getItems().size() == 0){
+            alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Add invoice items before save the invoice");
+            alert.showAndWait();
+        }
+        else {
+            if(isValidinvoice()) {
+                Invoice i = new Invoice();
+                i.setInvoiceID(getInvoiceId());
+                i.setDistibutorCode(distributerCode.getValue());
+                i.setInvoiceDate(date.getValue());
+                if(!invoiceNote.getText().equals(""))
+                    i.setInvoiceNote(invoiceNote.getText());
+                ObservableList< InvoiceItem> items = invoiceItemTable.getItems();         
+                iim.addInvoice(i, items);
+                alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Information");
+                alert.setHeaderText("Invoice added with "+ invoiceItemTable.getItems().size() + " items" );
+                alert.showAndWait();
+                clearAll();
             }
-            i.setItems(items);
-            iim.addInvoice(i);
-            //iim.addInvoice(i, items);
-            clear();
-            for (int l = 0; l < invoiceItemTable.getItems().size(); l++) {
-                invoiceItemTable.getItems().clear();
+            else {
+                messageLabel.setTextFill(Color.RED);
+                messageLabel.setText(" Fill all fields ");
             }
         }
     }
-
-    /*
-     @FXML
-     public void save() {
-     Invoice i = new Invoice();
-     i.setInvoiceID(invoiceID.getText());
-     i.setDistibutorCode(distributerCode.getValue());
-     i.setInvoiceDate(date.getValue());
-     i.setInvoiceNote(invoiceNote.getText());
-     ObservableList< InvoiceItem> items = invoiceItemTable.getItems();
-     int j = 1;
-     for (int k = 0; k < items.size(); k++) {
-     items.get(k).setInvoiceID(invoiceID.getText());
-     items.get(k).setItemID("Item-" + j);
-     j++;
-     }
-     i.setItems(items);
-     iim.addInvoice(i);
-     cancel();
-     }*/
     
     @FXML
     public void edit() {
@@ -333,115 +304,106 @@ public class InvoiceController implements Initializable {
             margin.setText(String.valueOf(ii.getMargin()));
             expireDate.setValue(ii.getExpireDate());
             discount.setText(String.valueOf(ii.getDiscount()));
+            productID.setDisable(true);
+            addBtn.setText("Update");
+            messageLabel.setText("");
         } else {
-            //icon.setImage(imageWarnning);
             messageLabel.setTextFill(Color.ORANGE);
-            messageLabel.setText("Please select an item to edit");
+            messageLabel.setText(" Please select an invoice item to edit ");
         }
     }
-
-    /* @FXML
-     public void edit() {
-     index = invoiceItemTable.getSelectionModel().getSelectedIndex();
-     InvoiceItem ii = invoiceItemTable.getItems().get(index);
-     productID.setValue(ii.getProductID());
-     packSize.setText(String.valueOf(ii.getPackSize()));
-     quantity.setText(String.valueOf(ii.getQuantity()));
-     free.setText(String.valueOf(ii.getFree()));
-     price.setText(String.valueOf(ii.getPrice()));
-     margin.setText(String.valueOf(ii.getMargin()));
-     expireDate.setValue(ii.getExpireDate());
-     discount.setText(String.valueOf(ii.getDiscount()));
-     productID.setDisable(true);
-     }
-     */
     
     @FXML
     public void update() {
         if (isValid()) {
             if (isInteger(quantity.getText())) {
-                if (isFloat(price.getText())) {
+                if (isDouble(price.getText())) {
                     InvoiceItem ii = new InvoiceItem();
                     ii.setProductID(productID.getValue());
-                    ii.setPackSize(Integer.parseInt(packSize.getText()));
+                    if(!packSize.getText().equals("")){
+                        if(isInteger(packSize.getText()))
+                            ii.setPackSize(Integer.parseInt(packSize.getText()));
+                        else{
+                            messageLabel.setTextFill(Color.RED);
+                            messageLabel.setText("Pack Size should be a numeric value ");
+                            return;
+                        }
+                    }
                     ii.setQuantity(Integer.parseInt(quantity.getText()));
-                    ii.setFree(Integer.parseInt(free.getText()));
+                    if(!free.getText().equals("")){
+                        if(isInteger(free.getText()))
+                            ii.setFree(Integer.parseInt(free.getText()));
+                        else{
+                            messageLabel.setTextFill(Color.RED);
+                            messageLabel.setText("Free should be a numeric value ");
+                            return;
+                        }
+                    }
                     ii.setPrice(Double.parseDouble(price.getText()));
-                    ii.setMargin(Integer.parseInt(margin.getText()));
+                    if(!margin.getText().equals("")){
+                        if(isDouble(margin.getText()))
+                            ii.setMargin(Double.parseDouble(margin.getText()));
+                        else{
+                            messageLabel.setTextFill(Color.RED);
+                            messageLabel.setText("Margin should be a decimal value ");
+                            return;
+                        }
+                    }
                     ii.setExpireDate(expireDate.getValue());
-                    ii.setDiscount(Double.parseDouble(discount.getText()));
+                    if(!discount.getText().equals("")){
+                        if(isDouble(discount.getText()))
+                            ii.setDiscount(Double.parseDouble(discount.getText()));
+                        else{
+                            messageLabel.setTextFill(Color.RED);
+                            messageLabel.setText("Discount should be a decimal value ");
+                            return;
+                        }
+                    }
                     index = invoiceItemTable.getSelectionModel().getSelectedIndex();
                     invoiceItemTable.getItems().set(index, ii);
-                    clear();
-                    //icon.setImage(imageSuccess);
+                    clearInvoiceItemItemFields();
+                    productID.setDisable(false);
+                    addBtn.setText("Add");
                     messageLabel.setTextFill(Color.GREEN);
-                    messageLabel.setText(" product item updated ");
+                    messageLabel.setText(" Invoice item updated ");
                 } else {
-                    //icon.setImage(imageError);
-                    priceLabel.setText("It's not a valid number");
+                    priceLabel.setText("It's not a decimal");
                     messageLabel.setTextFill(Color.RED);
                     messageLabel.setText(" Price should be a decimal value ");
                 }
             } else {
-                //icon.setImage(imageError);
                 quantityLabel.setText("It's not a number");
                 messageLabel.setTextFill(Color.RED);
                 messageLabel.setText(" Quantity should be a numeric value ");
             }
         } else {
-            //icon.setImage(imageError);
             messageLabel.setTextFill(Color.RED);
             messageLabel.setText(" Fill all fields ");
         }
     }
 
-    /*
-     @FXML
-     public void update() {
-     InvoiceItem ii = new InvoiceItem();
-     ii.setProductID(productID.getValue());
-     ii.setPackSize(Integer.parseInt(packSize.getText()));
-     ii.setQuantity(Integer.parseInt(quantity.getText()));
-     ii.setFree(Integer.parseInt(free.getText()));
-     ii.setPrice(Double.parseDouble(price.getText()));
-     ii.setMargin(Double.parseDouble(margin.getText()));
-     ii.setExpireDate(expireDate.getValue());
-     ii.setDiscount(Double.parseDouble(discount.getText()));
-     index = invoiceItemTable.getSelectionModel().getSelectedIndex();
-     invoiceItemTable.getItems().set(index, ii);
-     clear();
-     }*/
-    
     @FXML
     public void delete() {
         index = invoiceItemTable.getSelectionModel().getSelectedIndex();
         if (index >= 0) {
-            invoiceItemTable.getItems().remove(index);
-            clear();
-            //icon.setImage(imageSuccess);
-            messageLabel.setTextFill(Color.GREEN);
-            messageLabel.setText(" The Product item is Deleted ");
+            alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Conformation");
+            alert.setHeaderText("Are you sure to delete selected invoice item?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                invoiceItemTable.getItems().remove(index);
+                messageLabel.setTextFill(Color.GREEN);
+                messageLabel.setText("The Product item is Deleted");
+            } else if (result.get() == ButtonType.CANCEL){
+                alert.close();
+            }
         } else {
-            //icon.setImage(imageWarnning);
             messageLabel.setTextFill(Color.ORANGE);
             messageLabel.setText("Please select an item to delete");
         }
     }
-
-    /*
-     @FXML
-     public void delete() {
-     index = invoiceItemTable.getSelectionModel().getSelectedIndex();
-     invoiceItemTable.getItems().remove(index);
-     clear();
-     }
-     */
     
-    @FXML
-    public void clear() {
-        invoiceID.clear();
-        distributerCode.setValue(null);
-        invoiceNote.clear();
+    public void clearInvoiceItemItemFields(){
         productID.setValue(null);
         packSize.clear();
         quantity.clear();
@@ -450,58 +412,65 @@ public class InvoiceController implements Initializable {
         free.clear();
         margin.clear();
         expireDate.setValue(null);
-
-        dateLabel.setText("");
-        noteLabel.setText("");
-        productIdLabel.setText("");
-        packSizeLabel.setText("");
-        quantityLabel.setText("");
-        priceLabel.setText("");
-        discountLabel.setText("");
-        freeLabel.setText("");
-        marginLabel.setText("");
-        expireDateLabel.setText("");
-
-        productID.setDisable(false);
-        // addBtn.setText("Add");
+    }   
+    
+    public void clearInvoiceFields(){
+        distributerCode.setValue(null);
+        date.setValue(null);
+        invoiceNote.clear();
+        invoiceTotal.clear();   
+    }
+    
+    @FXML
+    public void clear() {
+        clearInvoiceFields();
+        clearInvoiceItemItemFields();
     }
 
     @FXML
     public void cancel() {
-        invoiceID.clear();
-        distributerCode.setValue(null);
-        date.setValue(null);
-        invoiceNote.clear();
+        clearInvoiceFields();
+        clearInvoiceItemItemFields();
         invoiceItemTable.getItems().clear();
     }
-
+    
+    public void clearAll(){
+        cancel();
+    }
+     
     @FXML
-    public void clearAll() {
-        clear();
+    public void distributorOnPress(){
+        distriCodeLabel.setText("");
         onPressAnything();
     }
-
+    
     @FXML
-    public void idOnPress() {
-        productIdLabel.setText("");
+    public void dateOnPress() {
+        dateLabel.setText("");
         onPressAnything();
     }
-
-    @FXML
-    public void quantityOnPress() {
-        quantityLabel.setText("");
-        onPressAnything();
-    }
-
+    
     @FXML
     public void noteOnPress() {
         noteLabel.setText("");
         onPressAnything();
     }
-
+  
+    @FXML
+    public void productIDOnPress() {
+        productIDLabel.setText("");
+        onPressAnything();
+    }
+    
     @FXML
     public void packSizeOnPress() {
         packSizeLabel.setText("");
+        onPressAnything();
+    }
+    
+    @FXML
+    public void quantityOnPress() {
+        quantityLabel.setText("");
         onPressAnything();
     }
 
@@ -534,32 +503,10 @@ public class InvoiceController implements Initializable {
         expireDateLabel.setText("");
         onPressAnything();
     }
-
-    @FXML
-    public void dateOnPress() {
-        dateLabel.setText("");
-        onPressAnything();
-    }
-
-    public void distributorOnPress() {
-        distriCodeLabel.setText("");
-        onPressAnything();
-    }
-
-    public void invoiceIDOnPress() {
-        invoiceIdLabel.setText("");
-        onPressAnything();
-    }
-
+    
     @FXML
     public void onPressAnything() {
-        //icon.setImage(imageProduct);
         messageLabel.setText("");
-    }
-
-    @FXML
-    public void expandDiscription() {
-        // discriptionPane.expandedProperty().set(true);
     }
 
 }

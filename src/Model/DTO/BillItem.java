@@ -3,14 +3,14 @@ package Model.DTO;
 public class BillItem {
 
     private int billNo;
-    private String billItemNo;
+    private int billItemNo;
     private String productID;
     private double unitPrice;
     private int quantity;
     private double total;
     private String productName;
 
-    public BillItem(int billNo, String billItemNo, String productID, double unitPrice, int quantity, double total) {
+    public BillItem(int billNo, int billItemNo, String productID, double unitPrice, int quantity, double total) {
         this.billNo = billNo;
         this.billItemNo = billItemNo;
         this.productID = productID;
@@ -21,7 +21,7 @@ public class BillItem {
 
     public BillItem() {
         this.billNo = 0;
-        this.billItemNo = "";
+        this.billItemNo = 0;
         this.productID = "";
         this.unitPrice = 0.00;
         this.quantity = 0;
@@ -36,11 +36,11 @@ public class BillItem {
         this.billNo = billNo;
     }
 
-    public String getBillItemNo() {
+    public int getBillItemNo() {
         return billItemNo;
     }
 
-    public void setBillItemNo(String billItemNo) {
+    public void setBillItemNo(int billItemNo) {
         this.billItemNo = billItemNo;
     }
 

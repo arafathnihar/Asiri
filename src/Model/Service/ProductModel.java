@@ -16,15 +16,16 @@ public class ProductModel {
 
     DataSource ds = DatabaseSource.getMySQLDataSource();
 
-    public ObservableList< Product> getDistributors() {
+    public ObservableList<Product> getProducts() {
         try (Connection con = ds.getConnection()) {
             ObservableList< Product> ol = FXCollections.observableArrayList();
             String query = "SELECT * FROM product";
             PreparedStatement pStmt = con.prepareStatement(query);
             ResultSet rs = pStmt.executeQuery();
             while (rs.next()) {
-                ol.add(new Product(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-                        rs.getInt(5), rs.getString(6), rs.getInt(7), rs.getDouble(8)));
+                ol.add(new Product(rs.getString(1), rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getInt(5), rs.getString(6), rs.getInt(7), 
+                        rs.getDouble(8)));
             }
             return ol;
         } catch (SQLException ex) {
@@ -68,7 +69,13 @@ public class ProductModel {
 
     public void update(Product p) {
         try (Connection con = ds.getConnection()) {
-            String query = "UPDATE product SET " + "productName='" + p.getProductName() + "'," + "productDescription='" + p.getProductDescription() + "'," + "productBrand='" + p.getProductBrand() + "'," + "productStrength=" + p.getProductStrength() + "," + "productType='" + p.getProductType() + "'," + "productMinStock=" + p.getProductMinStock() + "," + "customPrice=" + p.getCustomPrice() + " WHERE productID='" + p.getProductID() + "'";
+            String query = "UPDATE product SET " + "productName='" + p.getProductName() 
+                    + "'," + "productDescription='" + p.getProductDescription() 
+                    + "'," + "productBrand='" + p.getProductBrand() + "'," 
+                    + "productStrength=" + p.getProductStrength() + "," 
+                    + "productType='" + p.getProductType() + "'," + "productMinStock=" 
+                    + p.getProductMinStock() + "," + "customPrice=" + p.getCustomPrice() 
+                    + " WHERE productID='" + p.getProductID() + "'";
             PreparedStatement pStmt = con.prepareStatement(query);
             pStmt.executeUpdate();
         } catch (SQLException ex) {
@@ -88,14 +95,14 @@ public class ProductModel {
 
     public List<String> getProductNames() {
         try (Connection con = ds.getConnection()) {
-            List<String> lis = new ArrayList<>();
+            List<String> list = new ArrayList<>();
             String query = "SELECT productName FROM product";
             PreparedStatement pStmt = con.prepareStatement(query);
             ResultSet rs = pStmt.executeQuery();
             while (rs.next()) {
-                lis.add(rs.getString(1));
+                list.add(rs.getString(1));
             }
-            return lis;
+            return list;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return null;

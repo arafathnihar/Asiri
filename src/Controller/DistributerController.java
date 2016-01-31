@@ -220,11 +220,11 @@ public class DistributerController implements Initializable {
         if (isValid()) {
             Distributor d = new Distributor();
             d.setCode(code.getText());
-            code.setDisable(false);
             d.setName(name.getText());
             d.setAddress(address.getText());
             d.setPhoneNo(phoneNo.getText());
             dm.update(d);
+            code.setDisable(false);
             icon.setImage(imageSuccess);
             messageLabel.setTextFill(Color.GREEN);
             messageLabel.setText("Distributer is updated");
@@ -242,10 +242,10 @@ public class DistributerController implements Initializable {
         if (index >= 0) {
             Distributor d = distributorTable.getItems().get(index);
             code.setText(d.getCode());
-            code.setDisable(true);
             name.setText(d.getName());
             address.setText(d.getAddress());
             phoneNo.setText(d.getPhoneNo());
+            code.setDisable(true);
             addBtn.setText("Update");
             icon.setImage(imageDistri);
             messageLabel.setText("");

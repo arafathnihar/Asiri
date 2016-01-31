@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class InvoiceItem {
 
     private String itemID;
-    private String invoiceID;
+    private int invoiceID;
     private String productID;
     private String productName;
     private int packSize;
@@ -15,11 +15,10 @@ public class InvoiceItem {
     private double margin;
     private LocalDate expireDate;
     private double discount;
-    private int sold;
 
-    public InvoiceItem(String itemID, String invoiceID, String productID, int packSize,
+    public InvoiceItem(String itemID, int invoiceID, String productID, int packSize,
             int quantity, int free, double price, double margin,
-            LocalDate expireDate, double discount, int sold) {
+            LocalDate expireDate, double discount) {
 
         this.itemID = itemID;
         this.invoiceID = invoiceID;
@@ -31,7 +30,6 @@ public class InvoiceItem {
         this.margin = margin;
         this.expireDate = expireDate;
         this.discount = discount;
-        this.sold = sold;
     }
 
     public InvoiceItem(String productID, String productName, int quantity, LocalDate expireDate) {
@@ -41,16 +39,15 @@ public class InvoiceItem {
         this.expireDate = expireDate;
     }
 
-    public InvoiceItem(String itemID, String productID, int quantity, int sold) {
+    public InvoiceItem(String itemID, String productID, int quantity) {
         this.itemID = itemID;
         this.productID = productID;
         this.quantity = quantity;
-        this.sold = sold;
     }
 
     public InvoiceItem() {
         this.itemID = "";
-        this.invoiceID = "";
+        this.invoiceID = 0;
         this.productID = "";
         this.packSize = 0;
         this.quantity = 0;
@@ -59,7 +56,6 @@ public class InvoiceItem {
         this.margin = 0.0;
         this.expireDate = null;
         this.discount = 0.0;
-        this.sold = 0;
     }
 
     public String getItemID() {
@@ -70,11 +66,11 @@ public class InvoiceItem {
         this.itemID = itemID;
     }
 
-    public String getInvoiceID() {
+    public int getInvoiceID() {
         return invoiceID;
     }
 
-    public void setInvoiceID(String invoiceID) {
+    public void setInvoiceID(int invoiceID) {
         this.invoiceID = invoiceID;
     }
 
@@ -132,14 +128,6 @@ public class InvoiceItem {
 
     public void setDiscount(double discount) {
         this.discount = discount;
-    }
-
-    public int getSold() {
-        return sold;
-    }
-
-    public void setSold(int sold) {
-        this.sold = sold;
     }
 
     public LocalDate getExpireDate() {
