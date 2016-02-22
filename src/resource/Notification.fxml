@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -26,5 +27,13 @@
             </TableView>
          </children>
       </HBox>
+      <Label layoutX="200.0" layoutY="-83.0" prefHeight="43.0" prefWidth="201.0" text="Minimum of Current Stock">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="628.0" layoutY="-83.0" prefHeight="43.0" prefWidth="150.0" text="Short Expiry">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
    </children>
 </AnchorPane>

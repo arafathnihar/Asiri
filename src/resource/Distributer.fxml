@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane onMouseClicked="#onPressAnything" stylesheets="@distributer.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DistributerController">
+<AnchorPane onMouseClicked="#onPressAnything" stylesheets="@distributer.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DistributerController">
     <children>
         <VBox alignment="CENTER" onMouseClicked="#onPressAnything" prefHeight="564.0" prefWidth="867.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -116,6 +116,10 @@
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin></Button>
+                                <Button mnemonicParsing="false" onAction="#clearAll" prefWidth="60.0" text="Clear">
+                           <VBox.margin>
+                              <Insets top="40.0" />
+                           </VBox.margin></Button>
                      </children>
                      <padding>
                         <Insets left="10.0" />
@@ -132,10 +136,6 @@
                               <Font name="System Bold Italic" size="14.0" />
                            </font>
                         </Label>
-                                <Button mnemonicParsing="false" onAction="#clearAll" prefWidth="60.0" text="Clear">
-                           <HBox.margin>
-                              <Insets right="5.0" />
-                           </HBox.margin></Button>
                             </children>
                         </HBox>
                     </children>
