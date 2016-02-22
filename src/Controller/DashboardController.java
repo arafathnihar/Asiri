@@ -27,6 +27,8 @@ public class DashboardController implements Initializable {
     @FXML
     private VBox notificationTabVbx;
     @FXML
+    private VBox reportTabVbx;
+    @FXML
     private VBox salesTabVbx;
     @FXML
     private ImageView notifyingImage;
@@ -40,6 +42,8 @@ public class DashboardController implements Initializable {
     private Tab distributerTab;
     @FXML
     private Tab notificationTab;
+    @FXML
+    private Tab reportTab;
     @FXML
     private Tab saelsTab;
 
@@ -70,6 +74,11 @@ public class DashboardController implements Initializable {
                 reloadNotificationTab();
             }
         });
+        /*reportTab.setOnSelectionChanged((Event t) -> {
+            if (reportTab.isSelected()) {
+                reloadNotificationTab();
+            }
+        }); */
         saelsTab.setOnSelectionChanged((Event t) -> {
             if (saelsTab.isSelected()) {
                 reloadSalesTab();
@@ -85,8 +94,9 @@ public class DashboardController implements Initializable {
                     || (nm.expireNotification() != null && !nm.expireNotification().isEmpty())) {
                 Image i = new Image("/resource/images/notificationNotChecked.png");
                 notifyingImage.setImage(i);
-            }
+            }   
             notificationTabVbx.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Notification.fxml")));
+            //reportTabVbx.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Report.fxml")));
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -145,6 +155,24 @@ public class DashboardController implements Initializable {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    /*public void reloadReportTab() {
+        NotificationModel nm = new NotificationModel();
+        if ((nm.minStockNotification() != null && !nm.minStockNotification().isEmpty())
+                || (nm.expireNotification() != null && !nm.expireNotification().isEmpty())) {
+            Image i = new Image("/resource/images/notificationNotChecked.png");
+            notifyingImage.setImage(i);
+        } else {
+            Image i = new Image("/resource/images/notificationChecked.png");
+            notifyingImage.setImage(i);
+        }
+        notificationTabVbx.getChildren().clear();
+        try {
+            reportTabVbx.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Report.fxml")));
+        } catch (IOException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }*/
 
     public void reloadSalesTab() {
         salesTabVbx.getChildren().clear();
