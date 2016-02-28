@@ -8,8 +8,6 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -55,15 +53,15 @@ public class BillController implements Initializable {
     @FXML
     private TableView< BillItem> itemsTable;
     @FXML
-    private TableColumn< BillItem, String> productIDC;
+    private TableColumn<BillItem, String> productIDC;
     @FXML
-    private TableColumn< BillItem, Double> unitPriceC;
+    private TableColumn<BillItem, Double> unitPriceC;
     @FXML
-    private TableColumn< BillItem, String> productNameC;
+    private TableColumn<BillItem, String> productNameC;
     @FXML
     private TableColumn< BillItem, Integer> quantityC;
     @FXML
-    private TableColumn< BillItem, Double> totalC;
+    private TableColumn<BillItem, Double> totalC;
     
     @FXML
     private Label dateLabel;
@@ -225,6 +223,7 @@ public class BillController implements Initializable {
                 BillItem bi = new BillItem();
                 bi.setProductID(productID.getValue());
                 bi.setUnitPrice(Double.parseDouble(unitPrice.getText()));
+                bi.setProductName(productName.getText());
                 bi.setQuantity(Integer.parseInt(quantity.getText()));
                 bi.setTotal(Double.parseDouble(total.getText()));
                 itemsTable.getItems().add(bi);
@@ -298,7 +297,6 @@ public class BillController implements Initializable {
             unitPrice.setText(String.valueOf(bi.getUnitPrice()));
             quantity.setText(String.valueOf(bi.getQuantity()));
             total.setText(String.valueOf(bi.getTotal()));
-
             productID.setDisable(true);
             addBtn.setText("Update");
         } else {
@@ -345,7 +343,7 @@ public class BillController implements Initializable {
     public void delete() {
         index = itemsTable.getSelectionModel().getSelectedIndex();
         if (index >= 0) {
-    alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Conformation");
             alert.setHeaderText("Are you sure to delete selected invoice item?");
             Optional<ButtonType> result = alert.showAndWait();
@@ -376,14 +374,7 @@ public class BillController implements Initializable {
          billNote.clear();
          discount.clear();
          billAmount.clear();
-    }
-
-
-        /*codeSearch.clear();
-         nameSearch.clear();
-         addressSearch.clear();
-         phoneNoSearch.clear(); */
-        
+    }       
 
     @FXML
     public void clear() {

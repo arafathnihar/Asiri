@@ -9,11 +9,10 @@ public class Product {
     private int productStrength;
     private String productType;
     private int productMinStock;
-    private double customPrice;
-    private int currentStock;
+    private int productStock;
 
     public Product(String productID, String productName, String productDescription, String productBrand,
-            int productStrength, String productType, int productMinStock, double customPrice) {
+            int productStrength, String productType, int productMinStock, int productStock) {
         this.productID = productID;
         this.productName = productName;
         this.productDescription = productDescription;
@@ -21,13 +20,13 @@ public class Product {
         this.productStrength = productStrength;
         this.productType = productType;
         this.productMinStock = productMinStock;
-        this.customPrice = customPrice;
+        this.productStock = productStock;
     }
 
-    public Product(String productID, String productName, int currentStock, int productMinStock) {
+    public Product(String productID, String productName, int productStock, int productMinStock) {
         this.productID = productID;
         this.productName = productName;
-        this.currentStock = currentStock;
+        this.productStock = productStock;
         this.productMinStock = productMinStock;
     }
 
@@ -39,7 +38,7 @@ public class Product {
         this.productStrength = 0;
         this.productType = "";
         this.productMinStock = 0;
-        this.customPrice = 0.0;
+        this.productStock = 0;
     }
 
     public String getProductID() {
@@ -97,21 +96,12 @@ public class Product {
     public void setProductMinStock(int productMinStock) {
         this.productMinStock = productMinStock;
     }
-
-    public double getCustomPrice() {
-        return customPrice;
+    
+    public int getProductStock() {
+        return productStock;
     }
-
-    public void setCustomPrice(double customPrice) {
-        this.customPrice = customPrice;
+    
+    public void setProductStock(int productStock) {
+        this.productStock = productStock;
     }
-
-    public int getCurrentStock() {
-        return currentStock;
-    }
-
-    public void setCurrentStock(int currentStock) {
-        this.currentStock = currentStock;
-    }
-
 }

@@ -13,7 +13,6 @@ import javafx.collections.*;
 
 public class BillItemModel {
     
-
     DataSource ds = DatabaseSource.getMySQLDataSource();
 
     public Date getSqlDate(LocalDate localDate) {
@@ -54,9 +53,12 @@ public class BillItemModel {
                 pStmt.addBatch();
             }
             pStmt.executeBatch();
-            /*for (int i = 0; i < items.size(); i++) {
+            for(int i=0; i< items.size(); i++){
+                updateProduct(items.get(i).getProductID(),items.get(i).getQuantity());
+            } 
+            for (int i = 0; i < items.size(); i++) {
                 updateInvoice(items.get(i));
-            }*/
+            }
             query = "INSERT INTO bill (billDate, billNote, billAmount) VALUES (?,?,?)";
             pStmt = con.prepareStatement(query);
             pStmt.setDate(1, getSqlDate(b.getBillDate()));
@@ -68,6 +70,21 @@ public class BillItemModel {
         }
     }
 
+    public void updateProduct(String productID, int quantity) {
+        String query;
+        PreparedStatement pStmt;
+        try (Connection con = ds.getConnection()) {
+            query = "UPDATE product SET productStock = productStock - ? WHERE productID = ?";
+            pStmt = con.prepareStatement(query);
+            pStmt.setInt(1, quantity);
+            pStmt.setString(2, productID);
+            pStmt.executeUpdate();
+        } 
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
     public void updateInvoice(BillItem bi) {
         String query;
         PreparedStatement pStmt;

@@ -1,8 +1,29 @@
+-- phpMyAdmin SQL Dump
+-- version 4.1.14
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Feb 28, 2016 at 02:42 PM
+-- Server version: 5.6.17
+-- PHP Version: 5.5.12
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-DELIMITER $$
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `pharmacy`
+--
+
+DELIMITER $$
+--
+-- Procedures
+--
 CREATE DEFINER=`root`@`localhost` PROCEDURE `daysrangebillreport`(IN `date1` DATE, IN `date2` DATE)
 BEGIN
 SELECT *
@@ -33,25 +54,13 @@ BEGIN
 SELECT * FROM product;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getcurrentstock`(IN `productidparam` VARCHAR(255), OUT `stockreturn` INT)
-BEGIN
-  SELECT Sum(stock) 
-  INTO stockreturn
-  FROM (SELECT quantity - sold AS stock 
-  FROM   pharmacy.invoiceitem 
-  WHERE  productid = productidparam ) stock; 
- END$$
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getproductscurrentstock`()
 BEGIN
 SELECT 
-oc.productID, SUM(oc.quantity) Amount
-FROM (
-  SELECT productID,COALESCE(quantity,0) quantity FROM invoiceitem
-    UNION ALL
-    SELECT productID,COALESCE(-quantity,0) quantity FROM billitem
-) oc
-GROUP BY oc.productID;
+productID, productStock
+FROM
+product
+GROUP BY productID;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getunitprice`(IN `productidparam` VARCHAR(255), OUT `pricereturn` DOUBLE)
@@ -98,13 +107,25 @@ END$$
 
 DELIMITER ;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bill`
+--
+
 CREATE TABLE IF NOT EXISTS `bill` (
   `billNo` int(11) NOT NULL AUTO_INCREMENT,
   `billDate` date NOT NULL,
   `billNote` varchar(255) DEFAULT NULL,
   `billAmount` double NOT NULL,
   PRIMARY KEY (`billNo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `billitem`
+--
 
 CREATE TABLE IF NOT EXISTS `billitem` (
   `billItemNo` int(11) NOT NULL AUTO_INCREMENT,
@@ -116,7 +137,13 @@ CREATE TABLE IF NOT EXISTS `billitem` (
   PRIMARY KEY (`billItemNo`),
   KEY `fk_billitem_bill1_idx` (`billNo`),
   KEY `fk_billitem_product1_idx` (`productID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `distributor`
+--
 
 CREATE TABLE IF NOT EXISTS `distributor` (
   `dCode` varchar(255) NOT NULL,
@@ -125,6 +152,12 @@ CREATE TABLE IF NOT EXISTS `distributor` (
   `dTelephone` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`dCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoice`
+--
 
 CREATE TABLE IF NOT EXISTS `invoice` (
   `invoiceID` int(11) NOT NULL AUTO_INCREMENT,
@@ -135,7 +168,13 @@ CREATE TABLE IF NOT EXISTS `invoice` (
   `invoiceTotal` double NOT NULL,
   PRIMARY KEY (`invoiceID`),
   KEY `fk_invoice_distributor1_idx` (`dCode`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoiceitem`
+--
 
 CREATE TABLE IF NOT EXISTS `invoiceitem` (
   `invoiceItemID` int(11) NOT NULL AUTO_INCREMENT,
@@ -151,7 +190,13 @@ CREATE TABLE IF NOT EXISTS `invoiceitem` (
   PRIMARY KEY (`invoiceItemID`),
   KEY `fk_invoiceitem_invoice1_idx` (`invoiceID`),
   KEY `fk_invoiceitem_product1_idx` (`productID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
 
 CREATE TABLE IF NOT EXISTS `product` (
   `productID` varchar(255) NOT NULL,
@@ -161,16 +206,29 @@ CREATE TABLE IF NOT EXISTS `product` (
   `productStrength` int(11) DEFAULT NULL,
   `productType` varchar(255) DEFAULT NULL,
   `productMinStock` int(11) NOT NULL,
-  `customPrice` double NOT NULL,
+  `productStock` int(11) NOT NULL,
   PRIMARY KEY (`productID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `billitem`
+--
 ALTER TABLE `billitem`
   ADD CONSTRAINT `fk_billitem_product1` FOREIGN KEY (`productID`) REFERENCES `product` (`productID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
+--
+-- Constraints for table `invoice`
+--
 ALTER TABLE `invoice`
   ADD CONSTRAINT `fk_invoice_distributor1` FOREIGN KEY (`dCode`) REFERENCES `distributor` (`dCode`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
+--
+-- Constraints for table `invoiceitem`
+--
 ALTER TABLE `invoiceitem`
   ADD CONSTRAINT `fk_invoiceitem_product1` FOREIGN KEY (`productID`) REFERENCES `product` (`productID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 

@@ -29,7 +29,7 @@ public class NotificationController implements Initializable {
     @FXML
     private TableColumn<InvoiceItem, String> expProductIDC;
     @FXML
-    private TableColumn<Product, String> expProductNameC;
+    private TableColumn<InvoiceItem, String> expProductNameC;
     @FXML
     private TableColumn<InvoiceItem, Integer> expQuantityC;
     @FXML
@@ -39,7 +39,7 @@ public class NotificationController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         outProductIDC.setCellValueFactory(new PropertyValueFactory<>("productID"));
         outProductNameC.setCellValueFactory(new PropertyValueFactory<>("productName"));
-        outCurrentStockC.setCellValueFactory(new PropertyValueFactory<>("currentStock"));
+        outCurrentStockC.setCellValueFactory(new PropertyValueFactory<>("productStock"));
         outMinStockC.setCellValueFactory(new PropertyValueFactory<>("productMinStock"));
 
         expProductIDC.setCellValueFactory(new PropertyValueFactory<>("productID"));

@@ -9,7 +9,7 @@ public class BillItem {
     private int quantity;
     private double total;
     private String productName;
-
+    
     public BillItem(int billNo, int billItemNo, String productID, double unitPrice, int quantity, double total) {
         this.billNo = billNo;
         this.billItemNo = billItemNo;

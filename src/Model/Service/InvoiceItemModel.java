@@ -52,7 +52,9 @@ public class InvoiceItemModel {
                 pStmt.addBatch();
             }
             pStmt.executeBatch();
-            
+            for (InvoiceItem record : items) {
+                updateProduct(record.getProductID(), record.getQuantity());
+            }
             String query1 = "INSERT INTO invoice (dCode, invoiceDate, invoiceNote, "
                     + "invoicePayMode, invoiceTotal) VALUES (?,?,?,?,?)";
             PreparedStatement pStmt1 = con.prepareStatement(query1);
@@ -67,6 +69,21 @@ public class InvoiceItemModel {
         }
     }
 
+    public void updateProduct(String productID, int quantity) {
+        String query;
+        PreparedStatement pStmt;
+        try (Connection con = ds.getConnection()) {
+            query = "UPDATE product SET productStock = productStock + ? WHERE productID = ?";
+            pStmt = con.prepareStatement(query);
+            pStmt.setInt(1, quantity);
+            pStmt.setString(2, productID);
+            pStmt.executeUpdate();
+        } 
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
     public ObservableList<String> getProductID() {
         try (Connection con = ds.getConnection()) {
             ObservableList<String> ol = FXCollections.observableArrayList();
