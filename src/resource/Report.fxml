@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.NotificationController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="400.0" prefWidth="824.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TableView fx:id="outOfStockTable">
+               <columns>
+                  <TableColumn fx:id="outProductIDC" prefWidth="100.0" text="Product ID" />
+                  <TableColumn fx:id="outProductNameC" prefWidth="100.0" text="Product Name" />
+                  <TableColumn fx:id="outCurrentStockC" prefWidth="100.0" text="Current Stock" />
+                  <TableColumn fx:id="outMinStockC" prefWidth="100.0" text="Minimum Stock" />
+               </columns>
+            </TableView>
+            <TableView fx:id="expStockTable" layoutX="10.0" layoutY="10.0">
+               <columns>
+                  <TableColumn fx:id="expProductIDC" prefWidth="100.0" text="Product ID" />
+                  <TableColumn fx:id="expProductNameC" prefWidth="100.0" text="Product Name" />
+                  <TableColumn fx:id="expQuantityC" prefWidth="100.0" text="Quantity" />
+                  <TableColumn fx:id="expStockDate" prefWidth="100.0" text="Expire Date" />
+               </columns>
+            </TableView>
+         </children>
+      </HBox>
+      <Label layoutX="200.0" layoutY="-83.0" prefHeight="43.0" prefWidth="201.0" text="Minimum of Current Stock">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="628.0" layoutY="-83.0" prefHeight="43.0" prefWidth="150.0" text="Short Expiry">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+   </children>
+</AnchorPane>
