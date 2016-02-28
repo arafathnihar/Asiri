@@ -156,7 +156,7 @@ public class DashboardController implements Initializable {
         }
     }
     
-    /*public void reloadReportTab() {
+    public void reloadReportTab() {
         NotificationModel nm = new NotificationModel();
         if ((nm.minStockNotification() != null && !nm.minStockNotification().isEmpty())
                 || (nm.expireNotification() != null && !nm.expireNotification().isEmpty())) {
@@ -172,7 +172,7 @@ public class DashboardController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }*/
+    }
 
     public void reloadSalesTab() {
         salesTabVbx.getChildren().clear();
