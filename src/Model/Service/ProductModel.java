@@ -25,7 +25,7 @@ public class ProductModel {
             while (rs.next()) {
                 ol.add(new Product(rs.getString(1), rs.getString(2), rs.getString(3),
                         rs.getString(4), rs.getInt(5), rs.getString(6), rs.getInt(7), 
-                        rs.getDouble(8)));
+                        rs.getInt(8)));
             }
             return ol;
         } catch (SQLException ex) {
@@ -45,7 +45,7 @@ public class ProductModel {
             pStmt.setInt(5, p.getProductStrength());
             pStmt.setString(6, p.getProductType());
             pStmt.setInt(7, p.getProductMinStock());
-            pStmt.setDouble(8, p.getCustomPrice());
+            pStmt.setInt(8, p.getProductStock());
             pStmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -74,7 +74,7 @@ public class ProductModel {
                     + "'," + "productBrand='" + p.getProductBrand() + "'," 
                     + "productStrength=" + p.getProductStrength() + "," 
                     + "productType='" + p.getProductType() + "'," + "productMinStock=" 
-                    + p.getProductMinStock() + "," + "customPrice=" + p.getCustomPrice() 
+                    + p.getProductMinStock() + "," + "productStock=" + p.getProductStock()
                     + " WHERE productID='" + p.getProductID() + "'";
             PreparedStatement pStmt = con.prepareStatement(query);
             pStmt.executeUpdate();

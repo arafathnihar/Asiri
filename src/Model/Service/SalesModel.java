@@ -5,18 +5,14 @@ import Model.DTO.Bill;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Calendar;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.sql.DataSource;
 
-public class SalesModel {
+public class SalesModel{
 
     DataSource ds = DatabaseSource.getMySQLDataSource();
 

@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.NotificationController">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.NotificationController">
    <children>
       <HBox alignment="CENTER" prefHeight="400.0" prefWidth="824.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -27,11 +27,11 @@
             </TableView>
          </children>
       </HBox>
-      <Label layoutX="200.0" layoutY="-83.0" prefHeight="43.0" prefWidth="201.0" text="Minimum of Current Stock">
+      <Label alignment="CENTER" layoutX="150.0" layoutY="-70.0" prefHeight="45.0" prefWidth="300.0" text="  Exceed Minimum Stock Product Stock Details">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label layoutX="628.0" layoutY="-83.0" prefHeight="43.0" prefWidth="150.0" text="Short Expiry">
+      <Label alignment="CENTER" layoutX="570.0" layoutY="-70.0" prefHeight="45.0" prefWidth="300.0" text="   Expire Product Details (Within next 30 days)" textFill="#171617">
          <font>
             <Font size="14.0" />
          </font></Label>
