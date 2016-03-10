@@ -111,9 +111,28 @@
                   </VBox>
                </graphic>
             </Tab>
-            <Tab fx:id="saelsTab" text="SALES REPORT">
+            <Tab fx:id="salesTab" text="SALES REPORT">
                <content>
                   <VBox fx:id="salesTabVbx" alignment="CENTER" />
+               </content>
+               <graphic>
+                  <VBox>
+                     <children>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/salesTab.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </graphic>
+            </Tab>
+            <Tab fx:id="reportTab" text="REPORT">
+               <content>
+                  <VBox fx:id="reportTabVbx" alignment="CENTER" />
                </content>
                <graphic>
                   <VBox>

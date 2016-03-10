@@ -85,12 +85,12 @@ public class BillController implements Initializable {
     
     Alert alert;
 
-    private BillItemModel bm = new BillItemModel();
-    private ProductModel pm = new ProductModel();
-    private Bill b = new Bill();
-    private int index;
-    private double totalAmount;
-    private boolean bool = true;
+    BillItemModel bm = new BillItemModel();
+    ProductModel pm = new ProductModel();
+    Bill b = new Bill();
+    int index;
+    double totalAmount;
+    boolean bool = true;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -228,7 +228,6 @@ public class BillController implements Initializable {
                 bi.setTotal(Double.parseDouble(total.getText()));
                 itemsTable.getItems().add(bi);
                 total();
-
                 icon.setImage(imageSuccess);
                 clearBillItemFields();
                 messageLabel.setTextFill(Color.GREEN);

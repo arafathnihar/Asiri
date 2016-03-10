@@ -5,35 +5,45 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReportController">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReportController">
    <children>
-      <HBox alignment="CENTER" prefHeight="400.0" prefWidth="824.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER" prefHeight="400.0" prefWidth="820.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView fx:id="outOfStockTable">
+            <TableView fx:id="invoiceTable">
                <columns>
-                  <TableColumn fx:id="outProductIDC" prefWidth="100.0" text="Invoice ID" />
-                  <TableColumn fx:id="outMinStockC" prefWidth="100.0" text="Invoice Date" />
-                  <TableColumn fx:id="outProductNameC" prefWidth="100.0" text="Distributor ID" />
-                  <TableColumn fx:id="outCurrentStockC" prefWidth="100.0" text="Invoice total" />
+                  <TableColumn fx:id="invoiceIDC" prefWidth="100.0" text="Invoice ID" />
+                  <TableColumn fx:id="invoiceDateC" prefWidth="100.0" text="Invoice Date" />
+                  <TableColumn fx:id="DistributorC" prefWidth="100.0" text="Distributor ID" />
+                  <TableColumn fx:id="invoiceTotalC" prefWidth="100.0" text="Invoice total" />
                </columns>
             </TableView>
-            <TableView fx:id="expStockTable" layoutX="10.0" layoutY="10.0">
+            <TableView fx:id="billTable" layoutX="10.0" layoutY="10.0">
                <columns>
-                  <TableColumn fx:id="expProductIDC" prefWidth="100.0" text="Bill ID" />
-                  <TableColumn fx:id="expStockDate" prefWidth="100.0" text="Bill Date" />
-                  <TableColumn fx:id="expProductNameC" prefWidth="100.0" text=" Name" />
-                  <TableColumn fx:id="expQuantityC" prefWidth="100.0" text="Bill amount" />
+                  <TableColumn fx:id="billNoC" prefWidth="100.0" text="Bill ID" />
+                  <TableColumn fx:id="billDateC" prefWidth="100.0" text="Bill Date" />
+                  <TableColumn fx:id="billNoteC" prefWidth="100.0" text="Bill Note" />
+                  <TableColumn fx:id="billAmountC" prefWidth="100.0" text="Bill Amount" />
                </columns>
             </TableView>
          </children>
       </HBox>
-      <Label layoutX="200.0" layoutY="-83.0" prefHeight="43.0" prefWidth="201.0" text="Report on Invoices">
+      <Label layoutX="150.0" layoutY="-120.0" prefHeight="45.0" prefWidth="300.0" text="Report on Invoices">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label layoutX="628.0" layoutY="-83.0" prefHeight="43.0" prefWidth="150.0" text="Report on Bills">
+      <Label layoutX="570.0" layoutY="-120.0" prefHeight="45.0" prefWidth="300.0" text="Report on Bills">
          <font>
             <Font size="14.0" />
          </font></Label>
+      <DatePicker fx:id="invDate1" layoutX="150.0" layoutY="-45.0" prefHeight="25.0" prefWidth="125.0" />
+      <DatePicker fx:id="invDate2" layoutX="300.0" layoutY="-45.0" prefHeight="25.0" prefWidth="125.0" />
+      <Label layoutX="150.0" layoutY="-75.0" prefHeight="20.0" prefWidth="80.0" text="From:" />
+      <Label layoutX="300.0" layoutY="-75.0" prefHeight="20.0" prefWidth="80.0" text="To:" />
+      <Button layoutX="440.0" layoutY="-45.0" mnemonicParsing="false" onAction="#invoiceSales" text="Search Invoices" />
+      <DatePicker fx:id="billDate1" layoutX="575.0" layoutY="-45.0" prefHeight="25.0" prefWidth="125.0" />
+      <DatePicker fx:id="billDate2" layoutX="725.0" layoutY="-45.0" prefHeight="25.0" prefWidth="125.0" />
+      <Label layoutX="575.0" layoutY="-75.0" prefHeight="20.0" prefWidth="80.0" text="From:" />
+      <Label layoutX="725.0" layoutY="-75.0" prefHeight="20.0" prefWidth="80.0" text="To:" />
+      <Button layoutX="865.0" layoutY="-45.0" mnemonicParsing="false" onAction="#billSales" text="Search Bills" />
    </children>
 </AnchorPane>

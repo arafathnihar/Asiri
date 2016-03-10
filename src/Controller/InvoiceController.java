@@ -100,6 +100,7 @@ public class InvoiceController implements Initializable {
     Alert alert;
 
     InvoiceItemModel iim = new InvoiceItemModel();
+    double totalAmount;
     int index;
 
     @Override
@@ -119,7 +120,15 @@ public class InvoiceController implements Initializable {
         distributerCode.setItems(getDistributerCode());
         productID.setItems(getProductsID());
     }
-
+    
+    public void total() {
+        totalAmount = 0;
+        for (InvoiceItem ii : invoiceItemTable.getItems()) {
+            totalAmount += ii.getPrice();
+        }
+        invoiceTotal.setText(Double.toString(totalAmount));
+    }
+    
     public int getInvoiceId(){
         return iim.getInvoiceId();
     }
@@ -240,6 +249,7 @@ public class InvoiceController implements Initializable {
                         }
                     }
                     invoiceItemTable.getItems().add(ii);
+                    total();
                     clearInvoiceItemItemFields();
                     messageLabel.setTextFill(Color.GREEN);
                     messageLabel.setText(" New product added to the invoice ");
@@ -252,7 +262,7 @@ public class InvoiceController implements Initializable {
                 quantityLabel.setText("It's not a number");
                 messageLabel.setTextFill(Color.RED);
                 messageLabel.setText(" Quantity should be a numeric value ");
-             }
+            }
         } 
         else {
             messageLabel.setTextFill(Color.RED);
@@ -274,6 +284,7 @@ public class InvoiceController implements Initializable {
                 i.setInvoiceID(getInvoiceId());
                 i.setDistibutorCode(distributerCode.getValue());
                 i.setInvoiceDate(date.getValue());
+                i.setInvoiceTotal(totalAmount);
                 if(!invoiceNote.getText().equals(""))
                     i.setInvoiceNote(invoiceNote.getText());
                 ObservableList< InvoiceItem> items = invoiceItemTable.getItems();         
@@ -361,6 +372,7 @@ public class InvoiceController implements Initializable {
                     }
                     index = invoiceItemTable.getSelectionModel().getSelectedIndex();
                     invoiceItemTable.getItems().set(index, ii);
+                    total();
                     clearInvoiceItemItemFields();
                     productID.setDisable(false);
                     addBtn.setText("Add");

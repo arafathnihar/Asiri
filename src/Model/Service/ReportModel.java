@@ -13,7 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.sql.DataSource;
 
-public class BillAndInvoiceModel {
+public class ReportModel {
     
     DataSource ds = DatabaseSource.getMySQLDataSource();
 
@@ -100,3 +100,4 @@ public class BillAndInvoiceModel {
         }
     }
 }
+

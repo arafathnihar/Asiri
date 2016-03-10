@@ -31,7 +31,7 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label alignment="CENTER" layoutX="570.0" layoutY="-70.0" prefHeight="45.0" prefWidth="300.0" text="   Expire Product Details (Within next 30 days)" textFill="#171617">
+      <Label alignment="CENTER" layoutX="570.0" layoutY="-70.0" prefHeight="45.0" prefWidth="300.0" text="   Expire Product Details (Within next 30 days)">
          <font>
             <Font size="14.0" />
          </font></Label>

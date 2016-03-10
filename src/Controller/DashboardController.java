@@ -45,7 +45,7 @@ public class DashboardController implements Initializable {
     @FXML
     private Tab reportTab;
     @FXML
-    private Tab saelsTab;
+    private Tab salesTab;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -74,16 +74,16 @@ public class DashboardController implements Initializable {
                 reloadNotificationTab();
             }
         });
-        /*reportTab.setOnSelectionChanged((Event t) -> {
-            if (reportTab.isSelected()) {
-                reloadNotificationTab();
-            }
-        }); */
-        saelsTab.setOnSelectionChanged((Event t) -> {
-            if (saelsTab.isSelected()) {
+        salesTab.setOnSelectionChanged((Event t) -> {
+            if (salesTab.isSelected()) {
                 reloadSalesTab();
             }
         });
+        reportTab.setOnSelectionChanged((Event t) -> {
+            if (reportTab.isSelected()) {
+                reloadReportTab();
+            }
+        }); 
         try {
             invoiceTabVbx.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Invoice.fxml")));
             billTabVbx.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Bill.fxml")));
@@ -96,7 +96,7 @@ public class DashboardController implements Initializable {
                 notifyingImage.setImage(i);
             }   
             notificationTabVbx.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Notification.fxml")));
-            //reportTabVbx.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Report.fxml")));
+            reportTabVbx.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Report.fxml")));
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -155,29 +155,20 @@ public class DashboardController implements Initializable {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void reloadReportTab() {
-        NotificationModel nm = new NotificationModel();
-        if ((nm.minStockNotification() != null && !nm.minStockNotification().isEmpty())
-                || (nm.expireNotification() != null && !nm.expireNotification().isEmpty())) {
-            Image i = new Image("/resource/images/notificationNotChecked.png");
-            notifyingImage.setImage(i);
-        } else {
-            Image i = new Image("/resource/images/notificationChecked.png");
-            notifyingImage.setImage(i);
-        }
-        notificationTabVbx.getChildren().clear();
-        try {
-            reportTabVbx.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Report.fxml")));
-        } catch (IOException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     public void reloadSalesTab() {
         salesTabVbx.getChildren().clear();
         try {
             salesTabVbx.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Sales.fxml")));
+        } catch (IOException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+      
+    public void reloadReportTab() {
+        reportTabVbx.getChildren().clear();
+        try {
+            reportTabVbx.getChildren().setAll((Node) FXMLLoader.load(getClass().getResource("/resource/Report.fxml")));
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
